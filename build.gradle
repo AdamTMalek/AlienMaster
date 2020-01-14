@@ -16,6 +16,12 @@ dependencies {
     implementation 'org.openjfx:javafx-controls:12'
     implementation 'org.openjfx:javafx-fxml:12'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    runtimeOnly 'org.openjfx:javafx-controls:12:win'
+    runtimeOnly 'org.openjfx:javafx-controls:12:linux'
+    runtimeOnly 'org.openjfx:javafx-controls:12:mac'
+    runtimeOnly 'org.openjfx:javafx-fxml:12:win'
+    runtimeOnly 'org.openjfx:javafx-fxml:12:linux'
+    runtimeOnly 'org.openjfx:javafx-fxml:12:mac'
 }
 
 javafx {
@@ -36,3 +42,12 @@ compileTestKotlin {
 }
 
 mainClassName = 'app.MainApp'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'app.MainApp'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

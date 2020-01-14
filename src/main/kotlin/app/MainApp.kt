@@ -11,7 +11,7 @@ class MainApp : Application() {
         val url = this::class.java.classLoader.getResource("view/main_view.fxml")
         val loader = FXMLLoader().apply { location = url }
         val root = loader.load<Parent>()
-        val scene = Scene(root, 300.0, 300.0)
+        val scene = Scene(root, 600.0, 350.0)
 
         primaryStage?.let {
             it.title = "AlienMaster"

@@ -15,13 +15,15 @@ class ActionFromYamlBuilder {
     /**
      * Given the [line] set the correct field of the [Action] object
      */
-    fun set(line: String) {
+    fun set(line: String): ActionFromYamlBuilder {
         val (key, value) = parseLineAsPair(line)
 
         when (key) {
             "action" -> action = value
             "value" -> this.value = value
         }
+
+        return this
     }
 
     /**

@@ -1,5 +1,7 @@
 package app
 
+import app.serialcom.OnSerialDataReceivedListener
+import app.serialcom.SerialCommunication
 import com.fazecast.jSerialComm.SerialPort
 import javafx.application.Application
 import javafx.fxml.FXMLLoader

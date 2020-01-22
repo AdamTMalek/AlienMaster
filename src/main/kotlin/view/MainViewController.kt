@@ -1,6 +1,6 @@
 package view
 
-import app.OnSerialDataReceivedListener
+import app.serialcom.OnSerialDataReceivedListener
 import com.fazecast.jSerialComm.SerialPort
 import javafx.beans.value.ChangeListener
 import javafx.beans.value.ObservableValue

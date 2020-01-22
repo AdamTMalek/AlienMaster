@@ -1,4 +1,4 @@
-package app
+package app.serialcom
 
 import com.fazecast.jSerialComm.SerialPort
 import kotlin.concurrent.thread

@@ -9,8 +9,8 @@ package app.serialcom
  * - [build] that builds [Action] and returns it
  */
 class ActionFromYamlBuilder {
-    var action: String? = null
-    var value: String? = null
+    private var action: String? = null
+    private var value: String? = null
 
     /**
      * Given the [line] set the correct field of the [Action] object

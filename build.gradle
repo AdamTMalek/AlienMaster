@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.openjfx:javafx-controls:12'
     implementation 'org.openjfx:javafx-fxml:12'
     implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
+    implementation 'org.jetbrains.exposed:exposed:0.17.7'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
     runtimeOnly 'org.openjfx:javafx-controls:12:win'
     runtimeOnly 'org.openjfx:javafx-controls:12:linux'

@@ -12,7 +12,8 @@
         <TableView fx:id="playersTable" GridPane.columnSpan="2" editable="true" minWidth="600">
             <columns>
                 <TableColumn fx:id="idColumn" minWidth="20.0" text="ID"/>
-                <TableColumn fx:id="nameColumn" minWidth="20.0" prefWidth="250.0" text="Name"/>
+                <TableColumn fx:id="nameColumn" minWidth="20.0" prefWidth="150.0" text="Name"/>
+                <TableColumn fx:id="langColumn" minWidth="20.0" prefWidth="100.0" text="Language"/>
                 <TableColumn fx:id="scoreColumn" minWidth="20.0" prefWidth="150.0" text="Top Score"/>
             </columns>
         </TableView>

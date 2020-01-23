@@ -8,8 +8,8 @@ import org.jetbrains.exposed.sql.Column
 
 object Players : IntIdTable() {
     val name: Column<String> = varchar("name", 50)
+    val language: Column<String> = varchar("language", 3) // ISO-639-2/B code
     val score: Column<Int> = integer("score")
-
     override val primaryKey = PrimaryKey(id)
 }
 
@@ -17,5 +17,6 @@ class Player(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Player>(Players)
 
     var name by Players.name
+    var language by Players.language
     var score by Players.score
 }

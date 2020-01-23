@@ -23,6 +23,8 @@ class EditorViewController : Initializable {
     @FXML
     private var nameColumn = TableColumn<Player, String>()
     @FXML
+    private var langColumn = TableColumn<Player, String>()
+    @FXML
     private var scoreColumn = TableColumn<Player, Int>()
 
     companion object {
@@ -40,13 +42,14 @@ class EditorViewController : Initializable {
         }
     }
 
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         idColumn.cellValueFactory = PropertyValueFactory<Player, Int>("id")
         nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
+        langColumn.cellValueFactory = PropertyValueFactory<Player, String>("language")
         scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
 
-        val players = FXCollections.observableArrayList<Player>(PlayersDatabase.getAllPlayers())
-        playersTable.items = players
+        loadPlayers()
     }
 
 
@@ -55,6 +58,12 @@ class EditorViewController : Initializable {
     }
 
     fun addPlayer() {
+        AddPlayerController.showView()
+        loadPlayers()
+    }
 
+    private fun loadPlayers() {
+        val players = PlayersDatabase.getAllPlayers()
+        playersTable.items = FXCollections.observableList(players)
     }
 }

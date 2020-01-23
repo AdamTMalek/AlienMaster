@@ -1,6 +1,8 @@
 package view
 
-import app.Players
+import app.Player
+import app.PlayersDatabase
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -15,13 +17,13 @@ import java.util.*
 
 class EditorViewController : Initializable {
     @FXML
-    private var playersTable = TableView<Players>()
+    private var playersTable = TableView<Player>()
     @FXML
-    private var idColumn = TableColumn<Players, Int>()
+    private var idColumn = TableColumn<Player, Int>()
     @FXML
-    private var nameColumn = TableColumn<Players, String>()
+    private var nameColumn = TableColumn<Player, String>()
     @FXML
-    private var scoreColumn = TableColumn<Players, Int>()
+    private var scoreColumn = TableColumn<Player, Int>()
 
     companion object {
         fun showView() {
@@ -39,9 +41,12 @@ class EditorViewController : Initializable {
     }
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        idColumn.cellValueFactory = PropertyValueFactory<Players, Int>("id")
-        nameColumn.cellValueFactory = PropertyValueFactory<Players, String>("name")
-        scoreColumn.cellValueFactory = PropertyValueFactory<Players, Int>("score")
+        idColumn.cellValueFactory = PropertyValueFactory<Player, Int>("id")
+        nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
+        scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
+
+        val players = FXCollections.observableArrayList<Player>(PlayersDatabase.getAllPlayers())
+        playersTable.items = players
     }
 
 

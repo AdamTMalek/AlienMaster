@@ -10,10 +10,14 @@ import javafx.fxml.Initializable
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
+import javafx.scene.layout.Pane
+import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
 class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeListener<SerialPort> {
+    @FXML
+    private var rootPane = Pane()
     @FXML
     private var portChoice = ChoiceBox<SerialPort>()
     @FXML
@@ -22,12 +26,16 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
     private var dataReceived = TextArea()
 
     private lateinit var handler: SerialCommController
-
+    private var listener: MainViewRequestListener? = null
     val ports = FXCollections.observableArrayList<SerialPort>()
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         portChoice.items = ports
         portChoice.selectionModel.selectedItemProperty().addListener(this)
+    }
+
+    fun setRequestListener(listener: MainViewRequestListener) {
+        this.listener = listener
     }
 
     fun sendData() {
@@ -47,5 +55,14 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
     override fun changed(observable: ObservableValue<out SerialPort>?, oldValue: SerialPort?, newValue: SerialPort?) {
         val port = newValue ?: return
         handler.connectToPort(port)
+    }
+
+    fun openPlayersEditor() {
+        listener?.onOpenPlayerEditor()
+    }
+
+    fun close() {
+        val stage = rootPane.scene.window as Stage
+        stage.close()
     }
 }

@@ -11,9 +11,12 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TextField
+import javafx.scene.control.TextFormatter
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
+import java.text.NumberFormat
+import java.text.ParsePosition
 import java.util.*
 
 class AddPlayerController : Initializable {
@@ -47,6 +50,24 @@ class AddPlayerController : Initializable {
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         langChoice.items = FXCollections.observableList(TtsLanguage.values().toList())
+        addFormatterToScoreField()
+    }
+
+    private fun addFormatterToScoreField() {
+        val format = NumberFormat.getIntegerInstance()
+        scoreInput.textFormatter = TextFormatter<String> { change ->
+            if (change.controlNewText.isEmpty())
+                return@TextFormatter change
+
+            val parsePosition = ParsePosition(0)
+            format.parse(change.controlNewText, parsePosition)
+                ?: return@TextFormatter null
+
+            if (parsePosition.index < change.controlNewText.length)
+                return@TextFormatter null
+            else
+                return@TextFormatter change
+        }
     }
 
     fun cancel() {

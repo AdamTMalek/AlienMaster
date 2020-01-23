@@ -78,8 +78,8 @@ class EditorViewController : Initializable, ChangeListener<String> {
     }
 
     fun removeAllPlayers() {
-        PlayersDatabase.dropTable()
-        PlayersDatabase.createTable()
+        PlayersDatabase.dropPlayersTable()
+        PlayersDatabase.createPlayersTable()
 
         loadPlayers()
     }

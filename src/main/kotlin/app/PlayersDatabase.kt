@@ -6,21 +6,31 @@ import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.Connection
 
+/**
+ * The [PlayersDatabase] is an object managing all operations with the database, like getting all players,
+ * adding, and modifying a player.
+ */
 object PlayersDatabase {
 
     init {
         Database.connect("jdbc:sqlite:./resources/database.sqlite", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-        createTable()
+        createPlayersTable()
     }
 
-    fun createTable() {
+    /**
+     * Create the [Players] table in the database
+     */
+    fun createPlayersTable() {
         transaction {
             SchemaUtils.create(Players)
         }
     }
 
-    fun dropTable() {
+    /**
+     * Drop (delete) the [Players] table from the database
+     */
+    fun dropPlayersTable() {
         transaction {
             SchemaUtils.drop(Players)
         }
@@ -53,7 +63,6 @@ object PlayersDatabase {
             player.score = newScore
         }
     }
-
 
     fun getAllPlayers(): List<Player> {
         return transaction {

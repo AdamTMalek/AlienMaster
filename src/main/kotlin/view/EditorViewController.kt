@@ -57,6 +57,13 @@ class EditorViewController : Initializable {
 
     }
 
+    fun removeAllPlayers() {
+        PlayersDatabase.dropTable()
+        PlayersDatabase.createTable()
+
+        loadPlayers()
+    }
+
     fun addPlayer() {
         AddPlayerController.showView()
         loadPlayers()

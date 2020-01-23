@@ -14,9 +14,15 @@ object PlayersDatabase {
         createTable()
     }
 
-    private fun createTable() {
+    fun createTable() {
         transaction {
             SchemaUtils.create(Players)
+        }
+    }
+
+    fun dropTable() {
+        transaction {
+            SchemaUtils.drop(Players)
         }
     }
 

@@ -17,9 +17,10 @@
                 <TableColumn fx:id="scoreColumn" minWidth="20.0" prefWidth="150.0" text="Top Score"/>
             </columns>
         </TableView>
-        <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" maxWidth="-Infinity" minWidth="600">
+        <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" maxWidth="-Infinity" minWidth="600" spacing="20">
             <Button onAction="#close" text="Close"/>
             <Pane HBox.hgrow="ALWAYS"/>
+            <Button onAction="#removeAllPlayers" text="Remove All"/>
             <Button onAction="#addPlayer" text="Add Player"/>
         </HBox>
     </GridPane>

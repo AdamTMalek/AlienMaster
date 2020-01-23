@@ -36,6 +36,24 @@ object PlayersDatabase {
         }
     }
 
+    fun changeName(player: Player, newName: String) {
+        transaction {
+            player.name = newName
+        }
+    }
+
+    fun changeLanguage(player: Player, newLanguage: String) {
+        transaction {
+            player.language = newLanguage
+        }
+    }
+
+    fun changeScore(player: Player, newScore: Int) {
+        transaction {
+            player.score = newScore
+        }
+    }
+
 
     fun getAllPlayers(): List<Player> {
         return transaction {

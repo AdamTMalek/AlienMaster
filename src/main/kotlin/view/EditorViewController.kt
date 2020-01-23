@@ -2,6 +2,8 @@ package view
 
 import app.Player
 import app.PlayersDatabase
+import javafx.beans.value.ChangeListener
+import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -11,11 +13,13 @@ import javafx.scene.Scene
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.control.cell.TextFieldTableCell
 import javafx.stage.Stage
+import javafx.util.converter.IntegerStringConverter
 import java.net.URL
 import java.util.*
 
-class EditorViewController : Initializable {
+class EditorViewController : Initializable, ChangeListener<String> {
     @FXML
     private var playersTable = TableView<Player>()
     @FXML
@@ -46,15 +50,31 @@ class EditorViewController : Initializable {
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         idColumn.cellValueFactory = PropertyValueFactory<Player, Int>("id")
         nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
+        nameColumn.cellFactory = TextFieldTableCell.forTableColumn()
+        nameColumn.setOnEditCommit {
+            PlayersDatabase.changeName(it.rowValue, it.newValue)
+            loadPlayers()
+        }
+
         langColumn.cellValueFactory = PropertyValueFactory<Player, String>("language")
+        langColumn.cellFactory = TextFieldTableCell.forTableColumn()
+        langColumn.setOnEditCommit {
+            PlayersDatabase.changeLanguage(it.rowValue, it.newValue)
+            loadPlayers()
+        }
+
         scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
+        scoreColumn.cellFactory = TextFieldTableCell.forTableColumn(IntegerStringConverter())
+        scoreColumn.setOnEditCommit {
+            PlayersDatabase.changeScore(it.rowValue, it.newValue)
+            loadPlayers()
+        }
 
         loadPlayers()
     }
 
 
     fun close() {
-
     }
 
     fun removeAllPlayers() {
@@ -66,6 +86,10 @@ class EditorViewController : Initializable {
 
     fun addPlayer() {
         AddPlayerController.showView()
+        loadPlayers()
+    }
+
+    override fun changed(observable: ObservableValue<out String>?, oldValue: String?, newValue: String?) {
         loadPlayers()
     }
 

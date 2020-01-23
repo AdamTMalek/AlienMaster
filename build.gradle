@@ -14,7 +14,9 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation 'org.jetbrains.exposed:exposed:0.17.7'
+    implementation 'org.jetbrains.exposed:exposed-core:0.20.1'
+    implementation 'org.jetbrains.exposed:exposed-dao:0.20.1'
+    implementation 'org.jetbrains.exposed:exposed-jdbc:0.20.1'
     implementation 'org.openjfx:javafx-controls:12'
     implementation 'org.openjfx:javafx-fxml:12'
     implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'

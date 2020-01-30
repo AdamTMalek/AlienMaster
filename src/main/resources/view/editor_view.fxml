@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditorViewController">
+    <GridPane hgap="20" minWidth="600" vgap="20">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20"/>
+        </padding>
+        <TableView fx:id="playersTable" GridPane.columnSpan="2" editable="true" minWidth="600">
+            <columns>
+                <TableColumn fx:id="idColumn" minWidth="20.0" text="ID"/>
+                <TableColumn fx:id="nameColumn" minWidth="20.0" prefWidth="150.0" text="Name"/>
+                <TableColumn fx:id="langColumn" minWidth="20.0" prefWidth="100.0" text="Language"/>
+                <TableColumn fx:id="scoreColumn" minWidth="20.0" prefWidth="150.0" text="Top Score"/>
+            </columns>
+        </TableView>
+        <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" maxWidth="-Infinity" minWidth="600" spacing="20">
+            <Button onAction="#close" text="Close"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button onAction="#removeAllPlayers" text="Remove All"/>
+            <Button onAction="#addPlayer" text="Add Player"/>
+        </HBox>
+    </GridPane>
+</AnchorPane>

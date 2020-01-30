@@ -8,10 +8,12 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import view.EditorViewController
 import view.MainViewController
+import view.MainViewRequestListener
 import view.SerialCommController
 
-class MainApp : Application(), OnSerialDataReceivedListener, SerialCommController {
+class MainApp : Application(), OnSerialDataReceivedListener, SerialCommController, MainViewRequestListener {
     private lateinit var controller: MainViewController
     private val serialCommunication = SerialCommunication()
 
@@ -31,6 +33,7 @@ class MainApp : Application(), OnSerialDataReceivedListener, SerialCommControlle
         controller.ports.addAll(serialCommunication.getAllPorts())
         serialCommunication.addListener(this)
         controller.setHandler(this)
+        controller.setRequestListener(this)
     }
 
     override fun getPorts(): List<SerialPort> {
@@ -51,5 +54,9 @@ class MainApp : Application(), OnSerialDataReceivedListener, SerialCommControlle
 
     override fun stop() {
         serialCommunication.stop()
+    }
+
+    override fun onOpenPlayerEditor() {
+        EditorViewController.showView()
     }
 }

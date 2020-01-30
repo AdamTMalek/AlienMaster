@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="view.AddPlayerController"
+            fx:id="rootPane"
+            prefHeight="150.0" prefWidth="300.0">
+    <GridPane vgap="20" hgap="20">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Name: "/>
+        <TextField fx:id="nameInput" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Preferred Language: "/>
+        <ChoiceBox fx:id="langChoice" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Highest Score: "/>
+        <TextField fx:id="scoreInput" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <HBox GridPane.rowIndex="4" GridPane.columnSpan="2" maxWidth="-Infinity" minWidth="300">
+            <Button onAction="#cancel" text="Cancel"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button onAction="#save" text="Save"/>
+        </HBox>
+    </GridPane>
+</AnchorPane>

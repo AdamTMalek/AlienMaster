@@ -1,4 +1,4 @@
-package app
+package app.serialcom
 
 /**
  * This interface should be used by any classes that wants to receive data from a serial port must

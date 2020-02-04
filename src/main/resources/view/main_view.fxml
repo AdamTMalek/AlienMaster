@@ -6,18 +6,29 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.MainViewController"
+            fx:id="rootPane"
             prefHeight="400.0" prefWidth="600.0">
-    <GridPane hgap="40" vgap="20">
-        <padding>
-            <Insets bottom="20" left="20" right="20" top="20"/>
-        </padding>
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Port:</Label>
-        <ChoiceBox fx:id="portChoice" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <VBox>
+        <MenuBar focusTraversable="true">
+            <Menu text="File">
+                <MenuItem text="Close" onAction="#close"/>
+            </Menu>
+            <Menu text="Players">
+                <MenuItem text="Open Editor" onAction="#openPlayersEditor"/>
+            </Menu>
+        </MenuBar>
+        <GridPane hgap="40" vgap="20">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="50"/>
+            </padding>
+            <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Port:</Label>
+            <ChoiceBox fx:id="portChoice" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Data:</Label>
-        <TextField fx:id="userInput" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        <Button onAction="#sendData" GridPane.rowIndex="2" GridPane.columnIndex="1">Send</Button>
+            <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Data:</Label>
+            <TextField fx:id="userInput" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Button onAction="#sendData" GridPane.rowIndex="2" GridPane.columnIndex="1">Send</Button>
 
-        <TextArea fx:id="dataReceived" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-    </GridPane>
+            <TextArea fx:id="dataReceived" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+        </GridPane>
+    </VBox>
 </AnchorPane>

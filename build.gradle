@@ -19,8 +19,9 @@ dependencies {
     implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
     implementation 'de.dfki.mary:marytts:5.2'
     implementation 'de.dfki.mary:marytts-lang-en:5.2'
+    implementation 'de.dfki.mary:marytts-lang-de:5.2'
     implementation 'de.dfki.mary:voice-dfki-poppy-hsmm:5.2' // English
-    implementation 'de.dfki.mary:voice-enst-dennys-hsmm:5.2'  // French
+    implementation 'de.dfki.mary:voice-bits1-hsmm:5.2'  // German
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
     runtimeOnly 'org.openjfx:javafx-controls:12:win'
     runtimeOnly 'org.openjfx:javafx-controls:12:linux'

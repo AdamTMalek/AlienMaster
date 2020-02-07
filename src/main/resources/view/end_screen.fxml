@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndScreenController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+    <Pane styleClass="hbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="600"
+              prefHeight="375.0" prefWidth="600.0" spacing="20">
+            <padding>
+                <Insets top="10"/>
+            </padding>
+            <Label styleClass="thanks">Thank you for playing</Label>
+            <Label>Here is your result compared to other players</Label>
+            <TableView>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+                <columns>
+                    <TableColumn text="ID"/>
+                    <TableColumn text="Nickname"/>
+                    <TableColumn text="Top score"/>
+                </columns>
+            </TableView>
+            <Label styleClass="card-prompt">Please remember to take your card out</Label>
+            <Label styleClass="play-again">Or press any button if you want to play again</Label>
+        </VBox>
+    </Pane>
+</AnchorPane>

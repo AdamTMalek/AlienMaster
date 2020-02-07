@@ -1,0 +1,15 @@
+.hbox {
+    -fx-background-color: #ffffff;
+}
+
+.thanks {
+    -fx-font-size: 30.0;
+}
+
+.card-prompt {
+    -fx-font-size: 15.0;
+}
+
+.play-again {
+    -fx-font-size: 13.0;
+}

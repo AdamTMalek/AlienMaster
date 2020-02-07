@@ -12,9 +12,17 @@ import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.Pane
 import javafx.util.Duration
+import view.EndScreenController.Companion.loadWithAnimation
 import java.net.URL
 import java.util.*
 
+/**
+ * The [EndScreenController] is the class responsible for controlling data
+ * and interactions happening in the view defined by the end_screen.fxml.
+ *
+ * The controller defines a static method [loadWithAnimation] that loads the
+ * view and makes an animated transition from the old view to this.
+ */
 class EndScreenController : Initializable {
     @FXML
     private var playersTable = TableView<Player>()
@@ -27,20 +35,37 @@ class EndScreenController : Initializable {
     @FXML
     private var promptLabel = Label()
 
-    private lateinit var player: Player
+    private lateinit var currentPlayer: Player // Player who will be highlighted in the leader board table.
     private val allPlayers = PlayersDatabase.getAllPlayers().sortedByDescending { it.score }
 
     companion object {
+        /**
+         * Loads this view with an animated transition.
+         */
         fun loadWithAnimation(root: Pane, player: Player) {
-            val resource = this::class.java.classLoader.getResource("view/end_screen.fxml")
-            val loader = FXMLLoader().apply { location = resource }
+            val loader = loadFxml()
             val parent = loader.load<Parent>()
-            val scene = root.scene
 
             with(loader.getController<EndScreenController>()) {
                 setPlayer(player)
                 populateTable()
             }
+
+            animateTransition(root, parent)
+        }
+
+        private fun loadFxml(): FXMLLoader {
+            val resource = this::class.java.classLoader.getResource("view/end_screen.fxml")
+            return FXMLLoader().apply { location = resource }
+        }
+
+        /**
+         * Performs the animated transition.
+         * @param root Root pane of the original view (currently displayed, before this view will appear)
+         * @param parent Parent of the end_screen FXML
+         */
+        private fun animateTransition(root: Pane, parent: Parent) {
+            val scene = root.scene
 
             // Slide in from the right
             parent.translateXProperty().set(scene.width)
@@ -56,10 +81,16 @@ class EndScreenController : Initializable {
         }
     }
 
+    /**
+     * Sets the player that will be highlighted.
+     */
     fun setPlayer(player: Player) {
-        this.player = player
+        this.currentPlayer = player
     }
 
+    /**
+     * Populates the table on the end screen.
+     */
     fun populateTable() {
         addPlayersToTable()
         sortTable()
@@ -73,22 +104,25 @@ class EndScreenController : Initializable {
     private fun initColumns() {
         positionColumn.setCellFactory {
             object : TableCell<Player, Int>() {
+                private fun highlightIfCurrentPlayer(row: TableRow<Player>) {
+                    if (row.item == currentPlayer)
+                        row.styleClass.add("highlight")
+                }
+
+                private fun getPosition(player: Player): Int {
+                    return allPlayers.indexOf(player) + 1
+                }
+
                 override fun updateIndex(i: Int) {
                     super.updateIndex(i)
 
-                    text = if (isEmpty) {
+                    text = if (isEmpty || tableRow == null) {
                         ""
                     } else {
-                        val row = this.tableRow ?: return
-                        val playerAtRow = row.item
+                        val player = tableRow.item
 
-                        if (playerAtRow == player)
-                            addHighlightStyleToRow(row)
-
-                        val index = allPlayers.indexOf(playerAtRow)
-                        val position = index + 1
-
-                        position.toString()
+                        highlightIfCurrentPlayer(tableRow)
+                        getPosition(player).toString()
                     }
                 }
             }
@@ -97,14 +131,10 @@ class EndScreenController : Initializable {
         scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
     }
 
-    private fun addHighlightStyleToRow(row: TableRow<out Any?>) {
-        row.styleClass.add("highlight")
-    }
-
     private fun addPlayersToTable() {
         val players = mutableSetOf<Player>().apply {
             addAll(allPlayers.take(5))
-            add(player)
+            add(currentPlayer)
         }
 
         playersTable.items = FXCollections.observableList(players.toList())

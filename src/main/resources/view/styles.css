@@ -1,5 +1,5 @@
 .hbox {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #FFFFFF;
 }
 
 .thanks {
@@ -12,4 +12,11 @@
 
 .play-again {
     -fx-font-size: 13.0;
+}
+
+.highlight {
+    -fx-font-weight: bold;
+    -fx-background-color: #FFEE7F;
+    -fx-border-color: #000000;
+    -fx-border-radius: 1.0;
 }

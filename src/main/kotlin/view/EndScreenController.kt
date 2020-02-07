@@ -105,10 +105,12 @@ class EndScreenController : Initializable {
     }
 
     private fun addPlayersToTable() {
-        val players = mutableListOf<Player>()
-        players.addAll(allPlayers.take(5))
-        players.add(player)
-        playersTable.items = FXCollections.observableList(players)
+        val players = mutableSetOf<Player>().apply {
+            addAll(allPlayers.take(5))
+            add(player)
+        }
+
+        playersTable.items = FXCollections.observableList(players.toList())
     }
 
     private fun sortTable() {

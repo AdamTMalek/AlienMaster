@@ -2,19 +2,13 @@ package view
 
 import app.Player
 import app.PlayersDatabase
-import javafx.animation.Interpolator
-import javafx.animation.KeyFrame
-import javafx.animation.KeyValue
-import javafx.animation.Timeline
+import javafx.animation.*
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
-import javafx.scene.control.TableCell
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableRow
-import javafx.scene.control.TableView
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.Pane
 import javafx.util.Duration
@@ -30,6 +24,8 @@ class EndScreenController : Initializable {
     private var nameColumn = TableColumn<Player, String>()
     @FXML
     private var scoreColumn = TableColumn<Player, Int>()
+    @FXML
+    private var promptLabel = Label()
 
     private lateinit var player: Player
     private val allPlayers = PlayersDatabase.getAllPlayers().sortedByDescending { it.score }
@@ -71,6 +67,7 @@ class EndScreenController : Initializable {
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         initColumns()
+        addPulsingToPromptLabel()
     }
 
     private fun initColumns() {
@@ -116,5 +113,15 @@ class EndScreenController : Initializable {
     private fun sortTable() {
         scoreColumn.comparator = scoreColumn.comparator.reversed()
         playersTable.sortOrder.add(scoreColumn)
+    }
+
+    private fun addPulsingToPromptLabel() {
+        FadeTransition(Duration.seconds(1.0), promptLabel).apply {
+            fromValue = 1.0
+            toValue = 0.0
+            isAutoReverse = true
+            cycleCount = Animation.INDEFINITE
+            play()
+        }
     }
 }

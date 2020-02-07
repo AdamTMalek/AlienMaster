@@ -32,7 +32,7 @@
                 </columns>
             </TableView>
             <Label styleClass="card-prompt">Please remember to take your card out</Label>
-            <Label styleClass="play-again">Or press any button if you want to play again</Label>
+            <Label fx:id="promptLabel" styleClass="play-again">Or press any button to play again</Label>
         </VBox>
     </Pane>
 </AnchorPane>

@@ -100,6 +100,12 @@ class EndScreenController : Initializable {
 
     fun getPromptText(): String = textResourceBundle.getString("end_screen.play_again_prompt")
 
+    fun getPositionHeading(): String = textResourceBundle.getString("end_screen.table.position")
+
+    fun getNicknameHeading(): String = textResourceBundle.getString("end_screen.table.nickname")
+
+    fun getScoreHeading(): String = textResourceBundle.getString("end_screen.table.score")
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         initColumns()
         addPulsingToPromptLabel()

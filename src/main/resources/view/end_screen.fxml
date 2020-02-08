@@ -27,9 +27,9 @@
                     <Insets bottom="20" left="20" right="20"/>
                 </VBox.margin>
                 <columns>
-                    <TableColumn fx:id="positionColumn" text="Position"/>
-                    <TableColumn fx:id="nameColumn" text="Nickname"/>
-                    <TableColumn fx:id="scoreColumn" text="Top score"/>
+                    <TableColumn fx:id="positionColumn" text="${controller.positionHeading}"/>
+                    <TableColumn fx:id="nameColumn" text="${controller.nicknameHeading}"/>
+                    <TableColumn fx:id="scoreColumn" text="${controller.scoreHeading}"/>
                 </columns>
             </TableView>
             <Label styleClass="card-prompt" text="${controller.cardPromptText}"/>

@@ -21,7 +21,7 @@ class MainApp : Application(), OnSerialDataReceivedListener, SerialCommControlle
         val url = this::class.java.classLoader.getResource("view/main_view.fxml")
         val loader = FXMLLoader().apply { location = url }
         val root = loader.load<Parent>()
-        val scene = Scene(root, 600.0, 350.0)
+        val scene = Scene(root, 600.0, 400.0)
 
         primaryStage?.let {
             it.title = "AlienMaster"
@@ -34,6 +34,7 @@ class MainApp : Application(), OnSerialDataReceivedListener, SerialCommControlle
         serialCommunication.addListener(this)
         controller.setHandler(this)
         controller.setRequestListener(this)
+        controller.setStage()
     }
 
     override fun getPorts(): List<SerialPort> {

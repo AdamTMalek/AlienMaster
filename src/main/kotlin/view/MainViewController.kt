@@ -1,5 +1,7 @@
 package view
 
+import app.Language
+import app.PlayersDatabase
 import app.serialcom.OnSerialDataReceivedListener
 import com.fazecast.jSerialComm.SerialPort
 import javafx.beans.value.ChangeListener
@@ -10,6 +12,7 @@ import javafx.fxml.Initializable
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
+import javafx.scene.input.KeyCode
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
@@ -32,6 +35,32 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         portChoice.items = ports
         portChoice.selectionModel.selectedItemProperty().addListener(this)
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    fun setStage() {
+        rootPane.scene.setOnKeyPressed { key ->
+            if (key.code == KeyCode.G) loadGermanPlayerEndScreen()
+            else if (key.code == KeyCode.E) loadEnglishPlayerEndScreen()
+        }
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    private fun loadGermanPlayerEndScreen() {
+        val player = PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
+        EndScreenController.loadWithAnimation(rootPane, player)
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    private fun loadEnglishPlayerEndScreen() {
+        val player = PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
+        EndScreenController.loadWithAnimation(rootPane, player)
     }
 
     fun setRequestListener(listener: MainViewRequestListener) {

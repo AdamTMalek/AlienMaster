@@ -1,8 +1,8 @@
 package view
 
+import app.Language
 import app.Player
 import app.PlayersDatabase
-import app.tts.TtsLanguage
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -25,7 +25,7 @@ class AddPlayerController : Initializable {
     @FXML
     private var nameInput = TextField()
     @FXML
-    private var langChoice = ChoiceBox<TtsLanguage>()
+    private var langChoice = ChoiceBox<Language>()
     @FXML
     private var scoreInput = TextField()
 
@@ -49,7 +49,7 @@ class AddPlayerController : Initializable {
     }
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        langChoice.items = FXCollections.observableList(TtsLanguage.values().toList())
+        langChoice.items = FXCollections.observableList(Language.values().toList())
         addFormatterToScoreField()
     }
 

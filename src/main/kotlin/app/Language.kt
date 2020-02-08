@@ -4,7 +4,7 @@ import java.util.*
 
 enum class Language(val code: String, val locale: Locale, private val readableName: String) {
     ENG("eng", Locale.UK, "English"),
-    GER("ger", Locale.GERMAN, "German");
+    GER("ger", Locale.GERMANY, "German");
 
     override fun toString(): String {
         return readableName

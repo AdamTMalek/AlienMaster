@@ -12,12 +12,13 @@
     <Pane styleClass="hbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="0.0">
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="600"
-              prefHeight="375.0" prefWidth="600.0" spacing="20">
+              prefHeight="385.0" prefWidth="600.0" spacing="15">
             <padding>
                 <Insets top="10"/>
             </padding>
-            <Label styleClass="thanks">Thank you for playing</Label>
-            <Label>Here is your result compared to other players</Label>
+            <Label styleClass="thanks" text="${controller.thanksText}"/>
+            <Label text="${controller.resultText}"/>
+            <Label text="${controller.tableDesc}"/>
             <TableView fx:id="playersTable">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
@@ -31,8 +32,8 @@
                     <TableColumn fx:id="scoreColumn" text="Top score"/>
                 </columns>
             </TableView>
-            <Label styleClass="card-prompt">Please remember to take your card out</Label>
-            <Label fx:id="promptLabel" styleClass="play-again">Or press any button to play again</Label>
+            <Label styleClass="card-prompt" text="${controller.cardPromptText}"/>
+            <Label fx:id="promptLabel" styleClass="play-again" text="${controller.promptText}"/>
         </VBox>
     </Pane>
 </AnchorPane>

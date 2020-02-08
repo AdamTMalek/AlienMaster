@@ -1,7 +1,9 @@
 package view
 
+import app.Language
 import app.Player
 import app.PlayersDatabase
+import extensions.getParameterizedString
 import javafx.animation.*
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
@@ -35,21 +37,28 @@ class EndScreenController : Initializable {
     @FXML
     private var promptLabel = Label()
 
-    private lateinit var currentPlayer: Player // Player who will be highlighted in the leader board table.
+    /**
+     * The [textResourceBundle] contains all the locale-dependent translations of text
+     * appearing in the view.
+     */
+    private val textResourceBundle: ResourceBundle by lazy {
+        val language = Language.fromCode(currentPlayer.language)
+        ResourceBundle.getBundle("TextBundle", language.locale)
+    }
+
     private val allPlayers = PlayersDatabase.getAllPlayers().sortedByDescending { it.score }
 
     companion object {
+        private lateinit var currentPlayer: Player // Player is going to be highlighted in the table
+
         /**
          * Loads this view with an animated transition.
          */
         fun loadWithAnimation(root: Pane, player: Player) {
+            currentPlayer = player
+
             val loader = loadFxml()
             val parent = loader.load<Parent>()
-
-            with(loader.getController<EndScreenController>()) {
-                setPlayer(player)
-                populateTable()
-            }
 
             animateTransition(root, parent)
         }
@@ -81,24 +90,20 @@ class EndScreenController : Initializable {
         }
     }
 
-    /**
-     * Sets the player that will be highlighted.
-     */
-    fun setPlayer(player: Player) {
-        this.currentPlayer = player
-    }
+    fun getThanksText(): String = textResourceBundle.getString("end_screen.thanks")
 
-    /**
-     * Populates the table on the end screen.
-     */
-    fun populateTable() {
-        addPlayersToTable()
-        sortTable()
-    }
+    fun getResultText(): String = textResourceBundle.getParameterizedString("end_screen.game_result", 20)
+
+    fun getTableDesc(): String = textResourceBundle.getString("end_screen.leader_board_desc")
+
+    fun getCardPromptText(): String = textResourceBundle.getString("end_screen.card_reminder")
+
+    fun getPromptText(): String = textResourceBundle.getString("end_screen.play_again_prompt")
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         initColumns()
         addPulsingToPromptLabel()
+        populateTable()
     }
 
     private fun initColumns() {
@@ -119,7 +124,7 @@ class EndScreenController : Initializable {
                     text = if (isEmpty || tableRow == null) {
                         ""
                     } else {
-                        val player = tableRow.item
+                        val player = tableRow.item ?: return
 
                         highlightIfCurrentPlayer(tableRow)
                         getPosition(player).toString()
@@ -143,6 +148,14 @@ class EndScreenController : Initializable {
     private fun sortTable() {
         scoreColumn.comparator = scoreColumn.comparator.reversed()
         playersTable.sortOrder.add(scoreColumn)
+    }
+
+    /**
+     * Populates the table on the end screen.
+     */
+    private fun populateTable() {
+        addPlayersToTable()
+        sortTable()
     }
 
     private fun addPulsingToPromptLabel() {

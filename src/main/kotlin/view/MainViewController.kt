@@ -1,6 +1,7 @@
 package view
 
 import app.Language
+import app.Player
 import app.PlayersDatabase
 import app.serialcom.OnSerialDataReceivedListener
 import com.fazecast.jSerialComm.SerialPort
@@ -52,7 +53,7 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
      */
     private fun loadGermanPlayerEndScreen() {
         val player = PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
-        EndScreenController.loadWithAnimation(rootPane, player)
+        loadEndScreen(player)
     }
 
     /**
@@ -60,7 +61,11 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
      */
     private fun loadEnglishPlayerEndScreen() {
         val player = PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
-        EndScreenController.loadWithAnimation(rootPane, player)
+        loadEndScreen(player)
+    }
+
+    private fun loadEndScreen(player: Player) {
+        EndScreenController.loadWithAnimation(rootPane, player, 1)
     }
 
     fun setRequestListener(listener: MainViewRequestListener) {

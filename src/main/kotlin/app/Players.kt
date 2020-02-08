@@ -15,7 +15,6 @@ object Players : IntIdTable() {
     val name: Column<String> = varchar("name", 50)
     val language: Column<String> = varchar("language", 3) // ISO-639-2/B code
     val score: Column<Int> = integer("score")
-    override val primaryKey = PrimaryKey(id)
 }
 
 /**

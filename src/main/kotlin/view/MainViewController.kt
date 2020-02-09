@@ -1,5 +1,8 @@
 package view
 
+import app.Language
+import app.Player
+import app.PlayersDatabase
 import app.serialcom.OnSerialDataReceivedListener
 import com.fazecast.jSerialComm.SerialPort
 import javafx.beans.value.ChangeListener
@@ -10,6 +13,7 @@ import javafx.fxml.Initializable
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
+import javafx.scene.input.KeyCode
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
@@ -32,6 +36,48 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         portChoice.items = ports
         portChoice.selectionModel.selectedItemProperty().addListener(this)
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    fun setStage() {
+        rootPane.scene.setOnKeyPressed { key ->
+            val player = when (key.code) {
+                KeyCode.G -> getGermanPlayer()
+                KeyCode.E -> getEnglishPlayer()
+                KeyCode.L -> getLastPlayer()
+                else -> return@setOnKeyPressed
+            }
+
+            val isNewTopScore = key.isShiftDown
+            loadEndScreen(player, isNewTopScore)
+        }
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    private fun getGermanPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    private fun getEnglishPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
+    }
+
+    /**
+     * TODO: Delete after testing
+     */
+    private fun getLastPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
+    }
+
+    private fun loadEndScreen(player: Player, isNewTopScore: Boolean) {
+        EndScreenController.loadWithAnimation(rootPane, player, 1, isNewTopScore)
     }
 
     fun setRequestListener(listener: MainViewRequestListener) {

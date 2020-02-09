@@ -1,5 +1,6 @@
 package app
 
+import org.apache.commons.lang.builder.HashCodeBuilder
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -14,7 +15,6 @@ object Players : IntIdTable() {
     val name: Column<String> = varchar("name", 50)
     val language: Column<String> = varchar("language", 3) // ISO-639-2/B code
     val score: Column<Int> = integer("score")
-    override val primaryKey = PrimaryKey(id)
 }
 
 /**
@@ -26,4 +26,23 @@ class Player(id: EntityID<Int>) : IntEntity(id) {
     var name by Players.name
     var language by Players.language
     var score by Players.score
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Player) return false
+
+        return id.value == other.id.value &&
+                name == other.name &&
+                language == other.language &&
+                score == other.score
+    }
+
+    override fun hashCode(): Int {
+        return HashCodeBuilder(17, 31)
+            .append(id.value)
+            .append(name)
+            .append(language)
+            .append(score)
+            .toHashCode()
+    }
 }

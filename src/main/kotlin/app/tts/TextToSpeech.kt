@@ -1,5 +1,6 @@
 package app.tts
 
+import app.Language
 import marytts.LocalMaryInterface
 import marytts.util.data.audio.AudioPlayer
 import java.util.*
@@ -26,10 +27,10 @@ class TextToSpeech {
     /**
      * Initialise MaryTTS for the given language.
      */
-    private fun initialiseMary(language: TtsLanguage) {
+    private fun initialiseMary(language: Language) {
         when (language) {
-            TtsLanguage.ENG -> initialiseMary(Locale.UK, ENGLISH_VOICE)
-            TtsLanguage.GER -> initialiseMary(Locale.GERMAN, GERMAN_VOICE)
+            Language.ENG -> initialiseMary(Locale.UK, ENGLISH_VOICE)
+            Language.GER -> initialiseMary(Locale.GERMAN, GERMAN_VOICE)
         }
     }
 
@@ -38,7 +39,7 @@ class TextToSpeech {
      * This method is the one that actually configures Mary,
      * but because it requires both locale and voice as string,
      * it is advised to use the method [initialiseMary] that takes
-     * [TtsLanguage] as a parameter.
+     * [Language] as a parameter.
      */
     private fun initialiseMary(locale: Locale, voice: String) {
         mary.let {
@@ -50,7 +51,7 @@ class TextToSpeech {
     /**
      * Say the given [text] in the given [language]
      */
-    fun say(language: TtsLanguage, text: String) {
+    fun say(language: Language, text: String) {
         initialiseMary(language)
 
         val audio = mary.generateAudio(text)

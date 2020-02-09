@@ -1,0 +1,22 @@
+.hbox {
+    -fx-background-color: #FFFFFF;
+}
+
+.thanks {
+    -fx-font-size: 30.0;
+}
+
+.card-prompt {
+    -fx-font-size: 15.0;
+}
+
+.play-again {
+    -fx-font-size: 13.0;
+}
+
+.highlight {
+    -fx-font-weight: bold;
+    -fx-background-color: #FFEE7F;
+    -fx-border-color: #000000;
+    -fx-border-radius: 1.0;
+}

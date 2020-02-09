@@ -12,11 +12,12 @@
     <Pane styleClass="hbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="0.0">
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="600"
-              prefHeight="385.0" prefWidth="600.0" spacing="15">
+              prefHeight="450.0" prefWidth="600.0" spacing="15">
             <padding>
                 <Insets top="10"/>
             </padding>
             <Label styleClass="thanks" text="${controller.thanksText}"/>
+            <Label text="${controller.topScoreText}"/>
             <Label text="${controller.resultText}"/>
             <Label text="${controller.tableDesc}"/>
             <TableView fx:id="playersTable">

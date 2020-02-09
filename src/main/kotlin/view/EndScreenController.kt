@@ -51,13 +51,15 @@ class EndScreenController : Initializable {
     companion object {
         private lateinit var currentPlayer: Player // Player is going to be highlighted in the table
         private var score: Int = 0
+        private var isNewTopScore: Boolean = false
 
         /**
          * Loads this view with an animated transition.
          */
-        fun loadWithAnimation(root: Pane, player: Player, score: Int) {
+        fun loadWithAnimation(root: Pane, player: Player, score: Int, isNewTopScore: Boolean) {
             currentPlayer = player
             this.score = score
+            this.isNewTopScore = isNewTopScore
 
             val loader = loadFxml()
             val parent = loader.load<Parent>()
@@ -95,6 +97,13 @@ class EndScreenController : Initializable {
     fun getThanksText(): String = textResourceBundle.getString("end_screen.thanks")
 
     fun getResultText(): String = textResourceBundle.getParameterizedString("end_screen.game_result", score)
+
+    fun getTopScoreText(): String {
+        return if (isNewTopScore)
+            textResourceBundle.getString("end_screen.top_score.new")
+        else
+            textResourceBundle.getString("end_screen.top_score.old")
+    }
 
     fun getTableDesc(): String = textResourceBundle.getString("end_screen.leader_board_desc")
 

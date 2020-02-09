@@ -43,29 +43,41 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
      */
     fun setStage() {
         rootPane.scene.setOnKeyPressed { key ->
-            if (key.code == KeyCode.G) loadGermanPlayerEndScreen()
-            else if (key.code == KeyCode.E) loadEnglishPlayerEndScreen()
+            val player = when (key.code) {
+                KeyCode.G -> getGermanPlayer()
+                KeyCode.E -> getEnglishPlayer()
+                KeyCode.L -> getLastPlayer()
+                else -> return@setOnKeyPressed
+            }
+
+            val isNewTopScore = key.isShiftDown
+            loadEndScreen(player, isNewTopScore)
         }
     }
 
     /**
      * TODO: Delete after testing
      */
-    private fun loadGermanPlayerEndScreen() {
-        val player = PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
-        loadEndScreen(player)
+    private fun getGermanPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
     }
 
     /**
      * TODO: Delete after testing
      */
-    private fun loadEnglishPlayerEndScreen() {
-        val player = PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
-        loadEndScreen(player)
+    private fun getEnglishPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
     }
 
-    private fun loadEndScreen(player: Player) {
-        EndScreenController.loadWithAnimation(rootPane, player, 1)
+    /**
+     * TODO: Delete after testing
+     */
+    private fun getLastPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
+    }
+
+    private fun loadEndScreen(player: Player, isNewTopScore: Boolean) {
+        EndScreenController.loadWithAnimation(rootPane, player, 1, isNewTopScore)
     }
 
     fun setRequestListener(listener: MainViewRequestListener) {

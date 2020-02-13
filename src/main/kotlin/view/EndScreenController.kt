@@ -4,7 +4,8 @@ import app.Language
 import app.Player
 import app.PlayersDatabase
 import extensions.getParameterizedString
-import javafx.animation.*
+import javafx.animation.Animation
+import javafx.animation.FadeTransition
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -64,33 +65,12 @@ class EndScreenController : Initializable {
             val loader = loadFxml()
             val parent = loader.load<Parent>()
 
-            animateTransition(root, parent)
+            LoadAnimation.loadWithAnimation(root, parent)
         }
 
         private fun loadFxml(): FXMLLoader {
             val resource = this::class.java.classLoader.getResource("view/end_screen.fxml")
             return FXMLLoader().apply { location = resource }
-        }
-
-        /**
-         * Performs the animated transition.
-         * @param root Root pane of the original view (currently displayed, before this view will appear)
-         * @param parent Parent of the end_screen FXML
-         */
-        private fun animateTransition(root: Pane, parent: Parent) {
-            val scene = root.scene
-
-            // Slide in from the right
-            parent.translateXProperty().set(scene.width)
-            root.children.add(parent)
-
-            val keyValue = KeyValue(parent.translateXProperty(), 0, Interpolator.EASE_IN)
-            val keyFrame = KeyFrame(Duration.seconds(1.0), keyValue)
-
-            Timeline().apply {
-                keyFrames.add(keyFrame)
-                play()
-            }
         }
     }
 

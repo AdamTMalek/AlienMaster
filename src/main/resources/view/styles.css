@@ -1,8 +1,8 @@
-.hbox {
+.box {
     -fx-background-color: #FFFFFF;
 }
 
-.thanks {
+.heading {
     -fx-font-size: 30.0;
 }
 

@@ -20,6 +20,7 @@
         <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" maxWidth="-Infinity" minWidth="600" spacing="20">
             <Button onAction="#close" text="Close"/>
             <Pane HBox.hgrow="ALWAYS"/>
+            <Button onAction="#generatePlayers" text="Generate Players"/>
             <Button onAction="#removeAllPlayers" text="Remove All"/>
             <Button onAction="#addPlayer" text="Add Player"/>
         </HBox>

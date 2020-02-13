@@ -1,6 +1,7 @@
 package view
 
 import app.Player
+import app.PlayerGenerator
 import app.PlayersDatabase
 import javafx.beans.value.ChangeListener
 import javafx.beans.value.ObservableValue
@@ -10,6 +11,8 @@ import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
@@ -75,6 +78,45 @@ class EditorViewController : Initializable, ChangeListener<String> {
 
 
     fun close() {
+    }
+
+    /**
+     * Shows the generator dialog and (unless cancel was clicked) adds generated players
+     * to the database.
+     */
+    fun generatePlayers() {
+        val generator = PlayerGenerator()
+        val players = when (showGeneratorDialogAndWait()) {
+            ButtonType.YES -> generator.generatePlayers(16, true)
+            ButtonType.NO -> generator.generatePlayers(16, false)
+            else -> return
+        }
+
+        addPlayersToTheDatabase(players)
+        loadPlayers()
+    }
+
+    /**
+     * Show the generator dialog allowing users to choose if the generated players
+     * should have randomised scores or not.
+     * @return Type of the button that was clicked
+     */
+    private fun showGeneratorDialogAndWait(): ButtonType {
+        val alert = Alert(
+            Alert.AlertType.NONE,
+            "Randomise scores?",
+            ButtonType.YES, ButtonType.NO, ButtonType.CANCEL
+        ).apply {
+            title = "Player Generator"
+        }
+
+        return alert.showAndWait().get()
+    }
+
+    private fun addPlayersToTheDatabase(players: List<PlayerGenerator.Player>) {
+        players.forEach { player ->
+            PlayersDatabase.addPlayer(player.name, player.language.code, player.score)
+        }
     }
 
     fun removeAllPlayers() {

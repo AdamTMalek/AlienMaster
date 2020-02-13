@@ -6,9 +6,11 @@ import app.PlayersDatabase
 import javafx.beans.value.ChangeListener
 import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
+import javafx.concurrent.Task
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
+import javafx.scene.Cursor
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Alert
@@ -34,6 +36,8 @@ class EditorViewController : Initializable, ChangeListener<String> {
     @FXML
     private var scoreColumn = TableColumn<Player, Int>()
 
+    private val scene by lazy { playersTable.scene }
+
     companion object {
         fun showView() {
             val url = this::class.java.classLoader.getResource("view/editor_view.fxml")
@@ -51,6 +55,11 @@ class EditorViewController : Initializable, ChangeListener<String> {
 
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        setupTable()
+        loadPlayers()
+    }
+
+    private fun setupTable() {
         idColumn.cellValueFactory = PropertyValueFactory<Player, Int>("id")
         nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
         nameColumn.cellFactory = TextFieldTableCell.forTableColumn()
@@ -72,8 +81,6 @@ class EditorViewController : Initializable, ChangeListener<String> {
             PlayersDatabase.changeScore(it.rowValue, it.newValue)
             loadPlayers()
         }
-
-        loadPlayers()
     }
 
 
@@ -85,15 +92,32 @@ class EditorViewController : Initializable, ChangeListener<String> {
      * to the database.
      */
     fun generatePlayers() {
-        val generator = PlayerGenerator()
-        val players = when (showGeneratorDialogAndWait()) {
-            ButtonType.YES -> generator.generatePlayers(16, true)
-            ButtonType.NO -> generator.generatePlayers(16, false)
+        val randomiseScore = when (showGeneratorDialogAndWait()) {
+            ButtonType.YES -> true
+            ButtonType.NO -> false
             else -> return
         }
 
-        addPlayersToTheDatabase(players)
-        loadPlayers()
+        scene.cursor = Cursor.WAIT
+
+        // The following task will be executed in a separate thread
+        val task = object : Task<Unit>() {
+            override fun call() {
+                val generator = PlayerGenerator()
+                val players = generator.generatePlayers(16, randomiseScore)
+
+                addPlayersToTheDatabase(players)
+            }
+        }
+
+        // Executed when players were added to the database
+        task.setOnSucceeded {
+            loadPlayers()
+            scene.cursor = Cursor.DEFAULT
+        }
+
+        // Start the task
+        Thread(task).start()
     }
 
     /**

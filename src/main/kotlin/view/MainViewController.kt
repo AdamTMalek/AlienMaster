@@ -50,6 +50,10 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
                 KeyCode.C -> {
                     SplashScreenController.loadWithAnimation(rootPane); return@setOnKeyPressed
                 }
+                KeyCode.W -> {
+                    val player = getGermanPlayer()
+                    WelcomeScreenController.loadWithAnimation(rootPane, player); return@setOnKeyPressed
+                }
                 else -> return@setOnKeyPressed
             }
 

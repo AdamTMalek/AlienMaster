@@ -10,8 +10,8 @@
     -fx-font-size: 15.0;
 }
 
-.play-again {
-    -fx-font-size: 13.0;
+.prompt {
+    -fx-font-size: 20.0;
 }
 
 .highlight {

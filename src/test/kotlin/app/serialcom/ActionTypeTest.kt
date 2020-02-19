@@ -14,6 +14,13 @@ class ActionTypeTest {
     }
 
     @Test
+    fun testSetFromString() {
+        val expected = ActionType.SET
+        val actual = ActionType.fromString("set")
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun testReportFromString() {
         val expected = ActionType.REPORT
         val actual = ActionType.fromString("report")

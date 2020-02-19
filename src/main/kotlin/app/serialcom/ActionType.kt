@@ -8,6 +8,7 @@ package app.serialcom
  */
 enum class ActionType(val code: String) {
     GET("get"),
+    SET("set"),
     REPORT("report");
 
     companion object {

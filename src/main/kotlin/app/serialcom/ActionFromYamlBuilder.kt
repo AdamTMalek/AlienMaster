@@ -9,8 +9,10 @@ package app.serialcom
  * - [build] that builds [Action] and returns it
  */
 class ActionFromYamlBuilder {
-    private var action: String? = null
-    private var value: String? = null
+    private var actionType: ActionType? = null
+    private var deviceType: DeviceType? = null
+    private var deviceId: Int = -1
+    private var value: Int = -1
 
     /**
      * Given the [line] set the correct field of the [Action] object
@@ -19,18 +21,30 @@ class ActionFromYamlBuilder {
         val (key, value) = parseLineAsPair(line)
 
         when (key) {
-            "action" -> action = value
-            "value" -> this.value = value
+            "action" -> actionType = ActionType.fromString(value)
+            "device" -> setDeviceTypeAndId(value)
+            "value" -> this.value = value.toInt()
         }
 
         return this
+    }
+
+    private fun setDeviceTypeAndId(string: String) {
+        val type = string.take(3)
+        val id = string.last()
+
+        deviceType = DeviceType.fromString(type)
+        deviceId = Character.getNumericValue(id)
     }
 
     /**
      * Returns true if the object is ready to be built
      */
     fun isReady(): Boolean {
-        return action != null && value != null
+        return actionType != null
+                && deviceType != null
+                && deviceId != -1
+                && value != -1
     }
 
     /**
@@ -42,7 +56,7 @@ class ActionFromYamlBuilder {
         if (!isReady())
             throw IllegalStateException("The object is not ready to be built")
 
-        return Action(action!!, value!!)
+        return Action(actionType!!, deviceType!!, deviceId, value)
     }
 
     private fun parseLineAsPair(line: String): Pair<String, String> {

@@ -1,25 +1,74 @@
 package app.serialcom
 
 import com.fazecast.jSerialComm.SerialPort
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.concurrent.thread
 
 
 /**
  * The [SerialCommunication] provides methods for serial port communication using jSerialComm (a platform-independent
  * library). An open port is running on a separate thread. When data is read from the port, the class will invoke
- * [OnSerialDataReceivedListener.onDataReceived] on every registered listener (using [addListener]).
+ * [OnSerialDataReceivedListener.onDataReceived] on every registered listener (using [addDataReceivedListener]).
  */
 class SerialCommunication {
-    private val listeners = mutableListOf<OnSerialDataReceivedListener>()
+    private class SerialPortCheckActivity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
+        fun checkForAvailablePorts(ports: MutableCollection<SerialPort>, onUpdateCallback: () -> Unit) {
+            launch {
+                while (true) {
+                    val comPorts = SerialPort.getCommPorts().toList()
+
+                    if (listsDifferent(comPorts, ports)) {
+                        ports.clear()
+                        ports.addAll(comPorts)
+
+                        onUpdateCallback()
+                    }
+
+                    // Wait 100ms before next check
+                    delay(100)
+                }
+            }
+        }
+
+        private fun listsDifferent(a: Collection<SerialPort>, b: Collection<SerialPort>): Boolean {
+            // Compare the two lists using port descriptions
+            // SerialPort does not override equals or hashCode
+            val same = a.all { it.portDescription in b.map { port -> port.portDescription } }
+
+            return if (!same)
+                true // some elements of a are not in b
+            else
+                a.size != b.size  // if size is the same - the lists are exactly the same
+        }
+    }
+
+    private val dataReceivedListeners = mutableListOf<OnSerialDataReceivedListener>()
+    private val portsChangedListeners = mutableListOf<OnAvailablePortsChangeListener>()
+    private val availablePorts = mutableListOf<SerialPort>()
     private var comPort: SerialPort? = null
     private var run = true
     private var running = false
 
+    init {
+        val portCheckActivity = SerialPortCheckActivity()
+        portCheckActivity.checkForAvailablePorts(availablePorts, ::notifyPortsListChanged)
+    }
+
     /**
      * Add [OnSerialDataReceivedListener] for it to be able to receive data from the serial port.
      */
-    fun addListener(listener: OnSerialDataReceivedListener) {
-        listeners.add(listener)
+    fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {
+        dataReceivedListeners.add(listener)
+    }
+
+    /**
+     * Add [OnAvailablePortsChangeListener] for it to be able to get notified about port list updates
+     */
+    fun addPortsReceivedListener(listener: OnAvailablePortsChangeListener) {
+        portsChangedListeners.add(listener)
     }
 
     /**
@@ -54,7 +103,14 @@ class SerialCommunication {
      * Send the received data to every registered listener
      */
     private fun notifyDataReceived(data: String) {
-        listeners.forEach { it.onDataReceived(data) }
+        dataReceivedListeners.forEach { it.onDataReceived(data) }
+    }
+
+    /**
+     * Send the notification about port list modification
+     */
+    private fun notifyPortsListChanged() {
+        portsChangedListeners.forEach { it.onAvailablePortsChange() }
     }
 
     /**

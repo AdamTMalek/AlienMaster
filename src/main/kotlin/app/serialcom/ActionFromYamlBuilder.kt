@@ -12,7 +12,7 @@ class ActionFromYamlBuilder {
     private var actionType: ActionType? = null
     private var deviceType: DeviceType? = null
     private var deviceId: Int = -1
-    private var value: Int = -1
+    private var value: Int? = null
 
     /**
      * Given the [line] set the correct field of the [Action] object
@@ -41,10 +41,26 @@ class ActionFromYamlBuilder {
      * Returns true if the object is ready to be built
      */
     fun isReady(): Boolean {
-        return actionType != null
-                && deviceType != null
-                && deviceId != -1
-                && value != -1
+        return if (isValueRequired())
+            hasRequiredFields() && value != null
+        else
+            hasRequiredFields()
+    }
+
+    /**
+     * Checks if the required fields (i.e. action type and device information)
+     * are present.
+     */
+    private fun hasRequiredFields() = actionType != null && deviceType != null && deviceId != -1
+
+    /**
+     * Returns true if the value is required for the action (depends on action type)
+     */
+    private fun isValueRequired(): Boolean {
+        return if (actionType == null)
+            true
+        else
+            actionType == ActionType.SET || actionType == ActionType.REPORT
     }
 
     /**

@@ -1,7 +1,6 @@
 package app.serialcom
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -51,6 +50,21 @@ class ActionFromYamlBuilderTest {
     @Test
     fun testValueNotSet() {
         val incomingAction = """
+            action: set
+            device: SRV0
+        """.trimIndent()
+
+        val builder = ActionFromYamlBuilder()
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
+
+        assertFalse(builder.isReady())
+    }
+
+    @Test
+    fun testValueNotRequiredWhenActionIsGet() {
+        val incomingAction = """
             action: get
             device: LED0
         """.trimIndent()
@@ -60,7 +74,7 @@ class ActionFromYamlBuilderTest {
             builder.set(line)
         }
 
-        assertFalse(builder.isReady())
+        assertTrue(builder.isReady())
     }
 
     @Test

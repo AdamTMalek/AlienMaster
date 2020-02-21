@@ -11,30 +11,18 @@ serial port.
 - JDK 11 (only for development, JARs can run on Java 8)
 
 ### Setup
-0. If you have an older JDK installed, ensure Gradle uses JDK 11 (required by JavaFX plugin)
-or the project will not compile.
-   
-    To tell Gradle which JDK to use, refer to the 1st step in this 
-    [SO answer](https://stackoverflow.com/a/21212790)
-    which makes changes globally, or, for runtime only config, follow the instructions 
-    [here](https://stackoverflow.com/a/21212790).
-1. **Install Gradle wrapper**
-
-    ```
-   $ gradle wrapper --gradle-version 6.1 --distribution-type all
-   ```
-2. **Build the project**
+1. **Build the project**
     1. Using Gradle wrapper
         ```
         $ ./gradlew build
         ```
     2. Using an IntelliJ IDEA, the IDE should detect gradle so all you need to do is to build
     the project as you would normally do.
-3. **Create the database**
+2. **Create the database**
     ```
     $ ./gradlew flyWayMigrate
     ```
-4. **Run the project**
+3. **Run the project**
     1. Using Gradle wrapper
        ```
        $ ./gradlew run

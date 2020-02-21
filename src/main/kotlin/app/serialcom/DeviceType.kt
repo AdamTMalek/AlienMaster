@@ -17,7 +17,9 @@ enum class DeviceType(val code: String) {
         /**
          * Parse the given [typeCode] (three letter code taken from the
          * device line, without the id) into the equivalent enum value.
+         * @throws UnknownDeviceTypeException when no equivalent value was found
          */
+        @Throws(UnknownDeviceTypeException::class)
         fun fromString(typeCode: String): DeviceType {
             return values().find { it.code == typeCode.toUpperCase() }
                 ?: throw UnknownDeviceTypeException(typeCode)

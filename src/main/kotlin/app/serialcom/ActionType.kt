@@ -15,7 +15,7 @@ enum class ActionType(val code: String) {
         /**
          * Parses the value of action (i.e. the string after the colon)
          * to the equivalent enum value.
-         * @throws UnknownDeviceTypeException when equivalent no value was found
+         * @throws UnknownDeviceTypeException when no equivalent value was found
          */
         @Throws(UnknownActionTypeException::class)
         fun fromString(code: String): ActionType {

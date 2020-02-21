@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="view.SplashScreenController"
+      AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+      alignment="CENTER" styleClass="box"
+      spacing="20">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" bottom="10"/>
+    </padding>
+    <Label styleClass="heading" text="Please insert your card into the card reader"/>
+    <ImageView>
+        <!-- TODO: To be replaced -->
+        <Image url="https://cloudcar.com/wp-content/uploads/2018/06/gif-bounce-arrow.gif"/>
+    </ImageView>
+</VBox>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.Media?>
+<?import javafx.scene.media.MediaPlayer?>
+<?import javafx.scene.media.MediaView?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.WelcomeScreenController"
+      AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+      spacing="20"
+      styleClass="box"
+      alignment="CENTER">
+    <padding>
+        <Insets top="20" bottom="20"/>
+    </padding>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+    <Label styleClass="heading" text="${controller.greetingText}">
+        <padding>
+            <Insets bottom="60"/>
+        </padding>
+    </Label>
+    <MediaView fitWidth="600" fx:id="mediaView">
+        <mediaPlayer>
+            <MediaPlayer autoPlay="true">
+                <media>
+                    <Media source="@../game.mp4"/>
+                </media>
+            </MediaPlayer>
+        </mediaPlayer>
+    </MediaView>
+    <Label text="${controller.zerothInstructionText}">
+        <padding>
+            <Insets top="60"/>
+        </padding>
+    </Label>
+    <Label text="${controller.firstInstructionText}"/>
+    <Label text="${controller.secondInstructionText}"/>
+    <Label text="${controller.thirdInstructionText}"/>
+    <Label text="${controller.fourthInstructionText}"/>
+    <Label text="${controller.finalInstructionText}"/>
+    <Label fx:id="promptLabel" styleClass="prompt" text="${controller.promptText}">
+        <padding>
+            <Insets top="40"/>
+        </padding>
+    </Label>
+</VBox>

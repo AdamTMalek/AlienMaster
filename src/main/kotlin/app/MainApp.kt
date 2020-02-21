@@ -24,7 +24,7 @@ class MainApp : Application(), OnSerialDataReceivedListener, SerialCommControlle
         val url = this::class.java.classLoader.getResource("view/main_view.fxml")
         val loader = FXMLLoader().apply { location = url }
         val root = loader.load<Parent>()
-        val scene = Scene(root, 700.0, 475.0)
+        val scene = Scene(root, 700.0, 650.0)
 
         primaryStage?.let {
             it.title = "AlienMaster"

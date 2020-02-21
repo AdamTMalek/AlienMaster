@@ -10,7 +10,7 @@
       fx:controller="view.EndScreenController"
       AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
       AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-      alignment="CENTER" styleClass="hbox"
+      alignment="CENTER" styleClass="box"
       spacing="20">
     <stylesheets>
         <URL value="@styles.css"/>
@@ -18,7 +18,7 @@
     <padding>
         <Insets top="10" bottom="10"/>
     </padding>
-    <Label styleClass="thanks" text="${controller.thanksText}"/>
+    <Label styleClass="heading" text="${controller.thanksText}"/>
     <Label text="${controller.topScoreText}"/>
     <Label text="${controller.resultText}"/>
     <Label text="${controller.tableDesc}"/>

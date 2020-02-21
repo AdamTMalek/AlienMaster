@@ -18,8 +18,8 @@ enum class State(val code: String) {
          * @throws UnknownStateCodeException when no equivalent value was found
          */
         @Throws(UnknownStateCodeException::class)
-        fun fromString(string: String) {
-            values().find { it.code == string.toUpperCase() }
+        fun fromString(string: String): State {
+            return values().find { it.code == string.toUpperCase() }
                 ?: throw UnknownStateCodeException(string)
         }
     }

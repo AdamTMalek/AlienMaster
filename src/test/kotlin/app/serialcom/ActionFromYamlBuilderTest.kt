@@ -1,56 +1,97 @@
 package app.serialcom
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ActionFromYamlBuilderTest {
     @Test
     fun testNothingSet() {
-        val builder = ActionFromYamlBuilder()
-        assertFalse(builder.isReady())
+        assertFalse(ActionFromYamlBuilder().isReady())
+    }
+
+    @Test
+    fun testThrowsExceptionWhenNotReady() {
+        assertThrows<IllegalStateException> {
+            ActionFromYamlBuilder().build()
+        }
     }
 
     @Test
     fun testActionNotSet() {
-        val builder = ActionFromYamlBuilder().set("value: 5")
+        val incomingAction = """
+            device: CRD0
+            value: 15
+        """.trimIndent()
+
+        val builder = ActionFromYamlBuilder()
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
+
+        assertFalse(builder.isReady())
+    }
+
+    @Test
+    fun testDeviceNotSet() {
+        val incomingAction = """
+            action: get
+            value: 15
+        """.trimIndent()
+
+        val builder = ActionFromYamlBuilder()
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
+
         assertFalse(builder.isReady())
     }
 
     @Test
     fun testValueNotSet() {
-        val builder = ActionFromYamlBuilder().set("action: setX")
+        val incomingAction = """
+            action: set
+            device: SRV0
+        """.trimIndent()
+
+        val builder = ActionFromYamlBuilder()
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
+
         assertFalse(builder.isReady())
     }
 
     @Test
-    fun testThrowsExceptionWhenNotReady() {
+    fun testValueNotRequiredWhenActionIsGet() {
+        val incomingAction = """
+            action: get
+            device: LED0
+        """.trimIndent()
+
         val builder = ActionFromYamlBuilder()
-        assertThrows<IllegalStateException> { builder.build() }
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
+
+        assertTrue(builder.isReady())
     }
 
     @Test
-    fun testSetFields() {
-        val action = ActionFromYamlBuilder()
-            .set("action: setX")
-            .set("value: 521")
-            .build()
+    fun testParser() {
+        val expected = Action(ActionType.REPORT, DeviceType.CARD, 0, 15)
+        val incomingAction = """
+            action: report
+            device: CRD0
+            value: 15
+        """.trimIndent()
 
-        val expected = Action("setX", "521")
+        val builder = ActionFromYamlBuilder()
+        incomingAction.lines().forEach { line ->
+            builder.set(line)
+        }
 
-        assertEquals(expected, action)
-    }
-
-    @Test
-    fun testValueCharacters() {
-        val action = ActionFromYamlBuilder()
-            .set("action: setX")
-            .set("value: .:Aa00")
-            .build()
-
-        val expected = Action("setX", ".:Aa00")
-
-        assertEquals(expected, action)
+        val actual = builder.build()
+        assertEquals(expected, actual)
     }
 }

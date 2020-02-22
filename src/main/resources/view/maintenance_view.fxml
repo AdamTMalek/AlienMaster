@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import java.net.URL?>
+<AnchorPane prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+    <GridPane hgap="20" vgap="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+              AnchorPane.topAnchor="0">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="heading" text="Maintenance Mode"
+               AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" GridPane.columnSpan="2"/>
+
+        <!-- Buttons and LEDs -->
+        <VBox GridPane.rowIndex="1">
+            <padding>
+                <Insets left="20" right="20"/>
+            </padding>
+            <Label alignment="CENTER" maxWidth="Infinity" styleClass="underline" text="Buttons and LEDs"/>
+            <GridPane alignment="CENTER" hgap="10" vgap="10" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                <padding>
+                    <Insets bottom="20" top="20"/>
+                </padding>
+                <!-- Buttons -->
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="0"
+                           GridPane.rowIndex="0"/>
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="1"
+                           GridPane.rowIndex="0"/>
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="2"
+                           GridPane.rowIndex="0"/>
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="0"
+                           GridPane.rowIndex="2"/>
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="1"
+                           GridPane.rowIndex="2"/>
+                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="2"
+                           GridPane.rowIndex="2"/>
+
+                <!-- LEDs -->
+                <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                    <Circle fill="grey" radius="15" stroke="black"/>
+                </VBox>
+            </GridPane>
+
+            <!-- Help -->
+            <Label text="Square denotes a button"/>
+            <Label text="Circle denotes a LED"/>
+            <Label text="Click on a LED to toggle its state"/>
+        </VBox>
+
+        <!-- Right side of the view -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <!-- COM Port -->
+            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="COM Port"/>
+            <GridPane hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20" bottom="20"/>
+                </padding>
+                <Label text="Port: "/>
+                <ChoiceBox GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Servo control -->
+            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Servo control"/>
+            <GridPane hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Label text="Good alien servo: "/>
+                <Button text="Raise" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Button text="Lower" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                <Label text="Bad alien servo: " GridPane.rowIndex="1"/>
+                <Button text="Raise" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Button text="Lower" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            </GridPane>
+
+            <!-- Card reader -->
+            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Card Reader">
+                <padding>
+                    <Insets top="40"/>
+                </padding>
+            </Label>
+            <GridPane hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Label text="User ID: "/>
+                <Label text="(card not present)" GridPane.columnIndex="1"/>
+            </GridPane>
+        </VBox>
+
+        <!-- Communication log -->
+        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" prefWidth="Infinity">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Serial communication log"/>
+            <TextArea minHeight="200"/>
+        </VBox>
+    </GridPane>
+</AnchorPane>

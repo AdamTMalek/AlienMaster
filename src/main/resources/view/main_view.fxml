@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.MainViewController"
             fx:id="rootPane"
             prefHeight="400.0" prefWidth="600.0">
-    <VBox>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+    <VBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <MenuBar focusTraversable="true">
             <Menu text="File">
                 <MenuItem text="Close" onAction="#close"/>
@@ -18,18 +22,6 @@
                 <MenuItem text="Open Player Editor" onAction="#openPlayersEditor"/>
             </Menu>
         </MenuBar>
-        <GridPane hgap="40" vgap="20">
-            <padding>
-                <Insets bottom="20" left="20" right="20" top="50"/>
-            </padding>
-            <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Port:</Label>
-            <ChoiceBox fx:id="portChoice" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-            <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Data:</Label>
-            <TextField fx:id="userInput" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-            <Button onAction="#sendData" GridPane.rowIndex="2" GridPane.columnIndex="1">Send</Button>
-
-            <TextArea fx:id="dataReceived" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-        </GridPane>
+        <Label styleClass="heading">AlienMaster</Label>
     </VBox>
 </AnchorPane>

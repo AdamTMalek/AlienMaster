@@ -13,7 +13,7 @@ import kotlin.concurrent.thread
  * library). An open port is running on a separate thread. When data is read from the port, the class will invoke
  * [OnSerialDataReceivedListener.onDataReceived] on every registered listener (using [addDataReceivedListener]).
  */
-class SerialCommunication {
+class SerialCommunication : Serial {
     private class SerialPortCheckActivity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
         fun checkForAvailablePorts(ports: MutableCollection<SerialPort>, onUpdateCallback: () -> Unit) {
             launch {
@@ -58,30 +58,23 @@ class SerialCommunication {
     }
 
     /**
-     * Add [OnSerialDataReceivedListener] for it to be able to receive data from the serial port.
+     * Returns all ports available to use
      */
-    fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {
-        dataReceivedListeners.add(listener)
-    }
-
-    /**
-     * Add [OnAvailablePortsChangeListener] for it to be able to get notified about port list updates
-     */
-    fun addPortsReceivedListener(listener: OnAvailablePortsChangeListener) {
-        portsChangedListeners.add(listener)
-    }
-
-    /**
-     * Get all available ports
-     */
-    fun getAllPorts(): List<SerialPort> {
+    override fun getAllAvailablePorts(): Collection<SerialPort> {
         return SerialPort.getCommPorts().toList()
     }
 
     /**
-     * Connect to the given [port].
+     * Returns the port to which the interface is currently connected
      */
-    fun connectToPort(port: SerialPort) {
+    override fun getActivePort(): SerialPort? {
+        return comPort
+    }
+
+    /**
+     * Connects to the given [port].
+     */
+    override fun connectTo(port: SerialPort) {
         if (running) {
             run = false
         }
@@ -92,11 +85,38 @@ class SerialCommunication {
     }
 
     /**
-     * Send the given [data] to the currently connected port.
+     * Add [OnSerialDataReceivedListener] for it to be able to receive data from the serial port.
      */
-    fun sendData(data: String) {
+    override fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {
+        dataReceivedListeners.add(listener)
+    }
+
+    override fun removeDataReceivedListener(listener: OnSerialDataReceivedListener) {
+        dataReceivedListeners.remove(listener)
+    }
+
+    /**
+     * Add [OnAvailablePortsChangeListener] for it to be able to get notified about port list updates
+     */
+    override fun addPortListener(listener: OnAvailablePortsChangeListener) {
+        portsChangedListeners.add(listener)
+    }
+
+    override fun removePortListener(listener: OnAvailablePortsChangeListener) {
+        portsChangedListeners.remove(listener)
+    }
+
+    /**
+     * Send the given [data] to the currently connected port.
+     * @throws IllegalStateException when the object is not connected to any port
+     */
+    @Throws(IllegalStateException::class)
+    override fun send(data: String) {
+        val port = comPort
+            ?: throw IllegalStateException("SerialCommunication is not connected to any port")
+
         val dataBytes = data.toByteArray()
-        comPort?.writeBytes(dataBytes, dataBytes.size.toLong())
+        port.writeBytes(dataBytes, dataBytes.size.toLong())
     }
 
     /**

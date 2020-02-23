@@ -3,39 +3,26 @@ package view
 import app.Language
 import app.Player
 import app.PlayersDatabase
-import app.serialcom.OnSerialDataReceivedListener
-import com.fazecast.jSerialComm.SerialPort
-import javafx.beans.value.ChangeListener
-import javafx.beans.value.ObservableValue
-import javafx.collections.FXCollections
+import app.serialcom.Serial
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
-import javafx.scene.control.ChoiceBox
-import javafx.scene.control.TextArea
-import javafx.scene.control.TextField
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
-class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeListener<SerialPort> {
+class MainViewController : Initializable {
     @FXML
     private var rootPane = Pane()
-    @FXML
-    private var portChoice = ChoiceBox<SerialPort>()
-    @FXML
-    private var userInput = TextField()
-    @FXML
-    private var dataReceived = TextArea()
 
-    private lateinit var handler: SerialCommController
-    private var listener: MainViewRequestListener? = null
-    val ports = FXCollections.observableArrayList<SerialPort>()
+    private lateinit var serial: Serial
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        portChoice.items = ports
-        portChoice.selectionModel.selectedItemProperty().addListener(this)
+    }
+
+    fun setSerial(serial: Serial) {
+        this.serial = serial
     }
 
     /**
@@ -87,35 +74,12 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
         EndScreenController.loadWithAnimation(rootPane, player, 1, isNewTopScore)
     }
 
-    fun setRequestListener(listener: MainViewRequestListener) {
-        this.listener = listener
-    }
-
-    fun sendData() {
-        val data = userInput.text
-        dataReceived.text += "> $data\n"
-        handler.sendData(data)
-    }
-
-    fun setHandler(handler: SerialCommController) {
-        this.handler = handler
-    }
-
-    override fun onDataReceived(data: String) {
-        dataReceived.text += "< $data\n"
-    }
-
-    override fun changed(observable: ObservableValue<out SerialPort>?, oldValue: SerialPort?, newValue: SerialPort?) {
-        val port = newValue ?: return
-        handler.connectToPort(port)
-    }
-
     fun openMaintenanceWindow() {
-        MaintenanceController.showAndWait()
+        MaintenanceController.showAndWait(serial)
     }
 
     fun openPlayersEditor() {
-        listener?.onOpenPlayerEditor()
+        EditorViewController.showView()
     }
 
     fun close() {

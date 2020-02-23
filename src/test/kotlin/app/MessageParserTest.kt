@@ -14,7 +14,7 @@ class MessageParserTest {
     @Test
     fun testParserWithCompleteMessage() {
         val message = """
-            action: SET
+            action: set
             device: LED0
             value: 1
         """.trimIndent()
@@ -44,7 +44,7 @@ class MessageParserTest {
     @Test
     fun testParserLineByLine() {
         val message = """
-            action: SET
+            action: set
             device: LED0
             value: 1
         """.trimIndent()
@@ -73,7 +73,7 @@ class MessageParserTest {
     @Test
     fun testParsesAction() {
         val message = """
-            action: SET
+            action: set
             device: LED0
             value: 1
         """.trimIndent()

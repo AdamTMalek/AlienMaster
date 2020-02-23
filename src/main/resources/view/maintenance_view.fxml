@@ -110,6 +110,21 @@
                 <Label text="User ID: "/>
                 <Label fx:id="userIdLabel" text="(card not present)" GridPane.columnIndex="1"/>
             </GridPane>
+
+            <!-- Distance sensor -->
+            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Distance Sensor">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+            </Label>
+            <GridPane hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button onAction="#requestDistanceSensorReading" text="Request reading"/>
+                <Label text="Distance: " GridPane.columnIndex="1"/>
+                <Label fx:id="distanceReading" GridPane.columnIndex="2"/>
+            </GridPane>
         </VBox>
 
         <!-- Communication log -->

@@ -52,6 +52,8 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private var userIdLabel = Label()
     @FXML
     private var logText = TextArea()
+    @FXML
+    private var distanceReading = Label()
 
     private val buttonPressedStyle = "button-pressed"
     private val ledActiveStyle = "led-active"
@@ -112,6 +114,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         when (action.deviceType) {
             DeviceType.BUTTON -> handleButtonAction(action)
             DeviceType.CARD -> handleCardReaderAction(action)
+            DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
             else -> return
         }
     }
@@ -132,6 +135,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         }
     }
 
+    @Throws(IllegalArgumentException::class)
     private fun handleCardReaderAction(action: Action) {
         if (action.deviceType != DeviceType.CARD)
             throw IllegalArgumentException("Action is not a card reader action")
@@ -142,6 +146,15 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             "(card not present)"
         else
             id.toString()
+    }
+
+    @Throws(IllegalArgumentException::class)
+    private fun handleDistanceReadingAction(action: Action) {
+        if (action.deviceType != DeviceType.DISTANCE_SENSOR)
+            throw IllegalArgumentException("Action is not a distance sensor action")
+
+        val distance = action.value!!
+        distanceReading.text = distance.toString()
     }
 
     override fun onStateReceived(state: StateMessage) {
@@ -222,6 +235,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
     fun lowerBadAlien() {
         val action = Action(ActionType.SET, DeviceType.SERVO, badAlienId, 0)
+        sendAction(action)
+    }
+
+    fun requestDistanceSensorReading() {
+        val action = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null)
         sendAction(action)
     }
 

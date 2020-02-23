@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
 
-class ParserTest {
+class MessageParserTest {
     /**
      * Test if the Parser behaves correctly when passing
      * a complete message to the parse function

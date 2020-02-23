@@ -24,3 +24,13 @@
 .underline {
     -fx-underline: true;
 }
+
+.led {
+    -fx-fill: grey;
+    -fx-stroke: black;
+}
+
+.led:hover {
+    -fx-stroke-width: 2px;
+    -fx-stroke: red;
+}

@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import java.net.URL?>
-<AnchorPane prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MaintenanceController">
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>
@@ -45,22 +45,22 @@
 
                 <!-- LEDs -->
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <Circle fill="grey" radius="15" stroke="black"/>
+                    <Circle styleClass="led" radius="15"/>
                 </VBox>
             </GridPane>
 

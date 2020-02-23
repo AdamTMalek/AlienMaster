@@ -57,7 +57,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        addAutoScrollToLogText()
+    }
 
+    private fun addAutoScrollToLogText() {
+        logText.textProperty().addListener { _, _, _ -> logText.scrollTop = Double.MAX_VALUE }
     }
 
     fun setSerial(serial: Serial) {
@@ -159,6 +163,6 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         val directionChar = if (sent) '>' else '<'
         val indentedText = text.prependIndent("\t")
 
-        logText.text += directionChar + indentedText + "\n\n"
+        logText.appendText(directionChar + indentedText + "\n\n")
     }
 }

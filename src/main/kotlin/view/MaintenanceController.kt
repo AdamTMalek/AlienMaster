@@ -16,9 +16,23 @@ import javafx.scene.control.TextArea
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
 import javafx.stage.Stage
+import view.MaintenanceController.Companion.loadRoot
+import view.MaintenanceController.Companion.showAndWait
 import java.net.URL
 import java.util.*
 
+/**
+ * The [MaintenanceController] is responsible for controlling all actions
+ * that happen in the maintenance view of which controls are defined in the
+ * fxml file maintenance_view.fxml.
+ *
+ * To open the view, it is recommended to use [showAndWait] and pass in
+ * a reference to the [Serial] implementation.
+ *
+ * Mainly used testing purposes, the [loadRoot] loads the FXML file, sets up
+ * the required configurations and returns the [Parent] of the view.
+ * It does not however create a window.
+ */
 class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvailablePortsChangeListener,
     OnSerialDataReceivedListener {
 
@@ -55,15 +69,23 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     @FXML
     private var distanceReading = Label()
 
-    private val buttonPressedStyle = "button-pressed"
-    private val ledActiveStyle = "led-active"
-    private val goodAlienId = 0
-    private val badAlienId = 1
+    // The message parser will be used for creating messages out of incoming yaml from serial
     private val messageParser = MessageParser()
-
     private lateinit var serial: Serial
 
     companion object {
+        const val BUTTON_PRESSED_STYLE = "button-pressed"
+        const val LED_ACTIVE_STYLE = "led-active"
+        const val GOOD_ALIEN_ID = 0
+        const val BAD_ALIEN_ID = 1
+
+        /**
+         * Loads the fxml file (maintenance_view.fxml), sets up the controller
+         * and returns the parent node
+         *
+         * @param serial Serial implementation
+         * @return Parent node of the loaded fxml
+         */
         fun loadRoot(serial: Serial): Parent {
             val url = this::class.java.classLoader.getResource("view/maintenance_view.fxml")
             val loader = FXMLLoader().apply { location = url }
@@ -75,6 +97,12 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             return root
         }
 
+        /**
+         * Loads the fxml file (maintenance_view.fxml), sets up the controller
+         * and opens a new window using [Stage.showAndWait] method.
+         *
+         * @param serial Serial implementation
+         */
         fun showAndWait(serial: Serial) {
             val root = loadRoot(serial)
 
@@ -96,6 +124,9 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         logText.textProperty().addListener { _, _, _ -> logText.scrollTop = Double.MAX_VALUE }
     }
 
+    /**
+     * Sets the serial reference to [serial] and configures for receiving data
+     */
     fun setSerial(serial: Serial) {
         this.serial = serial
         this.serial.addPortListener(this)
@@ -103,6 +134,9 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         setupPortChoice()
     }
 
+    /**
+     * Picks the current com port in the choice box if [Serial.getActivePort] returns non-null value
+     */
     private fun setupPortChoice() {
         val serialNames = getAllAvailablePortsNames()
 
@@ -116,6 +150,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     override fun onActionReceived(action: Action) {
+        // This method may be invoked by other threads
         Platform.runLater {
             addToLogTextView(action.toYaml(), false)
 
@@ -128,6 +163,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         }
     }
 
+    /**
+     * Handles the given [action] if it is related to buttons
+     *
+     * @throws IllegalArgumentException if the action is not related to buttons
+     */
     @Throws(IllegalArgumentException::class)
     private fun handleButtonAction(action: Action) {
         if (action.deviceType != DeviceType.BUTTON)
@@ -144,6 +184,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         }
     }
 
+    /**
+     * Handles the given [action] if it is related to the card reader
+     *
+     * @throws IllegalArgumentException if the action is not related to the card reader
+     */
     @Throws(IllegalArgumentException::class)
     private fun handleCardReaderAction(action: Action) {
         if (action.deviceType != DeviceType.CARD)
@@ -157,6 +202,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             id.toString()
     }
 
+    /**
+     * Handles the given [action] if is related to the distance sensor
+     *
+     * @throws IllegalArgumentException if the action is not related to the distance sensor
+     */
     @Throws(IllegalArgumentException::class)
     private fun handleDistanceReadingAction(action: Action) {
         if (action.deviceType != DeviceType.DISTANCE_SENSOR)
@@ -166,6 +216,10 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         distanceReading.text = distance.toString()
     }
 
+    /**
+     * Handles [StateMessage] messages coming from the serial.
+     * It just adds them to the log view.
+     */
     override fun onStateReceived(state: StateMessage) {
         addToLogTextView(state.toYaml(), false)
     }
@@ -175,9 +229,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             portChoice.items.clear()
             portChoice.items.addAll(getAllAvailablePortsNames())
         }
-        println("Ports updated")
     }
 
+    /**
+     * Returns a list of descriptive port names of the available ports
+     */
     private fun getAllAvailablePortsNames() = serial.getAllAvailablePorts().map { it.descriptivePortName }
 
     fun onLed0Clicked() {
@@ -210,17 +266,30 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         toggleLedActive(led5)
     }
 
+    /**
+     * Returns true if the led is active in the view
+     * (i.e. when the led has [LED_ACTIVE_STYLE] class)
+     */
     private fun isLedActive(led: Styleable): Boolean {
-        return led.styleClass.contains(ledActiveStyle)
+        return led.styleClass.contains(LED_ACTIVE_STYLE)
     }
 
+    /**
+     * Adds or removes [LED_ACTIVE_STYLE] to the led
+     * depending on the previous state
+     */
     private fun toggleLedActive(led: Styleable) {
         if (isLedActive(led))
-            led.styleClass.remove(ledActiveStyle)
+            led.styleClass.remove(LED_ACTIVE_STYLE)
         else
-            led.styleClass.add(ledActiveStyle)
+            led.styleClass.add(LED_ACTIVE_STYLE)
     }
 
+    /**
+     * Sends the set [Action] to the serial and logs the message
+     * @param id ID of the LED
+     * @param on true if the LED is to be turned on, false otherwise
+     */
     private fun sendSetLedAction(id: Int, on: Boolean) {
         val value = if (on) 1 else 0
         val action = Action(ActionType.SET, DeviceType.LED, id, value)
@@ -228,22 +297,22 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     fun raiseGoodAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, goodAlienId, 1)
+        val action = Action(ActionType.SET, DeviceType.SERVO, GOOD_ALIEN_ID, 1)
         sendAction(action)
     }
 
     fun lowerGoodAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, goodAlienId, 0)
+        val action = Action(ActionType.SET, DeviceType.SERVO, GOOD_ALIEN_ID, 0)
         sendAction(action)
     }
 
     fun raiseBadAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, badAlienId, 1)
+        val action = Action(ActionType.SET, DeviceType.SERVO, BAD_ALIEN_ID, 1)
         sendAction(action)
     }
 
     fun lowerBadAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, badAlienId, 0)
+        val action = Action(ActionType.SET, DeviceType.SERVO, BAD_ALIEN_ID, 0)
         sendAction(action)
     }
 
@@ -252,17 +321,24 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         sendAction(action)
     }
 
+    /**
+     * Sends [Action] to the serial and adds it to the log view
+     */
     private fun sendAction(action: Action) {
         val data = action.toYaml()
         serial.send(data)
         addToLogTextView(data, true)
     }
 
+    /**
+     * Add [BUTTON_PRESSED_STYLE] to the [button] if [pressed] is true.
+     * Otherwise remove the style.
+     */
     private fun changeButtonState(button: Styleable, pressed: Boolean) {
         if (pressed)
-            button.styleClass.add(buttonPressedStyle)
+            button.styleClass.add(BUTTON_PRESSED_STYLE)
         else
-            button.styleClass.remove(buttonPressedStyle)
+            button.styleClass.remove(BUTTON_PRESSED_STYLE)
     }
 
     /**

@@ -10,8 +10,9 @@
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>
-    <GridPane hgap="20" vgap="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-              AnchorPane.topAnchor="0">
+    <GridPane hgap="20" vgap="20"
+              AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <padding>
             <Insets top="20" right="20" bottom="20" left="20"/>
         </padding>
@@ -130,14 +131,14 @@
                 <Label fx:id="distanceReading" id="distanceReading" GridPane.columnIndex="2"/>
             </GridPane>
         </VBox>
-
         <!-- Communication log -->
-        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" prefWidth="Infinity">
+        <VBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.vgrow="ALWAYS" GridPane.rowIndex="2"
+              prefWidth="Infinity" spacing="20">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20"/>
             </padding>
             <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Serial communication log"/>
-            <TextArea fx:id="logText" id="logText" minHeight="200"/>
+            <TextArea fx:id="logText" id="logText" minHeight="100" VBox.vgrow="ALWAYS"/>
         </VBox>
     </GridPane>
 </AnchorPane>

@@ -30,37 +30,37 @@
                     <Insets bottom="20" top="20"/>
                 </padding>
                 <!-- Buttons -->
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="0"
-                           GridPane.rowIndex="0"/>
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="1"
-                           GridPane.rowIndex="0"/>
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="2"
-                           GridPane.rowIndex="0"/>
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="0"
-                           GridPane.rowIndex="2"/>
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="1"
-                           GridPane.rowIndex="2"/>
-                <Rectangle fill="grey" height="50" stroke="black" width="50" GridPane.columnIndex="2"
-                           GridPane.rowIndex="2"/>
+                <Rectangle fx:id="button0" id="button0" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Rectangle fx:id="button1" id="button1" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Rectangle fx:id="button2" id="button2" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <Rectangle fx:id="button3" id="button3" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Rectangle fx:id="button4" id="button4" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Rectangle fx:id="button5" id="button5" styleClass="button" height="50" width="50"
+                           GridPane.columnIndex="2" GridPane.rowIndex="2"/>
 
                 <!-- LEDs -->
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Circle fx:id="led0" onMouseClicked="#onLed0Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led0" id="led0" onMouseClicked="#onLed0Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Circle fx:id="led1" onMouseClicked="#onLed1Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led1" id="led1" onMouseClicked="#onLed1Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <Circle fx:id="led2" onMouseClicked="#onLed2Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led2" id="led2" onMouseClicked="#onLed2Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <Circle fx:id="led3" onMouseClicked="#onLed3Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led3" id="led3" onMouseClicked="#onLed3Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <Circle fx:id="led4" onMouseClicked="#onLed4Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led4" id="led4" onMouseClicked="#onLed4Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <Circle fx:id="led5" onMouseClicked="#onLed5Clicked" styleClass="led" radius="15"/>
+                    <Circle fx:id="led5" id="led5" onMouseClicked="#onLed5Clicked" styleClass="led" radius="15"/>
                 </VBox>
             </GridPane>
 
@@ -89,12 +89,16 @@
                     <Insets top="20"/>
                 </padding>
                 <Label text="Good alien servo: "/>
-                <Button text="Raise" onAction="#raiseGoodAlien" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Button text="Lower" onAction="#lowerGoodAlien" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <Button id="raiseGoodAlienButton" text="Raise" onAction="#raiseGoodAlien"
+                        GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Button id="lowerGoodAlienButton" text="Lower" onAction="#lowerGoodAlien"
+                        GridPane.columnIndex="2" GridPane.rowIndex="0"/>
 
                 <Label text="Bad alien servo: " GridPane.rowIndex="1"/>
-                <Button text="Raise" onAction="#raiseBadAlien" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Button text="Lower" onAction="#lowerBadAlien" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Button id="raiseBadAlienButton" text="Raise" onAction="#raiseBadAlien"
+                        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Button id="lowerBadAlienButton" text="Lower" onAction="#lowerBadAlien"
+                        GridPane.columnIndex="2" GridPane.rowIndex="1"/>
             </GridPane>
 
             <!-- Card reader -->
@@ -108,7 +112,7 @@
                     <Insets top="20"/>
                 </padding>
                 <Label text="User ID: "/>
-                <Label fx:id="userIdLabel" text="(card not present)" GridPane.columnIndex="1"/>
+                <Label fx:id="userIdLabel" id="userIdLabel" text="(card not present)" GridPane.columnIndex="1"/>
             </GridPane>
 
             <!-- Distance sensor -->
@@ -121,9 +125,9 @@
                 <padding>
                     <Insets top="20"/>
                 </padding>
-                <Button onAction="#requestDistanceSensorReading" text="Request reading"/>
+                <Button onAction="#requestDistanceSensorReading" id="requestDistanceButton" text="Request reading"/>
                 <Label text="Distance: " GridPane.columnIndex="1"/>
-                <Label fx:id="distanceReading" GridPane.columnIndex="2"/>
+                <Label fx:id="distanceReading" id="distanceReading" GridPane.columnIndex="2"/>
             </GridPane>
         </VBox>
 
@@ -133,7 +137,7 @@
                 <Insets bottom="20" left="20" right="20" top="20"/>
             </padding>
             <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Serial communication log"/>
-            <TextArea fx:id="logText" minHeight="200"/>
+            <TextArea fx:id="logText" id="logText" minHeight="200"/>
         </VBox>
     </GridPane>
 </AnchorPane>

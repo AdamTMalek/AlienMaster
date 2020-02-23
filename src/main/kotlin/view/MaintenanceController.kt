@@ -64,13 +64,19 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private lateinit var serial: Serial
 
     companion object {
-        fun showAndWait(serial: Serial) {
+        fun loadRoot(serial: Serial): Parent {
             val url = this::class.java.classLoader.getResource("view/maintenance_view.fxml")
             val loader = FXMLLoader().apply { location = url }
             val root = loader.load<Parent>()
 
             val controller = loader.getController<MaintenanceController>()
             controller.setSerial(serial)
+
+            return root
+        }
+
+        fun showAndWait(serial: Serial) {
+            val root = loadRoot(serial)
 
             val scene = Scene(root, 900.0, 700.0)
             Stage().apply {
@@ -93,6 +99,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     fun setSerial(serial: Serial) {
         this.serial = serial
         this.serial.addPortListener(this)
+        this.serial.addDataReceivedListener(this)
         setupPortChoice()
     }
 
@@ -109,13 +116,15 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     override fun onActionReceived(action: Action) {
-        addToLogTextView(action.toYaml(), false)
+        Platform.runLater {
+            addToLogTextView(action.toYaml(), false)
 
-        when (action.deviceType) {
-            DeviceType.BUTTON -> handleButtonAction(action)
-            DeviceType.CARD -> handleCardReaderAction(action)
-            DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
-            else -> return
+            when (action.deviceType) {
+                DeviceType.BUTTON -> handleButtonAction(action)
+                DeviceType.CARD -> handleCardReaderAction(action)
+                DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
+                else -> return@runLater
+            }
         }
     }
 
@@ -142,7 +151,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
         val id = action.value!!
 
-        userIdLabel.text = if (id < 0)
+        userIdLabel.text = if (id <= -1)
             "(card not present)"
         else
             id.toString()
@@ -245,7 +254,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
     private fun sendAction(action: Action) {
         val data = action.toYaml()
-        //serial.send(data) TODO: Uncomment after finished implementing the controller
+        serial.send(data)
         addToLogTextView(data, true)
     }
 

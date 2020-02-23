@@ -45,22 +45,22 @@
 
                 <!-- LEDs -->
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led0" onMouseClicked="#onLed0Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led1" onMouseClicked="#onLed1Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led2" onMouseClicked="#onLed2Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led3" onMouseClicked="#onLed3Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led4" onMouseClicked="#onLed4Clicked" styleClass="led" radius="15"/>
                 </VBox>
                 <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <Circle styleClass="led" radius="15"/>
+                    <Circle fx:id="led5" onMouseClicked="#onLed5Clicked" styleClass="led" radius="15"/>
                 </VBox>
             </GridPane>
 
@@ -118,7 +118,7 @@
                 <Insets bottom="20" left="20" right="20" top="20"/>
             </padding>
             <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Serial communication log"/>
-            <TextArea minHeight="200"/>
+            <TextArea fx:id="logText" minHeight="200"/>
         </VBox>
     </GridPane>
 </AnchorPane>

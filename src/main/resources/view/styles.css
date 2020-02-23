@@ -34,3 +34,7 @@
     -fx-stroke-width: 2px;
     -fx-stroke: red;
 }
+
+.led-active {
+    -fx-fill: #ff7667;
+}

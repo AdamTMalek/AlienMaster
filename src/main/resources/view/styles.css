@@ -38,3 +38,13 @@
 .led-active {
     -fx-fill: #ff7667;
 }
+
+.button {
+    -fx-fill: grey;
+    -fx-stroke: black;
+}
+
+.button-pressed {
+    -fx-fill: #5bb6ff;
+    -fx-stroke: black;
+}

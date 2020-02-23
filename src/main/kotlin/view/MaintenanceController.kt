@@ -101,32 +101,32 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private fun getAllAvailablePortsNames() = serial.getAllAvailablePorts().map { it.descriptivePortName }
 
     fun onLed0Clicked() {
-        sendSetLedAction(0, isLedActive(led0))
+        sendSetLedAction(0, !isLedActive(led0))
         toggleLedActive(led0)
     }
 
     fun onLed1Clicked() {
-        sendSetLedAction(1, isLedActive(led1))
+        sendSetLedAction(1, !isLedActive(led1))
         toggleLedActive(led1)
     }
 
     fun onLed2Clicked() {
-        sendSetLedAction(2, isLedActive(led2))
+        sendSetLedAction(2, !isLedActive(led2))
         toggleLedActive(led2)
     }
 
     fun onLed3Clicked() {
-        sendSetLedAction(3, isLedActive(led3))
+        sendSetLedAction(3, !isLedActive(led3))
         toggleLedActive(led3)
     }
 
     fun onLed4Clicked() {
-        sendSetLedAction(4, isLedActive(led4))
+        sendSetLedAction(4, !isLedActive(led4))
         toggleLedActive(led4)
     }
 
     fun onLed5Clicked() {
-        sendSetLedAction(5, isLedActive(led5))
+        sendSetLedAction(5, !isLedActive(led5))
         toggleLedActive(led5)
     }
 

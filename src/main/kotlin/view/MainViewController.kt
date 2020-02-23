@@ -110,6 +110,10 @@ class MainViewController : Initializable, OnSerialDataReceivedListener, ChangeLi
         handler.connectToPort(port)
     }
 
+    fun openMaintenanceWindow() {
+        MaintenanceController.showAndWait()
+    }
+
     fun openPlayersEditor() {
         listener?.onOpenPlayerEditor()
     }

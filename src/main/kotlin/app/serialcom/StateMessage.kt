@@ -7,4 +7,16 @@ package app.serialcom
  * It may also pass in the value depending on the
  * state.
  */
-data class StateMessage(val state: State, val value: Int?)
+data class StateMessage(val state: State, val value: Int?) {
+    /**
+     * Translate the object into equivalent YAML representation
+     */
+    fun toYaml(): String {
+        var yaml = "state: ${state.code}"
+        if (value != null) {
+            yaml += "\nvalue: $value"
+        }
+
+        return yaml
+    }
+}

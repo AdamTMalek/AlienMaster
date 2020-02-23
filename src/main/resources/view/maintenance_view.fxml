@@ -108,7 +108,7 @@
                     <Insets top="20"/>
                 </padding>
                 <Label text="User ID: "/>
-                <Label text="(card not present)" GridPane.columnIndex="1"/>
+                <Label fx:id="userIdLabel" text="(card not present)" GridPane.columnIndex="1"/>
             </GridPane>
         </VBox>
 

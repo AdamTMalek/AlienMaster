@@ -35,6 +35,8 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private var logText = TextArea()
 
     private val ledActiveStyle = "led-active"
+    private val goodAlienId = 0
+    private val badAlienId = 1
 
     private lateinit var serial: Serial
 
@@ -144,6 +146,26 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private fun sendSetLedAction(id: Int, on: Boolean) {
         val value = if (on) 1 else 0
         val action = Action(ActionType.SET, DeviceType.LED, id, value)
+        sendAction(action)
+    }
+
+    fun raiseGoodAlien() {
+        val action = Action(ActionType.SET, DeviceType.SERVO, goodAlienId, 1)
+        sendAction(action)
+    }
+
+    fun lowerGoodAlien() {
+        val action = Action(ActionType.SET, DeviceType.SERVO, goodAlienId, 0)
+        sendAction(action)
+    }
+
+    fun raiseBadAlien() {
+        val action = Action(ActionType.SET, DeviceType.SERVO, badAlienId, 1)
+        sendAction(action)
+    }
+
+    fun lowerBadAlien() {
+        val action = Action(ActionType.SET, DeviceType.SERVO, badAlienId, 0)
         sendAction(action)
     }
 

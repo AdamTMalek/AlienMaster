@@ -79,7 +79,7 @@
                     <Insets top="20" bottom="20"/>
                 </padding>
                 <Label text="Port: "/>
-                <ChoiceBox GridPane.columnIndex="1"/>
+                <ChoiceBox fx:id="portChoice" GridPane.columnIndex="1"/>
             </GridPane>
 
             <!-- Servo control -->

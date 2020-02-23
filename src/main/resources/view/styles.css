@@ -20,3 +20,31 @@
     -fx-border-color: #000000;
     -fx-border-radius: 1.0;
 }
+
+.underline {
+    -fx-underline: true;
+}
+
+.led {
+    -fx-fill: grey;
+    -fx-stroke: black;
+}
+
+.led:hover {
+    -fx-stroke-width: 2px;
+    -fx-stroke: red;
+}
+
+.led-active {
+    -fx-fill: #ff7667;
+}
+
+.button {
+    -fx-fill: grey;
+    -fx-stroke: black;
+}
+
+.button-pressed {
+    -fx-fill: #5bb6ff;
+    -fx-stroke: black;
+}

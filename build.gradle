@@ -29,6 +29,10 @@ dependencies {
     implementation 'de.dfki.mary:voice-bits1-hsmm:5.2'  // German
     implementation 'org.xerial:sqlite-jdbc:3.21.0.1'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    testImplementation 'org.assertj:assertj-core:3.13.2'
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
     runtimeOnly 'org.openjfx:javafx-controls:12:win'
     runtimeOnly 'org.openjfx:javafx-controls:12:linux'
     runtimeOnly 'org.openjfx:javafx-controls:12:mac'

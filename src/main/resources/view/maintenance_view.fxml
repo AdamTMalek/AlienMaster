@@ -74,7 +74,7 @@
         <!-- Right side of the view -->
         <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
             <!-- COM Port -->
-            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="COM Port"/>
+            <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="COM Port"/>
             <GridPane hgap="20" vgap="20">
                 <padding>
                     <Insets top="20" bottom="20"/>
@@ -84,7 +84,7 @@
             </GridPane>
 
             <!-- Servo control -->
-            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Servo control"/>
+            <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="Servo control"/>
             <GridPane hgap="20" vgap="20">
                 <padding>
                     <Insets top="20"/>
@@ -103,7 +103,7 @@
             </GridPane>
 
             <!-- Card reader -->
-            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Card Reader">
+            <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="Card Reader">
                 <padding>
                     <Insets top="40"/>
                 </padding>
@@ -117,7 +117,7 @@
             </GridPane>
 
             <!-- Distance sensor -->
-            <Label alignment="TOP_CENTER" maxWidth="Infinity" styleClass="underline" text="Distance Sensor">
+            <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="Distance Sensor">
                 <padding>
                     <Insets top="20"/>
                 </padding>

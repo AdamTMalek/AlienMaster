@@ -10,9 +10,7 @@ import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.control.ChoiceBox
-import javafx.scene.control.Label
-import javafx.scene.control.TextArea
+import javafx.scene.control.*
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
 import javafx.stage.Stage
@@ -237,33 +235,36 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private fun getAllAvailablePortsNames() = serial.getAllAvailablePorts().map { it.descriptivePortName }
 
     fun onLed0Clicked() {
-        sendSetLedAction(0, !isLedActive(led0))
-        toggleLedActive(led0)
+        onLedClicked(0, led0)
     }
 
     fun onLed1Clicked() {
-        sendSetLedAction(1, !isLedActive(led1))
-        toggleLedActive(led1)
+        onLedClicked(1, led1)
     }
 
     fun onLed2Clicked() {
-        sendSetLedAction(2, !isLedActive(led2))
-        toggleLedActive(led2)
+        onLedClicked(2, led2)
     }
 
     fun onLed3Clicked() {
-        sendSetLedAction(3, !isLedActive(led3))
-        toggleLedActive(led3)
+        onLedClicked(3, led3)
     }
 
     fun onLed4Clicked() {
-        sendSetLedAction(4, !isLedActive(led4))
-        toggleLedActive(led4)
+        onLedClicked(4, led4)
     }
 
     fun onLed5Clicked() {
-        sendSetLedAction(5, !isLedActive(led5))
-        toggleLedActive(led5)
+        onLedClicked(5, led5)
+    }
+
+    private fun onLedClicked(id: Int, led: Styleable) {
+        try {
+            sendSetLedAction(id, !isLedActive(led))
+            toggleLedActive(led)
+        } catch (ex: IllegalStateException) {
+            displaySerialNotConnectedError()
+        }
     }
 
     /**
@@ -297,28 +298,40 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     fun raiseGoodAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, GOOD_ALIEN_ID, 1)
-        sendAction(action)
+        moveAlien(GOOD_ALIEN_ID, true)
     }
 
     fun lowerGoodAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, GOOD_ALIEN_ID, 0)
-        sendAction(action)
+        moveAlien(GOOD_ALIEN_ID, false)
     }
 
     fun raiseBadAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, BAD_ALIEN_ID, 1)
-        sendAction(action)
+        moveAlien(BAD_ALIEN_ID, true)
     }
 
     fun lowerBadAlien() {
-        val action = Action(ActionType.SET, DeviceType.SERVO, BAD_ALIEN_ID, 0)
-        sendAction(action)
+        moveAlien(BAD_ALIEN_ID, false)
+    }
+
+    private fun moveAlien(alienId: Int, raise: Boolean) {
+        val value = if (raise) 1 else 0
+        val action = Action(ActionType.SET, DeviceType.SERVO, alienId, value)
+
+        try {
+            sendAction(action)
+        } catch (ex: IllegalStateException) {
+            displaySerialNotConnectedError()
+        }
     }
 
     fun requestDistanceSensorReading() {
         val action = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null)
-        sendAction(action)
+
+        try {
+            sendAction(action)
+        } catch (ex: IllegalStateException) {
+            displaySerialNotConnectedError()
+        }
     }
 
     /**
@@ -326,8 +339,16 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
      */
     private fun sendAction(action: Action) {
         val data = action.toYaml()
+
         serial.send(data)
         addToLogTextView(data, true)
+    }
+
+    private fun displaySerialNotConnectedError() {
+        Alert(Alert.AlertType.ERROR, "Please connect to a serial port first", ButtonType.OK).apply {
+            title = "Serial Communication Error"
+            showAndWait()
+        }
     }
 
     /**

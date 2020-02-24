@@ -66,6 +66,10 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private var logText = TextArea()
     @FXML
     private var distanceReading = Label()
+    @FXML
+    private var goodAlienStateLabel = Label()
+    @FXML
+    private var badAlienStateLabel = Label()
 
     // The message parser will be used for creating messages out of incoming yaml from serial
     private val messageParser = MessageParser()
@@ -140,8 +144,10 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         this.serial.addDataReceivedListener(this)
         setupPortChoice()
 
-        if (serial.isConnected())
+        if (serial.isConnected()) {
             requestLedStates()
+            requestAlienStates()
+        }
     }
 
     /**
@@ -166,6 +172,13 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         }
     }
 
+    private fun requestAlienStates() {
+        val actions = (0..1).map { Action(ActionType.GET, DeviceType.SERVO, it, null) }
+        actions.forEach { action ->
+            sendAction(action)
+        }
+    }
+
     override fun onActionReceived(action: Action) {
         // This method may be invoked by other threads
         Platform.runLater {
@@ -176,7 +189,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
                 DeviceType.CARD -> handleCardReaderAction(action)
                 DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
                 DeviceType.LED -> handleLedAction(action)
-                else -> return@runLater
+                DeviceType.SERVO -> handleServoAction(action)
             }
         }
     }
@@ -235,7 +248,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     /**
-     * Handles the given [action] if is related to the LEDs
+     * Handles the given [action] if it is related to the LEDs
      *
      * @throws IllegalArgumentException if the action is not related to the LEDs
      */
@@ -258,6 +271,24 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             setLedActive(led)
         else
             setLedInactive(led)
+    }
+
+    /**
+     * Handles the given [action] if it is related to the servos
+     *
+     * @throws IllegalArgumentException if the action is not related to the servos
+     */
+    @Throws(IllegalArgumentException::class)
+    private fun handleServoAction(action: Action) {
+        if (action.deviceType != DeviceType.SERVO)
+            throw IllegalArgumentException("Action is not a servo action")
+
+        val isRaised = action.value == 1
+
+        when (action.deviceId) {
+            0 -> changeAlienStateLabel(goodAlienStateLabel, isRaised)
+            1 -> changeAlienStateLabel(badAlienStateLabel, isRaised)
+        }
     }
 
     /**
@@ -352,19 +383,27 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     fun raiseGoodAlien() {
+        changeAlienStateLabel(goodAlienStateLabel, true)
         moveAlien(GOOD_ALIEN_ID, true)
     }
 
     fun lowerGoodAlien() {
+        changeAlienStateLabel(goodAlienStateLabel, false)
         moveAlien(GOOD_ALIEN_ID, false)
     }
 
     fun raiseBadAlien() {
+        changeAlienStateLabel(badAlienStateLabel, true)
         moveAlien(BAD_ALIEN_ID, true)
     }
 
     fun lowerBadAlien() {
+        changeAlienStateLabel(badAlienStateLabel, false)
         moveAlien(BAD_ALIEN_ID, false)
+    }
+
+    private fun changeAlienStateLabel(label: Label, raised: Boolean) {
+        label.text = if (raised) "raised" else "lowered"
     }
 
     private fun moveAlien(alienId: Int, raise: Boolean) {

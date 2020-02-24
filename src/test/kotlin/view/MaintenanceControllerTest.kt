@@ -376,4 +376,92 @@ class MaintenanceControllerTest : ApplicationTest() {
             assertFalse(leds[index].styleClass.contains(MaintenanceController.LED_ACTIVE_STYLE))
         }
     }
+
+    @Test
+    fun testAlienStatesAreUnknownByDefault() {
+        val labels = listOf(
+            lookup("#goodAlienStateLabel").tryQuery<Label>().get(),
+            lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        )
+
+        labels.forEach { label ->
+            assertEquals("unknown", label.text)
+        }
+    }
+
+    @Test
+    fun testGoodAlienStateWhenRaised() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testGoodAlienStateWhenLowered() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 0).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testBadAlienStateWhenRaised() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testBadAlienStateWhenLowered() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 0).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testRaiseGoodAlienChangesStateLabel() {
+        val button = lookup("#raiseGoodAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testLowerGoodAlienChangesStateLabel() {
+        val button = lookup("#lowerGoodAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testRaiseBadAlienChangesState() {
+        val button = lookup("#raiseBadAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testLowerBadAlienChangesState() {
+        val button = lookup("#lowerBadAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
 }

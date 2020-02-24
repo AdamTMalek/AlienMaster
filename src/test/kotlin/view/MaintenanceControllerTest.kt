@@ -34,6 +34,10 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         }
 
+        override fun isConnected(): Boolean {
+            return true
+        }
+
         override fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {
             dataListeners.add(listener)
         }
@@ -112,17 +116,13 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         val deviceIds = (0..5).map { "led$it" }
 
-        var log = getLog()
-        if (log.isNotEmpty())
-            fail("Log text should be empty")
-
         deviceIds.forEach { id ->
             val led = lookup("#$id").tryQuery<Node>().get()
 
             val expectedActionText = Regex("action: set\\s+device: ${id.toUpperCase()}\\s+value: 1")
 
             clickOn(led)
-            log = getLog()
+            val log = getLog()
             assertTrue(log.contains(expectedActionText))
         }
     }
@@ -344,6 +344,36 @@ class MaintenanceControllerTest : ApplicationTest() {
 
             Thread.sleep(100)
             assertFalse(button.styleClass.contains("button-pressed"))
+        }
+    }
+
+    @Test
+    fun testLedActivatesWhenReportReceived() {
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 1).toYaml() }
+        actions.forEachIndexed { index, action ->
+            serial.dataListeners.first().onDataReceived(action)
+
+            Thread.sleep(100)
+            val led = lookup("#led$index").tryQuery<Node>().get()
+            assertTrue(led.styleClass.contains(MaintenanceController.LED_ACTIVE_STYLE))
+        }
+    }
+
+    @Test
+    fun testLedDeactivatesWhenReportReceived() {
+        // Prepare (add active style to all leds)
+        val leds = (0..5).map { "#led$it" }.map { id ->
+            lookup(id).tryQuery<Node>().get()
+        }
+        leds.forEach { it.styleClass.add(MaintenanceController.LED_ACTIVE_STYLE) }
+
+        // Test
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 0).toYaml() }
+        actions.forEachIndexed { index, action ->
+            serial.dataListeners.first().onDataReceived(action)
+
+            Thread.sleep(100)
+            assertFalse(leds[index].styleClass.contains(MaintenanceController.LED_ACTIVE_STYLE))
         }
     }
 }

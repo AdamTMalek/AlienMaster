@@ -116,10 +116,19 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         messageParser.addListener(this)
         addAutoScrollToLogText()
+        addPortChoiceChangeListener()
     }
 
     private fun addAutoScrollToLogText() {
         logText.textProperty().addListener { _, _, _ -> logText.scrollTop = Double.MAX_VALUE }
+    }
+
+    private fun addPortChoiceChangeListener() {
+        portChoice.selectionModelProperty().addListener { _, _, newPort ->
+            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort.selectedItem }!!
+            serial.connectTo(port)
+            requestLedStates()
+        }
     }
 
     /**
@@ -130,6 +139,9 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         this.serial.addPortListener(this)
         this.serial.addDataReceivedListener(this)
         setupPortChoice()
+
+        if (serial.isConnected())
+            requestLedStates()
     }
 
     /**
@@ -147,6 +159,13 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         portChoice.selectionModel.select(currentPortIndex)
     }
 
+    private fun requestLedStates() {
+        val actions = (0..5).map { Action(ActionType.GET, DeviceType.LED, it, null) }
+        actions.forEach { action ->
+            sendAction(action)
+        }
+    }
+
     override fun onActionReceived(action: Action) {
         // This method may be invoked by other threads
         Platform.runLater {
@@ -156,6 +175,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
                 DeviceType.BUTTON -> handleButtonAction(action)
                 DeviceType.CARD -> handleCardReaderAction(action)
                 DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
+                DeviceType.LED -> handleLedAction(action)
                 else -> return@runLater
             }
         }
@@ -201,7 +221,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     /**
-     * Handles the given [action] if is related to the distance sensor
+     * Handles the given [action] if it is related to the distance sensor
      *
      * @throws IllegalArgumentException if the action is not related to the distance sensor
      */
@@ -212,6 +232,32 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
         val distance = action.value!!
         distanceReading.text = distance.toString()
+    }
+
+    /**
+     * Handles the given [action] if is related to the LEDs
+     *
+     * @throws IllegalArgumentException if the action is not related to the LEDs
+     */
+    @Throws(IllegalArgumentException::class)
+    private fun handleLedAction(action: Action) {
+        if (action.deviceType != DeviceType.LED)
+            throw IllegalArgumentException("Action is not a LED action")
+
+        val led = when (action.deviceId) {
+            0 -> led0
+            1 -> led1
+            2 -> led2
+            3 -> led3
+            4 -> led4
+            5 -> led5
+            else -> return
+        }
+
+        if (action.value == 1)
+            setLedActive(led)
+        else
+            setLedInactive(led)
     }
 
     /**
@@ -281,9 +327,17 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
      */
     private fun toggleLedActive(led: Styleable) {
         if (isLedActive(led))
-            led.styleClass.remove(LED_ACTIVE_STYLE)
+            setLedInactive(led)
         else
-            led.styleClass.add(LED_ACTIVE_STYLE)
+            setLedActive(led)
+    }
+
+    private fun setLedActive(led: Styleable) {
+        led.styleClass.add(LED_ACTIVE_STYLE)
+    }
+
+    private fun setLedInactive(led: Styleable) {
+        led.styleClass.remove(LED_ACTIVE_STYLE)
     }
 
     /**

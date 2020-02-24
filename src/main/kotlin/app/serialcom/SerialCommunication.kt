@@ -85,6 +85,11 @@ class SerialCommunication : Serial {
     }
 
     /**
+     * Returns true if the serial is connected to some port
+     */
+    override fun isConnected() = run
+
+    /**
      * Add [OnSerialDataReceivedListener] for it to be able to receive data from the serial port.
      */
     override fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {

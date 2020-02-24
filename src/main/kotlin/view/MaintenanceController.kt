@@ -132,6 +132,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort.selectedItem }!!
             serial.connectTo(port)
             requestLedStates()
+            requestAlienStates()
         }
     }
 

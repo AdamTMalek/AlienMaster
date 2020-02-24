@@ -34,6 +34,10 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         }
 
+        override fun isConnected(): Boolean {
+            return true
+        }
+
         override fun addDataReceivedListener(listener: OnSerialDataReceivedListener) {
             dataListeners.add(listener)
         }
@@ -112,17 +116,13 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         val deviceIds = (0..5).map { "led$it" }
 
-        var log = getLog()
-        if (log.isNotEmpty())
-            fail("Log text should be empty")
-
         deviceIds.forEach { id ->
             val led = lookup("#$id").tryQuery<Node>().get()
 
             val expectedActionText = Regex("action: set\\s+device: ${id.toUpperCase()}\\s+value: 1")
 
             clickOn(led)
-            log = getLog()
+            val log = getLog()
             assertTrue(log.contains(expectedActionText))
         }
     }
@@ -345,5 +345,123 @@ class MaintenanceControllerTest : ApplicationTest() {
             Thread.sleep(100)
             assertFalse(button.styleClass.contains("button-pressed"))
         }
+    }
+
+    @Test
+    fun testLedActivatesWhenReportReceived() {
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 1).toYaml() }
+        actions.forEachIndexed { index, action ->
+            serial.dataListeners.first().onDataReceived(action)
+
+            Thread.sleep(100)
+            val led = lookup("#led$index").tryQuery<Node>().get()
+            assertTrue(led.styleClass.contains(MaintenanceController.LED_ACTIVE_STYLE))
+        }
+    }
+
+    @Test
+    fun testLedDeactivatesWhenReportReceived() {
+        // Prepare (add active style to all leds)
+        val leds = (0..5).map { "#led$it" }.map { id ->
+            lookup(id).tryQuery<Node>().get()
+        }
+        leds.forEach { it.styleClass.add(MaintenanceController.LED_ACTIVE_STYLE) }
+
+        // Test
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 0).toYaml() }
+        actions.forEachIndexed { index, action ->
+            serial.dataListeners.first().onDataReceived(action)
+
+            Thread.sleep(100)
+            assertFalse(leds[index].styleClass.contains(MaintenanceController.LED_ACTIVE_STYLE))
+        }
+    }
+
+    @Test
+    fun testAlienStatesAreUnknownByDefault() {
+        val labels = listOf(
+            lookup("#goodAlienStateLabel").tryQuery<Label>().get(),
+            lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        )
+
+        labels.forEach { label ->
+            assertEquals("unknown", label.text)
+        }
+    }
+
+    @Test
+    fun testGoodAlienStateWhenRaised() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testGoodAlienStateWhenLowered() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 0).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testBadAlienStateWhenRaised() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testBadAlienStateWhenLowered() {
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 0).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testRaiseGoodAlienChangesStateLabel() {
+        val button = lookup("#raiseGoodAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testLowerGoodAlienChangesStateLabel() {
+        val button = lookup("#lowerGoodAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#goodAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testRaiseBadAlienChangesState() {
+        val button = lookup("#raiseBadAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("raised", label.text)
+    }
+
+    @Test
+    fun testLowerBadAlienChangesState() {
+        val button = lookup("#lowerBadAlienButton").tryQuery<Node>().get()
+        clickOn(button)
+
+        val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
+        assertEquals("lowered", label.text)
     }
 }

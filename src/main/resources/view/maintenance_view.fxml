@@ -94,12 +94,18 @@
                         GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                 <Button id="lowerGoodAlienButton" text="Lower" onAction="#lowerGoodAlien"
                         GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <Label text="Current state: " GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <Label fx:id="goodAlienStateLabel" id="goodAlienStateLabel" text="unknown"
+                       GridPane.columnIndex="4" GridPane.rowIndex="0"/>
 
                 <Label text="Bad alien servo: " GridPane.rowIndex="1"/>
                 <Button id="raiseBadAlienButton" text="Raise" onAction="#raiseBadAlien"
                         GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Button id="lowerBadAlienButton" text="Lower" onAction="#lowerBadAlien"
                         GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Label text="Current state: " GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Label fx:id="badAlienStateLabel" id="badAlienStateLabel" text="unknown"
+                       GridPane.columnIndex="4" GridPane.rowIndex="1"/>
             </GridPane>
 
             <!-- Card reader -->

@@ -23,6 +23,11 @@ interface Serial {
     fun connectTo(port: SerialPort)
 
     /**
+     * Returns true if the serial is connected to some port
+     */
+    fun isConnected(): Boolean
+
+    /**
      * Adds listener that receives all incoming data
      */
     fun addDataReceivedListener(listener: OnSerialDataReceivedListener)

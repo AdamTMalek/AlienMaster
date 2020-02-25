@@ -9,6 +9,7 @@ class ActionTest {
         val expected = """
             action: get
             device: DST0
+            
         """.trimIndent()
 
         val actual = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null).toYaml()
@@ -22,6 +23,7 @@ class ActionTest {
             action: set
             device: LED5
             value: 1
+            
         """.trimIndent()
 
         val actual = Action(ActionType.SET, DeviceType.LED, 5, 1).toYaml()

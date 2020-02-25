@@ -12,9 +12,9 @@ data class StateMessage(val state: State, val value: Int?) {
      * Translate the object into equivalent YAML representation
      */
     fun toYaml(): String {
-        var yaml = "state: ${state.code}"
+        var yaml = "state: ${state.code}\n"
         if (value != null) {
-            yaml += "\nvalue: $value"
+            yaml += "value: $value\n"
         }
 
         return yaml

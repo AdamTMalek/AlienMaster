@@ -469,7 +469,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         val directionChar = if (sent) '>' else '<'
         val indentedText = text.prependIndent("\t")
 
-        logText.appendText(directionChar + indentedText + "\n\n")
+        logText.appendText(directionChar + indentedText + "\n")
     }
 
     override fun onDataReceived(data: String) {

@@ -128,8 +128,11 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     private fun addPortChoiceChangeListener() {
-        portChoice.selectionModelProperty().addListener { _, _, newPort ->
-            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort.selectedItem }!!
+        portChoice.selectionModel.selectedItemProperty().addListener { _, _, newPort ->
+            if (newPort == null)
+                return@addListener
+
+            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort }!!
             serial.connectTo(port)
             requestLedStates()
             requestAlienStates()
@@ -466,7 +469,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         val directionChar = if (sent) '>' else '<'
         val indentedText = text.prependIndent("\t")
 
-        logText.appendText(directionChar + indentedText + "\n\n")
+        logText.appendText(directionChar + indentedText + "\n")
     }
 
     override fun onDataReceived(data: String) {

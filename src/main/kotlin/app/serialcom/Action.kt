@@ -21,6 +21,7 @@ data class Action(val action: ActionType, val deviceType: DeviceType, val device
         var yaml = """
             action: ${action.code}
             device: ${deviceType.code}$deviceId
+            
         """.trimIndent()
 
         if (value != null)
@@ -29,8 +30,8 @@ data class Action(val action: ActionType, val deviceType: DeviceType, val device
         // go right after the device id
             yaml = yaml.plus(
                 """
-                
                 value: $value
+                
             """.trimIndent()
             )
 

@@ -18,6 +18,9 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
      * Given the [line] set the correct field of the [Action] object
      */
     override fun set(line: String): ActionFromYamlBuilder {
+        if (line.isBlank())
+            return this
+
         val (key, value) = parseLineAsPair(line)
 
         when (key) {

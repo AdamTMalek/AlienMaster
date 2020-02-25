@@ -8,6 +8,7 @@ class StateMessageTest {
     fun testToYamlNoValue() {
         val expected = """
             state: ${State.WAITING.code}
+            
         """.trimIndent()
 
         val actual = StateMessage(State.WAITING, null).toYaml()
@@ -20,6 +21,7 @@ class StateMessageTest {
         val expected = """
             state: ${State.WAITING.code}
             value: 15
+            
         """.trimIndent()
 
         val actual = StateMessage(State.WAITING, 15).toYaml()

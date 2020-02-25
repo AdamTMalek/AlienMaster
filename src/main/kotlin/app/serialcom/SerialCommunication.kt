@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.concurrent.thread
 
 
@@ -51,6 +52,7 @@ class SerialCommunication : Serial {
     private var comPort: SerialPort? = null
     private var run = true
     private var running = false
+    private val outgoingDataQueue: Queue<ByteArray> = LinkedList<ByteArray>()
 
     init {
         val portCheckActivity = SerialPortCheckActivity()
@@ -117,18 +119,18 @@ class SerialCommunication : Serial {
      */
     @Throws(IllegalStateException::class)
     override fun send(data: String) {
-        val port = comPort
-            ?: throw IllegalStateException("SerialCommunication is not connected to any port")
+        checkNotNull(comPort) { throw IllegalStateException("SerialCommunication is not connected to any port") }
 
         val dataBytes = data.toByteArray(Charsets.US_ASCII)
-        port.writeBytes(dataBytes, dataBytes.size.toLong())
+        outgoingDataQueue.add(dataBytes)
     }
 
     /**
      * Send the received data to every registered listener
      */
     private fun notifyDataReceived(data: String) {
-        dataReceivedListeners.forEach { it.onDataReceived(data) }
+        val string = data.lines().filterNot { it.isBlank() }.joinToString("\n")
+        dataReceivedListeners.forEach { it.onDataReceived(string) }
     }
 
     /**
@@ -152,13 +154,30 @@ class SerialCommunication : Serial {
     private fun run() {
         thread(start = true) {
             running = true
+
+            var receivedString = ""
+
             while (run) {
                 if (comPort!!.bytesAvailable() > 0) {
                     val buffer = ByteArray(comPort!!.bytesAvailable())
                     comPort!!.readBytes(buffer, buffer.size.toLong())
-                    notifyDataReceived(buffer.toString(Charsets.US_ASCII))
+
+                    val string = buffer.toString(Charsets.US_ASCII)
+                    receivedString += string
+
+                    if (string.last() == '\n') {
+                        notifyDataReceived(receivedString)
+                        receivedString = ""
+                    }
+
                 }
-                Thread.sleep(20)
+
+                if (outgoingDataQueue.isNotEmpty()) {
+                    val data = outgoingDataQueue.remove()
+                    comPort!!.writeBytes(data, data.size.toLong())
+                }
+
+                Thread.sleep(100)
             }
         }
     }

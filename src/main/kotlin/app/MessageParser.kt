@@ -75,14 +75,14 @@ class MessageParser {
     private fun parseAction(stringLines: Collection<String>) {
         stringLines.forEach { line ->
             actionBuilder.set(line)
-        }
 
-        if (actionBuilder.isReady()) {
-            val action = actionBuilder.build()
-            actionBuilder = ActionFromYamlBuilder()
-            currentState = State.WAITING
+            if (actionBuilder.isReady()) {
+                val action = actionBuilder.build()
+                actionBuilder = ActionFromYamlBuilder()
+                currentState = State.WAITING
 
-            notifyActionReceived(action)
+                notifyActionReceived(action)
+            }
         }
     }
 

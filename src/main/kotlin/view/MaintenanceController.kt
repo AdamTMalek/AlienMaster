@@ -128,8 +128,8 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     private fun addPortChoiceChangeListener() {
-        portChoice.selectionModelProperty().addListener { _, _, newPort ->
-            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort.selectedItem }!!
+        portChoice.selectionModel.selectedItemProperty().addListener { _, _, newPort ->
+            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort }!!
             serial.connectTo(port)
             requestLedStates()
             requestAlienStates()

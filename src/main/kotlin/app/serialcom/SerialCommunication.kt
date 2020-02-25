@@ -120,7 +120,7 @@ class SerialCommunication : Serial {
         val port = comPort
             ?: throw IllegalStateException("SerialCommunication is not connected to any port")
 
-        val dataBytes = data.toByteArray()
+        val dataBytes = data.toByteArray(Charsets.US_ASCII)
         port.writeBytes(dataBytes, dataBytes.size.toLong())
     }
 
@@ -156,7 +156,7 @@ class SerialCommunication : Serial {
                 if (comPort!!.bytesAvailable() > 0) {
                     val buffer = ByteArray(comPort!!.bytesAvailable())
                     comPort!!.readBytes(buffer, buffer.size.toLong())
-                    notifyDataReceived(buffer.toString(Charsets.UTF_8))
+                    notifyDataReceived(buffer.toString(Charsets.US_ASCII))
                 }
                 Thread.sleep(20)
             }

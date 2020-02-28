@@ -1,6 +1,5 @@
 package app
 
-import app.serialcom.Serial
 import app.serialcom.SerialCommunication
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -11,7 +10,7 @@ import view.MainViewController
 
 class MainApp : Application() {
     private lateinit var controller: MainViewController
-    private val serial: Serial = SerialCommunication()
+    private val serial = SerialCommunication()
 
     override fun start(primaryStage: Stage?) {
         val url = this::class.java.classLoader.getResource("view/main_view.fxml")
@@ -28,5 +27,10 @@ class MainApp : Application() {
         controller = loader.getController<MainViewController>()
         controller.setSerial(serial)
         controller.setStage()
+    }
+
+    override fun stop() {
+        serial.stop()
+        super.stop()
     }
 }

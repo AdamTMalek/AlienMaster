@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.concurrent.thread
 
 
@@ -14,7 +15,17 @@ import kotlin.concurrent.thread
  * [OnSerialDataReceivedListener.onDataReceived] on every registered listener (using [addDataReceivedListener]).
  */
 class SerialCommunication : Serial {
+    /**
+     * The [SerialPortCheckActivity] is an asynchronous activity that is responsible
+     * for checking if the list of available com ports has updated or not.
+     */
     private class SerialPortCheckActivity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
+
+        /**
+         * Starts the asynchronous checking coroutine.
+         * @param ports Reference to a mutable collection of [SerialPort] objects
+         * @param onUpdateCallback called when the collection has been modified.
+         */
         fun checkForAvailablePorts(ports: MutableCollection<SerialPort>, onUpdateCallback: () -> Unit) {
             launch {
                 while (true) {
@@ -33,6 +44,9 @@ class SerialCommunication : Serial {
             }
         }
 
+        /**
+         * Returns true if the two collections [a] and [b] are different.
+         */
         private fun listsDifferent(a: Collection<SerialPort>, b: Collection<SerialPort>): Boolean {
             // Compare the two lists using port descriptions
             // SerialPort does not override equals or hashCode
@@ -49,8 +63,9 @@ class SerialCommunication : Serial {
     private val portsChangedListeners = mutableListOf<OnAvailablePortsChangeListener>()
     private val availablePorts = mutableListOf<SerialPort>()
     private var comPort: SerialPort? = null
-    private var run = true
-    private var running = false
+    private var runCommunicationThread = true
+    private var communicationThreadRunning = false
+    private val outgoingDataQueue: Queue<ByteArray> = LinkedList<ByteArray>()
 
     init {
         val portCheckActivity = SerialPortCheckActivity()
@@ -75,8 +90,8 @@ class SerialCommunication : Serial {
      * Connects to the given [port].
      */
     override fun connectTo(port: SerialPort) {
-        if (running) {
-            run = false
+        if (communicationThreadRunning) {
+            runCommunicationThread = false
         }
 
         comPort = port
@@ -87,7 +102,7 @@ class SerialCommunication : Serial {
     /**
      * Returns true if the serial is connected to some port
      */
-    override fun isConnected() = run
+    override fun isConnected() = communicationThreadRunning
 
     /**
      * Add [OnSerialDataReceivedListener] for it to be able to receive data from the serial port.
@@ -117,18 +132,18 @@ class SerialCommunication : Serial {
      */
     @Throws(IllegalStateException::class)
     override fun send(data: String) {
-        val port = comPort
-            ?: throw IllegalStateException("SerialCommunication is not connected to any port")
+        checkNotNull(comPort) { throw IllegalStateException("SerialCommunication is not connected to any port") }
 
-        val dataBytes = data.toByteArray()
-        port.writeBytes(dataBytes, dataBytes.size.toLong())
+        val dataBytes = data.toByteArray(Charsets.US_ASCII)
+        outgoingDataQueue.add(dataBytes)
     }
 
     /**
      * Send the received data to every registered listener
      */
     private fun notifyDataReceived(data: String) {
-        dataReceivedListeners.forEach { it.onDataReceived(data) }
+        val string = data.lines().filterNot { it.isBlank() }.joinToString("\n")
+        dataReceivedListeners.forEach { it.onDataReceived(string) }
     }
 
     /**
@@ -142,7 +157,7 @@ class SerialCommunication : Serial {
      * Stop the polling thread and close the currently open port
      */
     fun stop() {
-        run = false
+        runCommunicationThread = false
         comPort?.closePort()
     }
 
@@ -151,15 +166,47 @@ class SerialCommunication : Serial {
      */
     private fun run() {
         thread(start = true) {
-            running = true
-            while (run) {
+            communicationThreadRunning = true
+            val stringBuffer = StringBuilder()
+
+            while (runCommunicationThread) {
                 if (comPort!!.bytesAvailable() > 0) {
-                    val buffer = ByteArray(comPort!!.bytesAvailable())
-                    comPort!!.readBytes(buffer, buffer.size.toLong())
-                    notifyDataReceived(buffer.toString(Charsets.UTF_8))
+                    readData(stringBuffer)
+
+                    if (stringBuffer.last() == '\n') {
+                        notifyDataReceived(stringBuffer.toString())
+                        stringBuffer.clear()
+                    }
+
                 }
-                Thread.sleep(20)
+
+                sendDataFromQueue()
+                Thread.sleep(100)
             }
         }
+    }
+
+    /**
+     * Reads all available bytes from the communication port
+     * into the [buffer].
+     */
+    private fun readData(buffer: StringBuilder) {
+        val bytes = ByteArray(comPort!!.bytesAvailable())
+        comPort!!.readBytes(bytes, bytes.size.toLong())
+
+        buffer.append(bytes.toString(Charsets.US_ASCII))
+    }
+
+    /**
+     * Checks if the [outgoingDataQueue] is not empty.
+     * If it isn't, it will dequeue a byte array and
+     * send it to the com port.
+     */
+    private fun sendDataFromQueue() {
+        if (outgoingDataQueue.isEmpty())
+            return
+
+        val data = outgoingDataQueue.remove()
+        comPort!!.writeBytes(data, data.size.toLong())
     }
 }

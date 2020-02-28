@@ -19,10 +19,7 @@ class ActionFromYamlBuilderTest {
 
     @Test
     fun testActionNotSet() {
-        val incomingAction = """
-            device: CRD0
-            value: 15
-        """.trimIndent()
+        val incomingAction = "{\n\tdevice: CRD0\n\tvalue: 15\n}"
 
         val builder = ActionFromYamlBuilder()
         incomingAction.lines().forEach { line ->
@@ -34,10 +31,7 @@ class ActionFromYamlBuilderTest {
 
     @Test
     fun testDeviceNotSet() {
-        val incomingAction = """
-            action: get
-            value: 15
-        """.trimIndent()
+        val incomingAction = "{\n\taction: get\n\tvalue: 15\n}"
 
         val builder = ActionFromYamlBuilder()
         incomingAction.lines().forEach { line ->
@@ -49,10 +43,7 @@ class ActionFromYamlBuilderTest {
 
     @Test
     fun testValueNotSet() {
-        val incomingAction = """
-            action: set
-            device: SRV0
-        """.trimIndent()
+        val incomingAction = "{\n\taction: set\n\tdevice: SRV0\n}"
 
         val builder = ActionFromYamlBuilder()
         incomingAction.lines().forEach { line ->
@@ -64,10 +55,7 @@ class ActionFromYamlBuilderTest {
 
     @Test
     fun testValueNotRequiredWhenActionIsGet() {
-        val incomingAction = """
-            action: get
-            device: LED0
-        """.trimIndent()
+        val incomingAction = "{\n\taction: get\n\tdevice: LED0\n}"
 
         val builder = ActionFromYamlBuilder()
         incomingAction.lines().forEach { line ->
@@ -80,11 +68,7 @@ class ActionFromYamlBuilderTest {
     @Test
     fun testParser() {
         val expected = Action(ActionType.REPORT, DeviceType.CARD, 0, 15)
-        val incomingAction = """
-            action: report
-            device: CRD0
-            value: 15
-        """.trimIndent()
+        val incomingAction = "{\n\taction: report\n\tdevice: CRD0\n\tvalue: 15\n}"
 
         val builder = ActionFromYamlBuilder()
         incomingAction.lines().forEach { line ->

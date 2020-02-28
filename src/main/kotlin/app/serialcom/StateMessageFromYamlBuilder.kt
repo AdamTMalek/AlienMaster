@@ -16,7 +16,12 @@ class StateMessageFromYamlBuilder : MessageFromYamlBuilder<StateMessage>() {
      * Given the [line] set the correct field of the [StateMessage] object
      */
     override fun set(line: String): MessageFromYamlBuilder<StateMessage> {
-        val (key, value) = parseLineAsPair(line)
+        val data = super.getMessageContent(line)
+
+        if (data == "")
+            return this
+
+        val (key, value) = parseLineAsPair(data)
 
         when (key) {
             "state" -> setState(value)

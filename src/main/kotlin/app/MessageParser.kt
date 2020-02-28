@@ -33,7 +33,7 @@ class MessageParser {
     private var currentState = State.WAITING
     private var actionBuilder = ActionFromYamlBuilder()
     private var stateBuilder = StateMessageFromYamlBuilder()
-
+    private var buffer = ""
     /**
      * Adds a [OnMessageReceivedListener] that will receive notifications
      * when the parser is finished parsing a message
@@ -53,11 +53,18 @@ class MessageParser {
      * Parses complete or incomplete yaml message
      */
     fun parse(string: String) {
-        val lines = string.lines()
+        buffer += string
+
+        if (!buffer.contains("{") || !buffer.contains("}")) {
+            buffer += "\n"
+            return
+        }
+
+        val lines = buffer.lines()
 
         // Check what the first line contains to determine what builder will be used
         if (currentState == State.WAITING) {
-            val isAction = lines.first().contains("action")
+            val isAction = lines[1].contains("action")
 
             currentState = if (isAction) State.PARSING_ACTION else State.PARSING_STATE
         }

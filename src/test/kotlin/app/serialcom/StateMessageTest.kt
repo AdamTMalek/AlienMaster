@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test
 class StateMessageTest {
     @Test
     fun testToYamlNoValue() {
-        val expected = """
-            state: ${State.WAITING.code}
-            
-        """.trimIndent()
+        val expected = "{\n\tstate: ${State.WAITING.code}\n}"
 
         val actual = StateMessage(State.WAITING, null).toYaml()
 
@@ -18,11 +15,7 @@ class StateMessageTest {
 
     @Test
     fun testToYamlWithValue() {
-        val expected = """
-            state: ${State.WAITING.code}
-            value: 15
-            
-        """.trimIndent()
+        val expected = "{\n\tstate: ${State.WAITING.code}\n\tvalue: 15\n}"
 
         val actual = StateMessage(State.WAITING, 15).toYaml()
 

@@ -13,11 +13,7 @@ class MessageParserTest {
      */
     @Test
     fun testParserWithCompleteMessage() {
-        val message = """
-            action: set
-            device: LED0
-            value: 1
-        """.trimIndent()
+        val message = "{\n\taction: set\n\tdevice: LED0\n\tvalue: 1\n}"
 
         var actionReceived = false
         val listener = object : OnMessageReceivedListener {
@@ -43,11 +39,7 @@ class MessageParserTest {
      */
     @Test
     fun testParserLineByLine() {
-        val message = """
-            action: set
-            device: LED0
-            value: 1
-        """.trimIndent()
+        val message = "{\n\taction: set\n\tdevice: LED0\n\tvalue: 1\n}"
 
         var actionReceived = false
         val listener = object : OnMessageReceivedListener {
@@ -72,11 +64,7 @@ class MessageParserTest {
 
     @Test
     fun testParsesAction() {
-        val message = """
-            action: set
-            device: LED0
-            value: 1
-        """.trimIndent()
+        val message = "{\n\taction: set\n\tdevice: LED0\n\tvalue: 1\n}"
 
         var receivedAction: Action? = null
         val listener = object : OnMessageReceivedListener {
@@ -97,10 +85,7 @@ class MessageParserTest {
 
     @Test
     fun testParsesState() {
-        val message = """
-            state: OVER
-            value: 20
-        """.trimIndent()
+        val message = "{\n\tstate: OVER\n\tvalue: 20\n}"
 
         var receivedState: StateMessage? = null
         val listener = object : OnMessageReceivedListener {
@@ -121,10 +106,7 @@ class MessageParserTest {
 
     @Test
     fun testRemoveListener() {
-        val message = """
-            state: OVER
-            value: 20
-        """.trimIndent()
+        val message = "{\n\tstate: OVER\n\tvalue: 20\n}"
 
         var receivedState: StateMessage? = null
         val listener = object : OnMessageReceivedListener {

@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test
 class ActionTest {
     @Test
     fun testToYamlWithNoValue() {
-        val expected = """
-            action: get
-            device: DST0
-        """.trimIndent()
+        val expected = "{\n\taction: get\n\tdevice: DST0\n}"
 
         val actual = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null).toYaml()
 
@@ -18,11 +15,7 @@ class ActionTest {
 
     @Test
     fun testToYamlWithValue() {
-        val expected = """
-            action: set
-            device: LED5
-            value: 1
-        """.trimIndent()
+        val expected = "{\n\taction: set\n\tdevice: LED5\n\tvalue: 1\n}"
 
         val actual = Action(ActionType.SET, DeviceType.LED, 5, 1).toYaml()
 

@@ -18,22 +18,14 @@ data class Action(val action: ActionType, val deviceType: DeviceType, val device
      * Translate the object into equivalent YAML representation
      */
     fun toYaml(): String {
-        var yaml = """
-            action: ${action.code}
-            device: ${deviceType.code}$deviceId
-        """.trimIndent()
+        var yaml = "{\n\taction: ${action.code}\n\tdevice: ${deviceType.code}$deviceId\n"
 
         if (value != null)
         // The blank line is so that the value appears on the
         // next line. If it was not there, the value would
         // go right after the device id
-            yaml = yaml.plus(
-                """
-                
-                value: $value
-            """.trimIndent()
-            )
+            yaml += "\tvalue: $value\n"
 
-        return yaml
+        return "$yaml}"
     }
 }

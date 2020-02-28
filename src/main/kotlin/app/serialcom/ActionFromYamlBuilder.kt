@@ -18,7 +18,12 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
      * Given the [line] set the correct field of the [Action] object
      */
     override fun set(line: String): ActionFromYamlBuilder {
-        val (key, value) = parseLineAsPair(line)
+        val data = super.getMessageContent(line)
+
+        if (data == "")
+            return this
+
+        val (key, value) = parseLineAsPair(data)
 
         when (key) {
             "action" -> actionType = ActionType.fromString(value)

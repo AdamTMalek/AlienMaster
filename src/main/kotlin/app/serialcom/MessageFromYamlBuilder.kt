@@ -5,6 +5,10 @@ abstract class MessageFromYamlBuilder<T> {
     abstract fun isReady(): Boolean
     abstract fun build(): T
 
+    protected fun getMessageContent(data: String): String {
+        return data.lines().filter { !it.contains("{") && !it.contains("}") }.joinToString("\n").trimIndent()
+    }
+
     /**
      * Parse a line in a format of
      * key: value

@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TextToSpeech - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.tts</a>&nbsp;/&nbsp;<a href="./index.html">TextToSpeech</a><br/>
+<br/>
+<h1>TextToSpeech</h1>
+<code><span class="keyword">class </span><span class="identifier">TextToSpeech</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineListener.html"><span class="identifier">LineListener</span></a></code>
+<p>The <a href="./index.html">TextToSpeech</a> class acts as an interface to the actual library used for
+doing text-to-speech using MaryTTS.</p>
+<p>Use the <a href="say.html">say</a> method to use the text-to-speech.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">TextToSpeech</a> class acts as an interface to the actual library used for
+doing text-to-speech using MaryTTS.</p>
+<code><span class="identifier">TextToSpeech</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="audio-player.html">audioPlayer</a></h4>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">audioPlayer</span><span class="symbol">: </span><span class="identifier">AudioPlayer</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="audio-queue.html">audioQueue</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">audioQueue</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/Queue.html"><span class="identifier">Queue</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/AudioInputStream.html"><span class="identifier">AudioInputStream</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="current-line-event.html">currentLineEvent</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">currentLineEvent</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineEvent/Type.html"><span class="identifier">Type</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="mary.html">mary</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">mary</span><span class="symbol">: </span><span class="identifier">LocalMaryInterface</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="initialise-audio-player.html">initialiseAudioPlayer</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initialiseAudioPlayer</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="initialise-mary.html">initialiseMary</a></h4>
+</td>
+<td>
+<p>Initialise MaryTTS for the given language.</p>
+<code><span class="keyword">fun </span><span class="identifier">initialiseMary</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$initialiseMary(app.Language)/language">language</span><span class="symbol">:</span>&nbsp;<a href="../../app/-language/index.html"><span class="identifier">Language</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Initialise MaryTTS with the given locale and voice.
+This method is the one that actually configures Mary,
+but because it requires both locale and voice as string,
+it is advised to use the method <a href="initialise-mary.html">initialiseMary</a> that takes
+<a href="../../app/-language/index.html">Language</a> as a parameter.</p>
+<code><span class="keyword">fun </span><span class="identifier">initialiseMary</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$initialiseMary(java.util.Locale, kotlin.String)/locale">locale</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">, </span><span class="identifier" id="app.tts.TextToSpeech$initialiseMary(java.util.Locale, kotlin.String)/voice">voice</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="play-audio.html">playAudio</a></h4>
+</td>
+<td>
+<p>Play the given <a href="play-audio.html#app.tts.TextToSpeech$playAudio(javax.sound.sampled.AudioInputStream)/audio">audio</a></p>
+<code><span class="keyword">fun </span><span class="identifier">playAudio</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$playAudio(javax.sound.sampled.AudioInputStream)/audio">audio</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/AudioInputStream.html"><span class="identifier">AudioInputStream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="say.html">say</a></h4>
+</td>
+<td>
+<p>Say the given <a href="say.html#app.tts.TextToSpeech$say(app.Language, kotlin.String)/text">text</a> in the given <a href="say.html#app.tts.TextToSpeech$say(app.Language, kotlin.String)/language">language</a></p>
+<code><span class="keyword">fun </span><span class="identifier">say</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$say(app.Language, kotlin.String)/language">language</span><span class="symbol">:</span>&nbsp;<a href="../../app/-language/index.html"><span class="identifier">Language</span></a><span class="symbol">, </span><span class="identifier" id="app.tts.TextToSpeech$say(app.Language, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="update.html">update</a></h4>
+</td>
+<td>
+<p>By the <a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineListener.html">LineListener</a> interface we will get updates when the
+<a href="audio-player.html">audioPlayer</a> changes state (e.g. starts playing, stops playing etc.)
+When the playback has finished we will create another audioPlayer
+(refer to the comment above <a href="audio-player.html">audioPlayer</a> for the reason why that is)
+and play back the next audio in the queue.</p>
+<code><span class="keyword">fun </span><span class="identifier">update</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$update(javax.sound.sampled.LineEvent)/event">event</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineEvent.html"><span class="identifier">LineEvent</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-e-n-g-l-i-s-h_-v-o-i-c-e.html">ENGLISH_VOICE</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">ENGLISH_VOICE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-g-e-r-m-a-n_-v-o-i-c-e.html">GERMAN_VOICE</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">GERMAN_VOICE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-all-available-locales.html">getAllAvailableLocales</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAllAvailableLocales</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/index.html"><span class="identifier">MutableSet</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">!</span><span class="symbol">&gt;</span><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-all-available-voices.html">getAllAvailableVoices</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAllAvailableVoices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/index.html"><span class="identifier">MutableSet</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">!</span><span class="symbol">&gt;</span><span class="symbol">!</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

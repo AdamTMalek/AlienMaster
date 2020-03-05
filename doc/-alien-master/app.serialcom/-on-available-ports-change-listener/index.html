@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>OnAvailablePortsChangeListener - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.serialcom</a>&nbsp;/&nbsp;<a href="./index.html">OnAvailablePortsChangeListener</a><br/>
+<br/>
+<h1>OnAvailablePortsChangeListener</h1>
+<code><span class="keyword">interface </span><span class="identifier">OnAvailablePortsChangeListener</span></code>
+<p>This interface should be implemented by every class that wants to keep
+the list of available serial communication ports up to date.
+The method should update the list by taking the up-to-date list
+of ports using <a href="#">SerialCommunication.getAllPorts</a> method.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-available-ports-change.html">onAvailablePortsChange</a></h4>
+</td>
+<td>
+<p>Invoked by the <a href="../-serial-communication/index.html">SerialCommunication</a> class whenever the list of
+available ports has been modified</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onAvailablePortsChange</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../../view/-maintenance-controller/index.html">MaintenanceController</a></h4>
+</td>
+<td>
+<p>The <a href="../../view/-maintenance-controller/index.html">MaintenanceController</a> is responsible for controlling all actions
+that happen in the maintenance view of which controls are defined in the
+fxml file maintenance_view.fxml.</p>
+<code><span class="keyword">class </span><span class="identifier">MaintenanceController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a href="../../app/-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">, </span><a href="../-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

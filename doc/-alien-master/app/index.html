@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>app - AlienMaster</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="./index.html">app</a><br/>
+<br/>
+<h2>Package app</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-language/index.html">Language</a></h4>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Language</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-main-app/index.html">MainApp</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MainApp</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Application</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-message-parser/index.html">MessageParser</a></h4>
+</td>
+<td>
+<p>The <a href="-message-parser/index.html">MessageParser</a> class parses messages coming from the
+virtual com port from the MBED into one of the two
+possible messages, <a href="../app.serialcom/-action/index.html">Action</a> or <a href="../app.serialcom/-state-message/index.html">StateMessage</a>.</p>
+<code><span class="keyword">class </span><span class="identifier">MessageParser</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-on-message-received-listener/index.html">OnMessageReceivedListener</a></h4>
+</td>
+<td>
+<p>Any class wanting to receive <a href="../app.serialcom/-action/index.html">Action</a> or <a href="../app.serialcom/-state-message/index.html">StateMessage</a>
+from the micro-controller, using the <a href="-message-parser/index.html">MessageParser</a>
+must implement this interface.</p>
+<code><span class="keyword">interface </span><span class="identifier">OnMessageReceivedListener</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-player/index.html">Player</a></h4>
+</td>
+<td>
+<p>The <a href="-player/index.html">Player</a> class is used to represent a single entry from the <a href="-players/index.html">Players</a> table</p>
+<code><span class="keyword">class </span><span class="identifier">Player</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IntEntity</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-player-generator/index.html">PlayerGenerator</a></h4>
+</td>
+<td>
+<p>The <a href="-player-generator/index.html">PlayerGenerator</a> class can be used to generate random players
+both English and German speaking, that can then be put inside the
+database.</p>
+<code><span class="keyword">class </span><span class="identifier">PlayerGenerator</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-players/index.html">Players</a></h4>
+</td>
+<td>
+<p>This object defines the database table properties like the field it contains, what the primary key is etc.</p>
+<code><span class="keyword">object </span><span class="identifier">Players</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IntIdTable</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-players-database/index.html">PlayersDatabase</a></h4>
+</td>
+<td>
+<p>The <a href="-players-database/index.html">PlayersDatabase</a> is an object managing all operations with the database, like getting all players,
+adding, and modifying a player.</p>
+<code><span class="keyword">object </span><span class="identifier">PlayersDatabase</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-language-not-found-exception/index.html">LanguageNotFoundException</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">LanguageNotFoundException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

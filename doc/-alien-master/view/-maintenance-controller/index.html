@@ -1,0 +1,548 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MaintenanceController - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">view</a>&nbsp;/&nbsp;<a href="./index.html">MaintenanceController</a><br/>
+<br/>
+<h1>MaintenanceController</h1>
+<code><span class="keyword">class </span><span class="identifier">MaintenanceController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a href="../../app/-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">, </span><a href="../../app.serialcom/-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">, </span><a href="../../app.serialcom/-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a></code>
+<p>The <a href="./index.html">MaintenanceController</a> is responsible for controlling all actions
+that happen in the maintenance view of which controls are defined in the
+fxml file maintenance_view.fxml.</p>
+<p>To open the view, it is recommended to use <a href="show-and-wait.html">showAndWait</a> and pass in
+a reference to the <a href="../../app.serialcom/-serial/index.html">Serial</a> implementation.</p>
+<p>Mainly used testing purposes, the <a href="load-root.html">loadRoot</a> loads the FXML file, sets up
+the required configurations and returns the <a href="#">Parent</a> of the view.
+It does not however create a window.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">MaintenanceController</a> is responsible for controlling all actions
+that happen in the maintenance view of which controls are defined in the
+fxml file maintenance_view.fxml.</p>
+<code><span class="identifier">MaintenanceController</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="bad-alien-state-label.html">badAlienStateLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">badAlienStateLabel</span><span class="symbol">: </span><span class="identifier">Label</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button0.html">button0</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button0</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button1.html">button1</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button1</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button2.html">button2</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button2</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button3.html">button3</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button3</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button4.html">button4</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button4</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="button5.html">button5</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">button5</span><span class="symbol">: </span><span class="identifier">Rectangle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="distance-reading.html">distanceReading</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">distanceReading</span><span class="symbol">: </span><span class="identifier">Label</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="good-alien-state-label.html">goodAlienStateLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">goodAlienStateLabel</span><span class="symbol">: </span><span class="identifier">Label</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led0.html">led0</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led0</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led1.html">led1</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led1</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led2.html">led2</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led2</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led3.html">led3</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led3</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led4.html">led4</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led4</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="led5.html">led5</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">led5</span><span class="symbol">: </span><span class="identifier">Circle</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="log-text.html">logText</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">logText</span><span class="symbol">: </span><span class="identifier">TextArea</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="message-parser.html">messageParser</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">messageParser</span><span class="symbol">: </span><a href="../../app/-message-parser/index.html"><span class="identifier">MessageParser</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="port-choice.html">portChoice</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">portChoice</span><span class="symbol">: </span><span class="identifier">ChoiceBox</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="serial.html">serial</a></h4>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">serial</span><span class="symbol">: </span><a href="../../app.serialcom/-serial/index.html"><span class="identifier">Serial</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="user-id-label.html">userIdLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">userIdLabel</span><span class="symbol">: </span><span class="identifier">Label</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-auto-scroll-to-log-text.html">addAutoScrollToLogText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addAutoScrollToLogText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="add-port-choice-change-listener.html">addPortChoiceChangeListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPortChoiceChangeListener</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="add-to-log-text-view.html">addToLogTextView</a></h4>
+</td>
+<td>
+<p>Adds the given <a href="add-to-log-text-view.html#view.MaintenanceController$addToLogTextView(kotlin.String, kotlin.Boolean)/text">text</a> to the serial communication log view,
+if <a href="add-to-log-text-view.html#view.MaintenanceController$addToLogTextView(kotlin.String, kotlin.Boolean)/sent">sent</a> is set to true, the text will be prepended with &gt;
+to indicate the direction of the message, otherwise it will
+be prepended with &lt;</p>
+<code><span class="keyword">fun </span><span class="identifier">addToLogTextView</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$addToLogTextView(kotlin.String, kotlin.Boolean)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$addToLogTextView(kotlin.String, kotlin.Boolean)/sent">sent</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="change-alien-state-label.html">changeAlienStateLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeAlienStateLabel</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$changeAlienStateLabel(javafx.scene.control.Label, kotlin.Boolean)/label">label</span><span class="symbol">:</span>&nbsp;<span class="identifier">Label</span><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$changeAlienStateLabel(javafx.scene.control.Label, kotlin.Boolean)/raised">raised</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="change-button-state.html">changeButtonState</a></h4>
+</td>
+<td>
+<p>Add <a href="-b-u-t-t-o-n_-p-r-e-s-s-e-d_-s-t-y-l-e.html">BUTTON_PRESSED_STYLE</a> to the <a href="change-button-state.html#view.MaintenanceController$changeButtonState(javafx.css.Styleable, kotlin.Boolean)/button">button</a> if <a href="change-button-state.html#view.MaintenanceController$changeButtonState(javafx.css.Styleable, kotlin.Boolean)/pressed">pressed</a> is true.
+Otherwise remove the style.</p>
+<code><span class="keyword">fun </span><span class="identifier">changeButtonState</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$changeButtonState(javafx.css.Styleable, kotlin.Boolean)/button">button</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$changeButtonState(javafx.css.Styleable, kotlin.Boolean)/pressed">pressed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="display-serial-not-connected-error.html">displaySerialNotConnectedError</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">displaySerialNotConnectedError</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-all-available-ports-names.html">getAllAvailablePortsNames</a></h4>
+</td>
+<td>
+<p>Returns a list of descriptive port names of the available ports</p>
+<code><span class="keyword">fun </span><span class="identifier">getAllAvailablePortsNames</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">!</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="handle-button-action.html">handleButtonAction</a></h4>
+</td>
+<td>
+<p>Handles the given <a href="handle-button-action.html#view.MaintenanceController$handleButtonAction(app.serialcom.Action)/action">action</a> if it is related to buttons</p>
+<code><span class="keyword">fun </span><span class="identifier">handleButtonAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$handleButtonAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="handle-card-reader-action.html">handleCardReaderAction</a></h4>
+</td>
+<td>
+<p>Handles the given <a href="handle-card-reader-action.html#view.MaintenanceController$handleCardReaderAction(app.serialcom.Action)/action">action</a> if it is related to the card reader</p>
+<code><span class="keyword">fun </span><span class="identifier">handleCardReaderAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$handleCardReaderAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="handle-distance-reading-action.html">handleDistanceReadingAction</a></h4>
+</td>
+<td>
+<p>Handles the given <a href="handle-distance-reading-action.html#view.MaintenanceController$handleDistanceReadingAction(app.serialcom.Action)/action">action</a> if it is related to the distance sensor</p>
+<code><span class="keyword">fun </span><span class="identifier">handleDistanceReadingAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$handleDistanceReadingAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="handle-led-action.html">handleLedAction</a></h4>
+</td>
+<td>
+<p>Handles the given <a href="handle-led-action.html#view.MaintenanceController$handleLedAction(app.serialcom.Action)/action">action</a> if it is related to the LEDs</p>
+<code><span class="keyword">fun </span><span class="identifier">handleLedAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$handleLedAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="handle-servo-action.html">handleServoAction</a></h4>
+</td>
+<td>
+<p>Handles the given <a href="handle-servo-action.html#view.MaintenanceController$handleServoAction(app.serialcom.Action)/action">action</a> if it is related to the servos</p>
+<code><span class="keyword">fun </span><span class="identifier">handleServoAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$handleServoAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="initialize.html">initialize</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$initialize(java.net.URL, java.util.ResourceBundle)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$initialize(java.net.URL, java.util.ResourceBundle)/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-led-active.html">isLedActive</a></h4>
+</td>
+<td>
+<p>Returns true if the led is active in the view
+(i.e. when the led has <a href="-l-e-d_-a-c-t-i-v-e_-s-t-y-l-e.html">LED_ACTIVE_STYLE</a> class)</p>
+<code><span class="keyword">fun </span><span class="identifier">isLedActive</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$isLedActive(javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="lower-bad-alien.html">lowerBadAlien</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">lowerBadAlien</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="lower-good-alien.html">lowerGoodAlien</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">lowerGoodAlien</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="move-alien.html">moveAlien</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">moveAlien</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$moveAlien(kotlin.Int, kotlin.Boolean)/alienId">alienId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$moveAlien(kotlin.Int, kotlin.Boolean)/raise">raise</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-action-received.html">onActionReceived</a></h4>
+</td>
+<td>
+<p>Invoked when the parser has finished parsing an <a href="../../app.serialcom/-action/index.html">Action</a></p>
+<code><span class="keyword">fun </span><span class="identifier">onActionReceived</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onActionReceived(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-available-ports-change.html">onAvailablePortsChange</a></h4>
+</td>
+<td>
+<p>Invoked by the <a href="../../app.serialcom/-serial-communication/index.html">SerialCommunication</a> class whenever the list of
+available ports has been modified</p>
+<code><span class="keyword">fun </span><span class="identifier">onAvailablePortsChange</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-data-received.html">onDataReceived</a></h4>
+</td>
+<td>
+<p>Called after receiving data from the serial port.</p>
+<code><span class="keyword">fun </span><span class="identifier">onDataReceived</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onDataReceived(kotlin.String)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led0-clicked.html">onLed0Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed0Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led1-clicked.html">onLed1Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed1Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led2-clicked.html">onLed2Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed2Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led3-clicked.html">onLed3Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed3Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led4-clicked.html">onLed4Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed4Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led5-clicked.html">onLed5Clicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLed5Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-led-clicked.html">onLedClicked</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onLedClicked</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-state-received.html">onStateReceived</a></h4>
+</td>
+<td>
+<p>Handles <a href="../../app.serialcom/-state-message/index.html">StateMessage</a> messages coming from the serial.
+It just adds them to the log view.</p>
+<code><span class="keyword">fun </span><span class="identifier">onStateReceived</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onStateReceived(app.serialcom.StateMessage)/state">state</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="raise-bad-alien.html">raiseBadAlien</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">raiseBadAlien</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="raise-good-alien.html">raiseGoodAlien</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">raiseGoodAlien</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="request-alien-states.html">requestAlienStates</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">requestAlienStates</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="request-distance-sensor-reading.html">requestDistanceSensorReading</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">requestDistanceSensorReading</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="request-led-states.html">requestLedStates</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">requestLedStates</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send-action.html">sendAction</a></h4>
+</td>
+<td>
+<p>Sends <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and adds it to the log view</p>
+<code><span class="keyword">fun </span><span class="identifier">sendAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$sendAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send-set-led-action.html">sendSetLedAction</a></h4>
+</td>
+<td>
+<p>Sends the set <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and logs the message</p>
+<code><span class="keyword">fun </span><span class="identifier">sendSetLedAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/on">on</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set-led-active.html">setLedActive</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setLedActive</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$setLedActive(javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set-led-inactive.html">setLedInactive</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setLedInactive</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$setLedInactive(javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set-serial.html">setSerial</a></h4>
+</td>
+<td>
+<p>Sets the serial reference to <a href="set-serial.html#view.MaintenanceController$setSerial(app.serialcom.Serial)/serial">serial</a> and configures for receiving data</p>
+<code><span class="keyword">fun </span><span class="identifier">setSerial</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$setSerial(app.serialcom.Serial)/serial">serial</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-serial/index.html"><span class="identifier">Serial</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="setup-port-choice.html">setupPortChoice</a></h4>
+</td>
+<td>
+<p>Picks the current com port in the choice box if <a href="../../app.serialcom/-serial/get-active-port.html">Serial.getActivePort</a> returns non-null value</p>
+<code><span class="keyword">fun </span><span class="identifier">setupPortChoice</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="toggle-led-active.html">toggleLedActive</a></h4>
+</td>
+<td>
+<p>Adds or removes <a href="-l-e-d_-a-c-t-i-v-e_-s-t-y-l-e.html">LED_ACTIVE_STYLE</a> to the led
+depending on the previous state</p>
+<code><span class="keyword">fun </span><span class="identifier">toggleLedActive</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$toggleLedActive(javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-b-a-d_-a-l-i-e-n_-i-d.html">BAD_ALIEN_ID</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">BAD_ALIEN_ID</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-b-u-t-t-o-n_-p-r-e-s-s-e-d_-s-t-y-l-e.html">BUTTON_PRESSED_STYLE</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">BUTTON_PRESSED_STYLE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-g-o-o-d_-a-l-i-e-n_-i-d.html">GOOD_ALIEN_ID</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">GOOD_ALIEN_ID</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-l-e-d_-a-c-t-i-v-e_-s-t-y-l-e.html">LED_ACTIVE_STYLE</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">LED_ACTIVE_STYLE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="load-root.html">loadRoot</a></h4>
+</td>
+<td>
+<p>Loads the fxml file (maintenance_view.fxml), sets up the controller
+and returns the parent node</p>
+<code><span class="keyword">fun </span><span class="identifier">loadRoot</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController.Companion$loadRoot(app.serialcom.Serial)/serial">serial</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-serial/index.html"><span class="identifier">Serial</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Parent</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="show-and-wait.html">showAndWait</a></h4>
+</td>
+<td>
+<p>Loads the fxml file (maintenance_view.fxml), sets up the controller
+and opens a new window using <a href="#">Stage.showAndWait</a> method.</p>
+<code><span class="keyword">fun </span><span class="identifier">showAndWait</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController.Companion$showAndWait(app.serialcom.Serial)/serial">serial</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-serial/index.html"><span class="identifier">Serial</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

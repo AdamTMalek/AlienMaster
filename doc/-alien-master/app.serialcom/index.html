@@ -1,0 +1,166 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>app.serialcom - AlienMaster</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="./index.html">app.serialcom</a><br/>
+<br/>
+<h2>Package app.serialcom</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-action/index.html">Action</a></h4>
+</td>
+<td>
+<p>The <a href="-action/index.html">Action</a> class is used for exchanging data
+between the micro-controller and the PC
+via serial communication.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Action</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a></h4>
+</td>
+<td>
+<p>The <a href="-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a> takes a line coming from the serial port and builds an <a href="-action/index.html">Action</a> object by parsing
+the line.
+It exposes three public methods:</p>
+<code><span class="keyword">class </span><span class="identifier">ActionFromYamlBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-message-from-yaml-builder/index.html"><span class="identifier">MessageFromYamlBuilder</span></a><span class="symbol">&lt;</span><a href="-action/index.html"><span class="identifier">Action</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-action-type/index.html">ActionType</a></h4>
+</td>
+<td>
+<p>The <a href="-action-type/index.html">ActionType</a> determines the type of action
+the micro-controller or the PC wants the other part
+to take.
+It is a part of the <a href="-action/index.html">Action</a> class.</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">ActionType</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-device-type/index.html">DeviceType</a></h4>
+</td>
+<td>
+<p>The <a href="-device-type/index.html">DeviceType</a> class indicates the type of the device
+that is used in the data communication between the
+micro-controller and the PC.
+It is part of the <a href="-action/index.html">Action</a> class.</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">DeviceType</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-message-from-yaml-builder/index.html">MessageFromYamlBuilder</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">MessageFromYamlBuilder</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-on-available-ports-change-listener/index.html">OnAvailablePortsChangeListener</a></h4>
+</td>
+<td>
+<p>This interface should be implemented by every class that wants to keep
+the list of available serial communication ports up to date.
+The method should update the list by taking the up-to-date list
+of ports using <a href="#">SerialCommunication.getAllPorts</a> method.</p>
+<code><span class="keyword">interface </span><span class="identifier">OnAvailablePortsChangeListener</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-on-serial-data-received-listener/index.html">OnSerialDataReceivedListener</a></h4>
+</td>
+<td>
+<p>This interface should be used by any classes that wants to receive data from a serial port must
+implement this interface. Every time there is data available to read, the <a href="-serial-communication/index.html">SerialCommunication</a>
+will read the available string and call this method.</p>
+<code><span class="keyword">interface </span><span class="identifier">OnSerialDataReceivedListener</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-serial/index.html">Serial</a></h4>
+</td>
+<td>
+<p>The <a href="-serial/index.html">Serial</a> interface defines method that the implementation
+of a serial communication interface should implement.</p>
+<code><span class="keyword">interface </span><span class="identifier">Serial</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-serial-communication/index.html">SerialCommunication</a></h4>
+</td>
+<td>
+<p>The <a href="-serial-communication/index.html">SerialCommunication</a> provides methods for serial port communication using jSerialComm (a platform-independent
+library). An open port is running on a separate thread. When data is read from the port, the class will invoke
+<a href="-on-serial-data-received-listener/on-data-received.html">OnSerialDataReceivedListener.onDataReceived</a> on every registered listener (using <a href="-serial-communication/add-data-received-listener.html">addDataReceivedListener</a>).</p>
+<code><span class="keyword">class </span><span class="identifier">SerialCommunication</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-serial/index.html"><span class="identifier">Serial</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-state/index.html">State</a></h4>
+</td>
+<td>
+<p>A value from <a href="-state-message/index.html">StateMessage</a> class determines the state
+that the MBED is currently entering.</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">State</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-state-message/index.html">StateMessage</a></h4>
+</td>
+<td>
+<p><a href="-state-message/index.html">StateMessage</a> class represents the state type of message
+that the micro-controller (MBED) will send to the
+PC to inform about state transitions.
+It may also pass in the value depending on the
+state.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">StateMessage</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-state-message-from-yaml-builder/index.html">StateMessageFromYamlBuilder</a></h4>
+</td>
+<td>
+<p>The <a href="-state-message-from-yaml-builder/index.html">StateMessageFromYamlBuilder</a> takes a line coming from the serial port
+and builds an <a href="-state-message/index.html">StateMessage</a> object by parsing the line.
+It exposes three public methods:</p>
+<code><span class="keyword">class </span><span class="identifier">StateMessageFromYamlBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-message-from-yaml-builder/index.html"><span class="identifier">MessageFromYamlBuilder</span></a><span class="symbol">&lt;</span><a href="-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-unknown-action-type-exception/index.html">UnknownActionTypeException</a></h4>
+</td>
+<td>
+<p>Raised when no enum value was found when parsing it from string (using <a href="-action-type/from-string.html">ActionType.fromString</a>)</p>
+<code><span class="keyword">class </span><span class="identifier">UnknownActionTypeException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-unknown-device-type-exception/index.html">UnknownDeviceTypeException</a></h4>
+</td>
+<td>
+<p>Raised when no enum value was found when parsing it from string (using <a href="-device-type/from-string.html">DeviceType.fromString</a>)</p>
+<code><span class="keyword">class </span><span class="identifier">UnknownDeviceTypeException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-unknown-state-code-exception/index.html">UnknownStateCodeException</a></h4>
+</td>
+<td>
+<p>Raised when no enum value was found when parsing it from string (using <a href="-state/from-string.html">State.fromString</a>)</p>
+<code><span class="keyword">class </span><span class="identifier">UnknownStateCodeException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PlayerGenerator - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">PlayerGenerator</a><br/>
+<br/>
+<h1>PlayerGenerator</h1>
+<code><span class="keyword">class </span><span class="identifier">PlayerGenerator</span></code>
+<p>The <a href="./index.html">PlayerGenerator</a> class can be used to generate random players
+both English and German speaking, that can then be put inside the
+database.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-player/index.html">Player</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Player</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">PlayerGenerator</a> class can be used to generate random players
+both English and German speaking, that can then be put inside the
+database.</p>
+<code><span class="identifier">PlayerGenerator</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="players.html">players</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">players</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><span class="identifier">Player</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="generate-players.html">generatePlayers</a></h4>
+</td>
+<td>
+<p>Generate random players with names taken from the player_generator resources.</p>
+<code><span class="keyword">fun </span><span class="identifier">generatePlayers</span><span class="symbol">(</span><span class="identifier" id="app.PlayerGenerator$generatePlayers(kotlin.Int, kotlin.Boolean)/numberOfPlayers">numberOfPlayers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayerGenerator$generatePlayers(kotlin.Int, kotlin.Boolean)/randomScore">randomScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">Player</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="generate-players-from-names.html">generatePlayersFromNames</a></h4>
+</td>
+<td>
+<p>Generate list of <a href="-player/index.html">Player</a> objects from the given list of names.</p>
+<code><span class="keyword">fun </span><span class="identifier">generatePlayersFromNames</span><span class="symbol">(</span><span class="identifier" id="app.PlayerGenerator$generatePlayersFromNames(kotlin.collections.List((kotlin.String)), app.Language)/names">names</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="app.PlayerGenerator$generatePlayersFromNames(kotlin.collections.List((kotlin.String)), app.Language)/language">language</span><span class="symbol">:</span>&nbsp;<a href="../-language/index.html"><span class="identifier">Language</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">Player</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="read-names-from-file.html">readNamesFromFile</a></h4>
+</td>
+<td>
+<p>Get a list of names from the given file.</p>
+<code><span class="keyword">fun </span><span class="identifier">readNamesFromFile</span><span class="symbol">(</span><span class="identifier" id="app.PlayerGenerator$readNamesFromFile(kotlin.String)/filename">filename</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

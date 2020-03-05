@@ -1,0 +1,225 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SerialCommunication - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.serialcom</a>&nbsp;/&nbsp;<a href="./index.html">SerialCommunication</a><br/>
+<br/>
+<h1>SerialCommunication</h1>
+<code><span class="keyword">class </span><span class="identifier">SerialCommunication</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-serial/index.html"><span class="identifier">Serial</span></a></code>
+<p>The <a href="./index.html">SerialCommunication</a> provides methods for serial port communication using jSerialComm (a platform-independent
+library). An open port is running on a separate thread. When data is read from the port, the class will invoke
+<a href="../-on-serial-data-received-listener/on-data-received.html">OnSerialDataReceivedListener.onDataReceived</a> on every registered listener (using <a href="add-data-received-listener.html">addDataReceivedListener</a>).</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-serial-port-check-activity/index.html">SerialPortCheckActivity</a></h4>
+</td>
+<td>
+<p>The <a href="-serial-port-check-activity/index.html">SerialPortCheckActivity</a> is an asynchronous activity that is responsible
+for checking if the list of available com ports has updated or not.</p>
+<code><span class="keyword">class </span><span class="identifier">SerialPortCheckActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">CoroutineScope</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">SerialCommunication</a> provides methods for serial port communication using jSerialComm (a platform-independent
+library). An open port is running on a separate thread. When data is read from the port, the class will invoke
+<a href="../-on-serial-data-received-listener/on-data-received.html">OnSerialDataReceivedListener.onDataReceived</a> on every registered listener (using <a href="add-data-received-listener.html">addDataReceivedListener</a>).</p>
+<code><span class="identifier">SerialCommunication</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="available-ports.html">availablePorts</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">availablePorts</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><span class="identifier">SerialPort</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="communication-thread-running.html">communicationThreadRunning</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">communicationThreadRunning</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="com-port.html">comPort</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">comPort</span><span class="symbol">: </span><span class="identifier">SerialPort</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="data-received-listeners.html">dataReceivedListeners</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">dataReceivedListeners</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="../-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="outgoing-data-queue.html">outgoingDataQueue</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">outgoingDataQueue</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/Queue.html"><span class="identifier">Queue</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="ports-changed-listeners.html">portsChangedListeners</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">portsChangedListeners</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="../-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="run-communication-thread.html">runCommunicationThread</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">runCommunicationThread</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-data-received-listener.html">addDataReceivedListener</a></h4>
+</td>
+<td>
+<p>Add <a href="../-on-serial-data-received-listener/index.html">OnSerialDataReceivedListener</a> for it to be able to receive data from the serial port.</p>
+<code><span class="keyword">fun </span><span class="identifier">addDataReceivedListener</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$addDataReceivedListener(app.serialcom.OnSerialDataReceivedListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="add-port-listener.html">addPortListener</a></h4>
+</td>
+<td>
+<p>Add <a href="../-on-available-ports-change-listener/index.html">OnAvailablePortsChangeListener</a> for it to be able to get notified about port list updates</p>
+<code><span class="keyword">fun </span><span class="identifier">addPortListener</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$addPortListener(app.serialcom.OnAvailablePortsChangeListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="connect-to.html">connectTo</a></h4>
+</td>
+<td>
+<p>Connects to the given <a href="connect-to.html#app.serialcom.SerialCommunication$connectTo(com.fazecast.jSerialComm.SerialPort)/port">port</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">connectTo</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$connectTo(com.fazecast.jSerialComm.SerialPort)/port">port</span><span class="symbol">:</span>&nbsp;<span class="identifier">SerialPort</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-active-port.html">getActivePort</a></h4>
+</td>
+<td>
+<p>Returns the port to which the interface is currently connected</p>
+<code><span class="keyword">fun </span><span class="identifier">getActivePort</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SerialPort</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-all-available-ports.html">getAllAvailablePorts</a></h4>
+</td>
+<td>
+<p>Returns all ports available to use</p>
+<code><span class="keyword">fun </span><span class="identifier">getAllAvailablePorts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><span class="identifier">SerialPort</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-connected.html">isConnected</a></h4>
+</td>
+<td>
+<p>Returns true if the serial is connected to some port</p>
+<code><span class="keyword">fun </span><span class="identifier">isConnected</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="notify-data-received.html">notifyDataReceived</a></h4>
+</td>
+<td>
+<p>Send the received data to every registered listener</p>
+<code><span class="keyword">fun </span><span class="identifier">notifyDataReceived</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$notifyDataReceived(kotlin.String)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="notify-ports-list-changed.html">notifyPortsListChanged</a></h4>
+</td>
+<td>
+<p>Send the notification about port list modification</p>
+<code><span class="keyword">fun </span><span class="identifier">notifyPortsListChanged</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="read-data.html">readData</a></h4>
+</td>
+<td>
+<p>Reads all available bytes from the communication port
+into the <a href="read-data.html#app.serialcom.SerialCommunication$readData(java.lang.StringBuilder)/buffer">buffer</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">readData</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$readData(java.lang.StringBuilder)/buffer">buffer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-string-builder/index.html"><span class="identifier">StringBuilder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-data-received-listener.html">removeDataReceivedListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeDataReceivedListener</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$removeDataReceivedListener(app.serialcom.OnSerialDataReceivedListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-port-listener.html">removePortListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removePortListener</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$removePortListener(app.serialcom.OnAvailablePortsChangeListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="run.html">run</a></h4>
+</td>
+<td>
+<p>This method will start a new thread that will keep polling the open com port for available data.</p>
+<code><span class="keyword">fun </span><span class="identifier">run</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send.html">send</a></h4>
+</td>
+<td>
+<p>Send the given <a href="send.html#app.serialcom.SerialCommunication$send(kotlin.String)/data">data</a> to the currently connected port.</p>
+<code><span class="keyword">fun </span><span class="identifier">send</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication$send(kotlin.String)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send-data-from-queue.html">sendDataFromQueue</a></h4>
+</td>
+<td>
+<p>Checks if the <a href="outgoing-data-queue.html">outgoingDataQueue</a> is not empty.
+If it isn't, it will dequeue a byte array and
+send it to the com port.</p>
+<code><span class="keyword">fun </span><span class="identifier">sendDataFromQueue</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="stop.html">stop</a></h4>
+</td>
+<td>
+<p>Stop the polling thread and close the currently open port</p>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

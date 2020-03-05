@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>OnSerialDataReceivedListener - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.serialcom</a>&nbsp;/&nbsp;<a href="./index.html">OnSerialDataReceivedListener</a><br/>
+<br/>
+<h1>OnSerialDataReceivedListener</h1>
+<code><span class="keyword">interface </span><span class="identifier">OnSerialDataReceivedListener</span></code>
+<p>This interface should be used by any classes that wants to receive data from a serial port must
+implement this interface. Every time there is data available to read, the <a href="../-serial-communication/index.html">SerialCommunication</a>
+will read the available string and call this method.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-data-received.html">onDataReceived</a></h4>
+</td>
+<td>
+<p>Called after receiving data from the serial port.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onDataReceived</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.OnSerialDataReceivedListener$onDataReceived(kotlin.String)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../../view/-maintenance-controller/index.html">MaintenanceController</a></h4>
+</td>
+<td>
+<p>The <a href="../../view/-maintenance-controller/index.html">MaintenanceController</a> is responsible for controlling all actions
+that happen in the maintenance view of which controls are defined in the
+fxml file maintenance_view.fxml.</p>
+<code><span class="keyword">class </span><span class="identifier">MaintenanceController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a href="../../app/-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">, </span><a href="../-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">OnSerialDataReceivedListener</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

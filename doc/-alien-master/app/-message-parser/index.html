@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MessageParser - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">MessageParser</a><br/>
+<br/>
+<h1>MessageParser</h1>
+<code><span class="keyword">class </span><span class="identifier">MessageParser</span></code>
+<p>The <a href="./index.html">MessageParser</a> class parses messages coming from the
+virtual com port from the MBED into one of the two
+possible messages, <a href="../../app.serialcom/-action/index.html">Action</a> or <a href="../../app.serialcom/-state-message/index.html">StateMessage</a>.</p>
+<p>When an object of the two classes is built, the
+parser will notify every registered listener
+(registered using <a href="add-listener.html">addListener</a>)
+using one of its two methods.</p>
+<p>The string passed to the <a href="parse.html">parse</a> method can either be
+a single line (incomplete message) or a complete
+message.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-state/index.html">State</a></h4>
+</td>
+<td>
+<p><a href="-state/index.html">State</a> determines the state of the parser</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">State</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">MessageParser</a> class parses messages coming from the
+virtual com port from the MBED into one of the two
+possible messages, <a href="../../app.serialcom/-action/index.html">Action</a> or <a href="../../app.serialcom/-state-message/index.html">StateMessage</a>.</p>
+<code><span class="identifier">MessageParser</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="action-builder.html">actionBuilder</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">actionBuilder</span><span class="symbol">: </span><a href="../../app.serialcom/-action-from-yaml-builder/index.html"><span class="identifier">ActionFromYamlBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="buffer.html">buffer</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">buffer</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="current-state.html">currentState</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">currentState</span><span class="symbol">: </span><span class="identifier">State</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="listeners.html">listeners</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">listeners</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="../-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="state-builder.html">stateBuilder</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">stateBuilder</span><span class="symbol">: </span><a href="../../app.serialcom/-state-message-from-yaml-builder/index.html"><span class="identifier">StateMessageFromYamlBuilder</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-listener.html">addListener</a></h4>
+</td>
+<td>
+<p>Adds a <a href="../-on-message-received-listener/index.html">OnMessageReceivedListener</a> that will receive notifications
+when the parser is finished parsing a message</p>
+<code><span class="keyword">fun </span><span class="identifier">addListener</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$addListener(app.OnMessageReceivedListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="notify-action-received.html">notifyActionReceived</a></h4>
+</td>
+<td>
+<p>Notify every listener that <a href="../../app.serialcom/-action/index.html">Action</a> has been received and pass it to the listeners</p>
+<code><span class="keyword">fun </span><span class="identifier">notifyActionReceived</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$notifyActionReceived(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="notify-state-received.html">notifyStateReceived</a></h4>
+</td>
+<td>
+<p>Notify every listener that <a href="../../app.serialcom/-state-message/index.html">StateMessage</a> has been received and pass it to the listeners</p>
+<code><span class="keyword">fun </span><span class="identifier">notifyStateReceived</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$notifyStateReceived(app.serialcom.StateMessage)/state">state</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="parse.html">parse</a></h4>
+</td>
+<td>
+<p>Parses complete or incomplete yaml message</p>
+<code><span class="keyword">fun </span><span class="identifier">parse</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$parse(kotlin.String)/string">string</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="parse-action.html">parseAction</a></h4>
+</td>
+<td>
+<p>Parses lines as an <a href="../../app.serialcom/-action/index.html">Action</a> using the <a href="../../app.serialcom/-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a></p>
+<code><span class="keyword">fun </span><span class="identifier">parseAction</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$parseAction(kotlin.collections.Collection((kotlin.String)))/stringLines">stringLines</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="parse-state.html">parseState</a></h4>
+</td>
+<td>
+<p>Parses lines as a <a href="../../app.serialcom/-state-message/index.html">StateMessage</a> using the <a href="../../app.serialcom/-state-message-from-yaml-builder/index.html">StateMessageFromYamlBuilder</a></p>
+<code><span class="keyword">fun </span><span class="identifier">parseState</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$parseState(kotlin.collections.Collection((kotlin.String)))/stringLines">stringLines</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove.html">remove</a></h4>
+</td>
+<td>
+<p>Removes the <a href="../-on-message-received-listener/index.html">OnMessageReceivedListener</a> from the list of listeners</p>
+<code><span class="keyword">fun </span><span class="identifier">remove</span><span class="symbol">(</span><span class="identifier" id="app.MessageParser$remove(app.OnMessageReceivedListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-on-message-received-listener/index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

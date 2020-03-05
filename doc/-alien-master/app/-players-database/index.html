@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PlayersDatabase - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">PlayersDatabase</a><br/>
+<br/>
+<h1>PlayersDatabase</h1>
+<code><span class="keyword">object </span><span class="identifier">PlayersDatabase</span></code>
+<p>The <a href="./index.html">PlayersDatabase</a> is an object managing all operations with the database, like getting all players,
+adding, and modifying a player.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-player.html">addPlayer</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPlayer</span><span class="symbol">(</span><span class="identifier" id="app.PlayersDatabase$addPlayer(kotlin.String, kotlin.String, kotlin.Int)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayersDatabase$addPlayer(kotlin.String, kotlin.String, kotlin.Int)/language">language</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayersDatabase$addPlayer(kotlin.String, kotlin.String, kotlin.Int)/score">score</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="change-language.html">changeLanguage</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeLanguage</span><span class="symbol">(</span><span class="identifier" id="app.PlayersDatabase$changeLanguage(app.Player, kotlin.String)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayersDatabase$changeLanguage(app.Player, kotlin.String)/newLanguage">newLanguage</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="change-name.html">changeName</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeName</span><span class="symbol">(</span><span class="identifier" id="app.PlayersDatabase$changeName(app.Player, kotlin.String)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayersDatabase$changeName(app.Player, kotlin.String)/newName">newName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="change-score.html">changeScore</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeScore</span><span class="symbol">(</span><span class="identifier" id="app.PlayersDatabase$changeScore(app.Player, kotlin.Int)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="app.PlayersDatabase$changeScore(app.Player, kotlin.Int)/newScore">newScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="create-players-table.html">createPlayersTable</a></h4>
+</td>
+<td>
+<p>Create the <a href="../-players/index.html">Players</a> table in the database</p>
+<code><span class="keyword">fun </span><span class="identifier">createPlayersTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="drop-players-table.html">dropPlayersTable</a></h4>
+</td>
+<td>
+<p>Drop (delete) the <a href="../-players/index.html">Players</a> table from the database</p>
+<code><span class="keyword">fun </span><span class="identifier">dropPlayersTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-all-players.html">getAllPlayers</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAllPlayers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-player/index.html"><span class="identifier">Player</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

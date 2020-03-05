@@ -1,0 +1,19 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TextToSpeech.update - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.tts</a>&nbsp;/&nbsp;<a href="index.html">TextToSpeech</a>&nbsp;/&nbsp;<a href="./update.html">update</a><br/>
+<br/>
+<h1>update</h1>
+<a name="app.tts.TextToSpeech$update(javax.sound.sampled.LineEvent)"></a>
+<code><span class="keyword">fun </span><span class="identifier">update</span><span class="symbol">(</span><span class="identifier" id="app.tts.TextToSpeech$update(javax.sound.sampled.LineEvent)/event">event</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineEvent.html"><span class="identifier">LineEvent</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>By the <a href="https://docs.oracle.com/javase/6/docs/api/javax/sound/sampled/LineListener.html">LineListener</a> interface we will get updates when the
+<a href="audio-player.html">audioPlayer</a> changes state (e.g. starts playing, stops playing etc.)
+When the playback has finished we will create another audioPlayer
+(refer to the comment above <a href="audio-player.html">audioPlayer</a> for the reason why that is)
+and play back the next audio in the queue.</p>
+</BODY>
+</HTML>

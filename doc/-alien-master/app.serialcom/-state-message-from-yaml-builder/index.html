@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>StateMessageFromYamlBuilder - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app.serialcom</a>&nbsp;/&nbsp;<a href="./index.html">StateMessageFromYamlBuilder</a><br/>
+<br/>
+<h1>StateMessageFromYamlBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">StateMessageFromYamlBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-message-from-yaml-builder/index.html"><span class="identifier">MessageFromYamlBuilder</span></a><span class="symbol">&lt;</span><a href="../-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">&gt;</span></code>
+<p>The <a href="./index.html">StateMessageFromYamlBuilder</a> takes a line coming from the serial port
+and builds an <a href="../-state-message/index.html">StateMessage</a> object by parsing the line.
+It exposes three public methods:</p>
+<ul><li><a href="set.html">set</a> that automatically sets the right fields of the <a href="../-action/index.html">Action</a> object</li>
+<li><a href="is-ready.html">isReady</a> that indicates if the <a href="../-action/index.html">Action</a> object is ready to be built or not</li>
+<li><a href="build.html">build</a> that builds <a href="../-action/index.html">Action</a> and returns it</li>
+</ul>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">StateMessageFromYamlBuilder</a> takes a line coming from the serial port
+and builds an <a href="../-state-message/index.html">StateMessage</a> object by parsing the line.
+It exposes three public methods:</p>
+<code><span class="identifier">StateMessageFromYamlBuilder</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="state.html">state</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">state</span><span class="symbol">: </span><a href="../-state/index.html"><span class="identifier">State</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="value.html">value</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">value</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="build.html">build</a></h4>
+</td>
+<td>
+<p>Returns the <a href="../-state-message/index.html">StateMessage</a> object with the set fields</p>
+<code><span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-state-message/index.html"><span class="identifier">StateMessage</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-ready.html">isReady</a></h4>
+</td>
+<td>
+<p>Returns true if the object is ready to be built</p>
+<code><span class="keyword">fun </span><span class="identifier">isReady</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set.html">set</a></h4>
+</td>
+<td>
+<p>Given the <a href="set.html#app.serialcom.StateMessageFromYamlBuilder$set(kotlin.String)/line">line</a> set the correct field of the <a href="../-state-message/index.html">StateMessage</a> object</p>
+<code><span class="keyword">fun </span><span class="identifier">set</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.StateMessageFromYamlBuilder$set(kotlin.String)/line">line</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-message-from-yaml-builder/index.html"><span class="identifier">MessageFromYamlBuilder</span></a><span class="symbol">&lt;</span><a href="../-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set-state.html">setState</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setState</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.StateMessageFromYamlBuilder$setState(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="set-value.html">setValue</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setValue</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.StateMessageFromYamlBuilder$setValue(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,244 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>EndScreenController - AlienMaster</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">view</a>&nbsp;/&nbsp;<a href="./index.html">EndScreenController</a><br/>
+<br/>
+<h1>EndScreenController</h1>
+<code><span class="keyword">class </span><span class="identifier">EndScreenController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span></code>
+<p>The <a href="./index.html">EndScreenController</a> is the class responsible for controlling data
+and interactions happening in the view defined by the end_screen.fxml.</p>
+<p>The controller defines a static method <a href="load-with-animation.html">loadWithAnimation</a> that loads the
+view and makes an animated transition from the old view to this.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">EndScreenController</a> is the class responsible for controlling data
+and interactions happening in the view defined by the end_screen.fxml.</p>
+<code><span class="identifier">EndScreenController</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="all-players.html">allPlayers</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">allPlayers</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name-column.html">nameColumn</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">nameColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="players-table.html">playersTable</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">playersTable</span><span class="symbol">: </span><span class="identifier">TableView</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="position-column.html">positionColumn</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">positionColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="prompt-label.html">promptLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">promptLabel</span><span class="symbol">: </span><span class="identifier">Label</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="score-column.html">scoreColumn</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">scoreColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="text-resource-bundle.html">textResourceBundle</a></h4>
+</td>
+<td>
+<p>The <a href="text-resource-bundle.html">textResourceBundle</a> contains all the locale-dependent translations of text
+appearing in the view.</p>
+<code><span class="keyword">val </span><span class="identifier">textResourceBundle</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-players-to-table.html">addPlayersToTable</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPlayersToTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="add-pulsing-to-prompt-label.html">addPulsingToPromptLabel</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPulsingToPromptLabel</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-card-prompt-text.html">getCardPromptText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getCardPromptText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-nickname-heading.html">getNicknameHeading</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getNicknameHeading</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-position-heading.html">getPositionHeading</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getPositionHeading</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-prompt-text.html">getPromptText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getPromptText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-result-text.html">getResultText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getResultText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-score-heading.html">getScoreHeading</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getScoreHeading</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-table-desc.html">getTableDesc</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getTableDesc</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-thanks-text.html">getThanksText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getThanksText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-top-score-text.html">getTopScoreText</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getTopScoreText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="init-columns.html">initColumns</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initColumns</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="initialize.html">initialize</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="identifier" id="view.EndScreenController$initialize(java.net.URL, java.util.ResourceBundle)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="view.EndScreenController$initialize(java.net.URL, java.util.ResourceBundle)/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="populate-table.html">populateTable</a></h4>
+</td>
+<td>
+<p>Populates the table on the end screen.</p>
+<code><span class="keyword">fun </span><span class="identifier">populateTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="sort-table.html">sortTable</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sortTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="current-player.html">currentPlayer</a></h4>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">currentPlayer</span><span class="symbol">: </span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-new-top-score.html">isNewTopScore</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isNewTopScore</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="score.html">score</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">score</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="load-fxml.html">loadFxml</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">loadFxml</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">FXMLLoader</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="load-with-animation.html">loadWithAnimation</a></h4>
+</td>
+<td>
+<p>Loads this view with an animated transition.</p>
+<code><span class="keyword">fun </span><span class="identifier">loadWithAnimation</span><span class="symbol">(</span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/root">root</span><span class="symbol">:</span>&nbsp;<span class="identifier">Pane</span><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/score">score</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/isNewTopScore">isNewTopScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

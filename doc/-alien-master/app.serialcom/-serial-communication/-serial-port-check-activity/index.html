@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SerialCommunication.SerialPortCheckActivity - AlienMaster</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../../index.html">app.serialcom</a>&nbsp;/&nbsp;<a href="../index.html">SerialCommunication</a>&nbsp;/&nbsp;<a href="./index.html">SerialPortCheckActivity</a><br/>
+<br/>
+<h1>SerialPortCheckActivity</h1>
+<code><span class="keyword">private</span> <span class="keyword">class </span><span class="identifier">SerialPortCheckActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">CoroutineScope</span></code>
+<p>The <a href="./index.html">SerialPortCheckActivity</a> is an asynchronous activity that is responsible
+for checking if the list of available com ports has updated or not.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>The <a href="./index.html">SerialPortCheckActivity</a> is an asynchronous activity that is responsible
+for checking if the list of available com ports has updated or not.</p>
+<code><span class="identifier">SerialPortCheckActivity</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="check-for-available-ports.html">checkForAvailablePorts</a></h4>
+</td>
+<td>
+<p>Starts the asynchronous checking coroutine.</p>
+<code><span class="keyword">fun </span><span class="identifier">checkForAvailablePorts</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication.SerialPortCheckActivity$checkForAvailablePorts(kotlin.collections.MutableCollection((com.fazecast.jSerialComm.SerialPort)), kotlin.Function0((kotlin.Unit)))/ports">ports</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><span class="identifier">SerialPort</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="app.serialcom.SerialCommunication.SerialPortCheckActivity$checkForAvailablePorts(kotlin.collections.MutableCollection((com.fazecast.jSerialComm.SerialPort)), kotlin.Function0((kotlin.Unit)))/onUpdateCallback">onUpdateCallback</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="lists-different.html">listsDifferent</a></h4>
+</td>
+<td>
+<p>Returns true if the two collections <a href="lists-different.html#app.serialcom.SerialCommunication.SerialPortCheckActivity$listsDifferent(kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)), kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)))/a">a</a> and <a href="lists-different.html#app.serialcom.SerialCommunication.SerialPortCheckActivity$listsDifferent(kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)), kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)))/b">b</a> are different.</p>
+<code><span class="keyword">fun </span><span class="identifier">listsDifferent</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.SerialCommunication.SerialPortCheckActivity$listsDifferent(kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)), kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><span class="identifier">SerialPort</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="app.serialcom.SerialCommunication.SerialPortCheckActivity$listsDifferent(kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)), kotlin.collections.Collection((com.fazecast.jSerialComm.SerialPort)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><span class="identifier">SerialPort</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

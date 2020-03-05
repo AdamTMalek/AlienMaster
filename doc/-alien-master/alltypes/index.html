@@ -1,0 +1,179 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - AlienMaster</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<h5><a href="../app.serialcom/-action/index.html">app.serialcom.Action</a></h5>
+<p>The <a href="../app.serialcom/-action/index.html">Action</a> class is used for exchanging data
+between the micro-controller and the PC
+via serial communication.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-action-from-yaml-builder/index.html">app.serialcom.ActionFromYamlBuilder</a></h5>
+<p>The <a href="../app.serialcom/-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a> takes a line coming from the serial port and builds an <a href="../app.serialcom/-action/index.html">Action</a> object by parsing
+the line.
+It exposes three public methods:</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-action-type/index.html">app.serialcom.ActionType</a></h5>
+<p>The <a href="../app.serialcom/-action-type/index.html">ActionType</a> determines the type of action
+the micro-controller or the PC wants the other part
+to take.
+It is a part of the <a href="../app.serialcom/-action/index.html">Action</a> class.</p>
+</tr>
+<tr>
+<h5><a href="../view/-add-player-controller/index.html">view.AddPlayerController</a></h5>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-device-type/index.html">app.serialcom.DeviceType</a></h5>
+<p>The <a href="../app.serialcom/-device-type/index.html">DeviceType</a> class indicates the type of the device
+that is used in the data communication between the
+micro-controller and the PC.
+It is part of the <a href="../app.serialcom/-action/index.html">Action</a> class.</p>
+</tr>
+<tr>
+<h5><a href="../view/-editor-view-controller/index.html">view.EditorViewController</a></h5>
+</tr>
+<tr>
+<h5><a href="../view/-end-screen-controller/index.html">view.EndScreenController</a></h5>
+<p>The <a href="../view/-end-screen-controller/index.html">EndScreenController</a> is the class responsible for controlling data
+and interactions happening in the view defined by the end_screen.fxml.</p>
+</tr>
+<tr>
+<h5><a href="../app/-language/index.html">app.Language</a></h5>
+</tr>
+<tr>
+<h5><a href="../app/-language-not-found-exception/index.html">app.LanguageNotFoundException</a></h5>
+</tr>
+<tr>
+<h5><a href="../view/-load-animation/index.html">view.LoadAnimation</a></h5>
+</tr>
+<tr>
+<h5><a href="../app/-main-app/index.html">app.MainApp</a></h5>
+</tr>
+<tr>
+<h5><a href="../view/-maintenance-controller/index.html">view.MaintenanceController</a></h5>
+<p>The <a href="../view/-maintenance-controller/index.html">MaintenanceController</a> is responsible for controlling all actions
+that happen in the maintenance view of which controls are defined in the
+fxml file maintenance_view.fxml.</p>
+</tr>
+<tr>
+<h5><a href="../view/-main-view-controller/index.html">view.MainViewController</a></h5>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-message-from-yaml-builder/index.html">app.serialcom.MessageFromYamlBuilder</a></h5>
+</tr>
+<tr>
+<h5><a href="../app/-message-parser/index.html">app.MessageParser</a></h5>
+<p>The <a href="../app/-message-parser/index.html">MessageParser</a> class parses messages coming from the
+virtual com port from the MBED into one of the two
+possible messages, <a href="../app.serialcom/-action/index.html">Action</a> or <a href="../app.serialcom/-state-message/index.html">StateMessage</a>.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-on-available-ports-change-listener/index.html">app.serialcom.OnAvailablePortsChangeListener</a></h5>
+<p>This interface should be implemented by every class that wants to keep
+the list of available serial communication ports up to date.
+The method should update the list by taking the up-to-date list
+of ports using <a href="#">SerialCommunication.getAllPorts</a> method.</p>
+</tr>
+<tr>
+<h5><a href="../app/-on-message-received-listener/index.html">app.OnMessageReceivedListener</a></h5>
+<p>Any class wanting to receive <a href="../app.serialcom/-action/index.html">Action</a> or <a href="../app.serialcom/-state-message/index.html">StateMessage</a>
+from the micro-controller, using the <a href="../app/-message-parser/index.html">MessageParser</a>
+must implement this interface.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-on-serial-data-received-listener/index.html">app.serialcom.OnSerialDataReceivedListener</a></h5>
+<p>This interface should be used by any classes that wants to receive data from a serial port must
+implement this interface. Every time there is data available to read, the <a href="../app.serialcom/-serial-communication/index.html">SerialCommunication</a>
+will read the available string and call this method.</p>
+</tr>
+<tr>
+<h5><a href="../app/-player/index.html">app.Player</a></h5>
+<p>The <a href="../app/-player/index.html">Player</a> class is used to represent a single entry from the <a href="../app/-players/index.html">Players</a> table</p>
+</tr>
+<tr>
+<h5><a href="../app/-player-generator/index.html">app.PlayerGenerator</a></h5>
+<p>The <a href="../app/-player-generator/index.html">PlayerGenerator</a> class can be used to generate random players
+both English and German speaking, that can then be put inside the
+database.</p>
+</tr>
+<tr>
+<h5><a href="../app/-players/index.html">app.Players</a></h5>
+<p>This object defines the database table properties like the field it contains, what the primary key is etc.</p>
+</tr>
+<tr>
+<h5><a href="../app/-players-database/index.html">app.PlayersDatabase</a></h5>
+<p>The <a href="../app/-players-database/index.html">PlayersDatabase</a> is an object managing all operations with the database, like getting all players,
+adding, and modifying a player.</p>
+</tr>
+<tr>
+ (extensions in package extensions)
+<h5><a href="../extensions/java.util.-resource-bundle/index.html">java.util.ResourceBundle</a></h5>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-serial/index.html">app.serialcom.Serial</a></h5>
+<p>The <a href="../app.serialcom/-serial/index.html">Serial</a> interface defines method that the implementation
+of a serial communication interface should implement.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-serial-communication/index.html">app.serialcom.SerialCommunication</a></h5>
+<p>The <a href="../app.serialcom/-serial-communication/index.html">SerialCommunication</a> provides methods for serial port communication using jSerialComm (a platform-independent
+library). An open port is running on a separate thread. When data is read from the port, the class will invoke
+<a href="../app.serialcom/-on-serial-data-received-listener/on-data-received.html">OnSerialDataReceivedListener.onDataReceived</a> on every registered listener (using <a href="../app.serialcom/-serial-communication/add-data-received-listener.html">addDataReceivedListener</a>).</p>
+</tr>
+<tr>
+<h5><a href="../view/-splash-screen-controller/index.html">view.SplashScreenController</a></h5>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-state/index.html">app.serialcom.State</a></h5>
+<p>A value from <a href="../app.serialcom/-state-message/index.html">StateMessage</a> class determines the state
+that the MBED is currently entering.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-state-message/index.html">app.serialcom.StateMessage</a></h5>
+<p><a href="../app.serialcom/-state-message/index.html">StateMessage</a> class represents the state type of message
+that the micro-controller (MBED) will send to the
+PC to inform about state transitions.
+It may also pass in the value depending on the
+state.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-state-message-from-yaml-builder/index.html">app.serialcom.StateMessageFromYamlBuilder</a></h5>
+<p>The <a href="../app.serialcom/-state-message-from-yaml-builder/index.html">StateMessageFromYamlBuilder</a> takes a line coming from the serial port
+and builds an <a href="../app.serialcom/-state-message/index.html">StateMessage</a> object by parsing the line.
+It exposes three public methods:</p>
+</tr>
+<tr>
+<h5><a href="../app.tts/-text-to-speech/index.html">app.tts.TextToSpeech</a></h5>
+<p>The <a href="../app.tts/-text-to-speech/index.html">TextToSpeech</a> class acts as an interface to the actual library used for
+doing text-to-speech using MaryTTS.</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-unknown-action-type-exception/index.html">app.serialcom.UnknownActionTypeException</a></h5>
+<p>Raised when no enum value was found when parsing it from string (using <a href="../app.serialcom/-action-type/from-string.html">ActionType.fromString</a>)</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-unknown-device-type-exception/index.html">app.serialcom.UnknownDeviceTypeException</a></h5>
+<p>Raised when no enum value was found when parsing it from string (using <a href="../app.serialcom/-device-type/from-string.html">DeviceType.fromString</a>)</p>
+</tr>
+<tr>
+<h5><a href="../app.serialcom/-unknown-state-code-exception/index.html">app.serialcom.UnknownStateCodeException</a></h5>
+<p>Raised when no enum value was found when parsing it from string (using <a href="../app.serialcom/-state/from-string.html">State.fromString</a>)</p>
+</tr>
+<tr>
+<h5><a href="../view/-welcome-screen-controller/index.html">view.WelcomeScreenController</a></h5>
+<p>The <a href="../view/-welcome-screen-controller/index.html">WelcomeScreenController</a> controls the welcome_screen.fxml
+that is displayed when the player has inserted their card
+and the player object has been read from the database.</p>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

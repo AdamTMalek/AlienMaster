@@ -1,0 +1,8 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:extensions$getParameterizedString(java.util.ResourceBundle, kotlin.String, kotlin.Array((kotlin.Any)))extensions/java.util.-resource-bundle/get-parameterized-string.html
+app
+app.serialcom
+app.tts
+extensions
+view

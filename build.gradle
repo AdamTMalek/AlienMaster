@@ -3,6 +3,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'application'
     id 'org.flywaydb.flyway' version '6.2.0'
+    id 'org.jetbrains.dokka' version '0.10.1'
 }
 
 group 'org.example'
@@ -77,4 +78,13 @@ jar {
 flyway {
     url = 'jdbc:sqlite:file:./resources/database.sqlite'
     user = 'admin'
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$projectDir/doc"
+
+    configuration {
+        includeNonPublic = true
+    }
 }

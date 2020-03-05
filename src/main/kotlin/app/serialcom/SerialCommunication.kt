@@ -181,7 +181,7 @@ class SerialCommunication : Serial {
                 }
 
                 sendDataFromQueue()
-                Thread.sleep(100)
+                Thread.sleep(500)
             }
         }
     }

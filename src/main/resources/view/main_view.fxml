@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -22,6 +22,15 @@
                 <MenuItem text="Open Player Editor" onAction="#openPlayersEditor"/>
             </Menu>
         </MenuBar>
-        <Label styleClass="heading">AlienMaster</Label>
+        <GridPane vgap="20" hgap="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label GridPane.columnSpan="2" styleClass="heading">AlienMaster</Label>
+            <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="COM Port: "/>
+            <ChoiceBox GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="portChoice"/>
+            <Button GridPane.rowIndex="3" GridPane.columnIndex="0" text="Open Maintenance Window"/>
+            <Button GridPane.rowIndex="3" GridPane.columnIndex="1" text="Open Game Window"/>
+        </GridPane>
     </VBox>
 </AnchorPane>

@@ -147,11 +147,6 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         this.serial.addPortListener(this)
         this.serial.addDataReceivedListener(this)
         setupPortChoice()
-
-        if (serial.isConnected()) {
-            requestLedStates()
-            requestAlienStates()
-        }
     }
 
     /**

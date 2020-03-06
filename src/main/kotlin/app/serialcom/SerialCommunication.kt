@@ -90,9 +90,8 @@ class SerialCommunication : Serial {
      * Connects to the given [port].
      */
     override fun connectTo(port: SerialPort) {
-        if (communicationThreadRunning) {
-            runCommunicationThread = false
-        }
+        if (comPort != null && comPort!!.systemPortName == port.systemPortName)
+            return
 
         comPort = port
         comPort!!.openPort()

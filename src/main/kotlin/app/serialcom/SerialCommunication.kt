@@ -173,7 +173,7 @@ class SerialCommunication : Serial {
                 if (comPort!!.bytesAvailable() > 0) {
                     readData(stringBuffer)
 
-                    if (stringBuffer.last() == '\n') {
+                    if (stringBuffer.last() == '\n' || stringBuffer.last() == '}') {
                         notifyDataReceived(stringBuffer.toString())
                         stringBuffer.clear()
                     }

@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.WaitingViewController"
+            fx:controller="view.GameViewController"
             fx:id="emptyViewRoot"
             prefHeight="500.0" prefWidth="500.0">
 

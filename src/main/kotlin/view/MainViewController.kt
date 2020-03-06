@@ -131,7 +131,7 @@ class MainViewController : Initializable, OnAvailablePortsChangeListener {
     }
 
     fun openGameWindow() {
-        WaitingViewController.showAndWait(serial)
+        GameViewController.showAndWait(serial)
     }
 
     fun close() {

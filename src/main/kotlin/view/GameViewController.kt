@@ -12,7 +12,16 @@ import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
-class WaitingViewController : Initializable, OnSerialDataReceivedListener, OnMessageReceivedListener {
+/**
+ * The [GameViewController] is the main controller for the game window.
+ * Because different views get attached to the root of this view, the
+ * controller always exists as long as the game window is opened.
+ *
+ * The controller will transition with animation to the next "state"
+ * view (e.g. splash screen, welcome screen or end screen) based on
+ * the state message received from the serial port.
+ */
+class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessageReceivedListener {
     @FXML
     private var emptyViewRoot = Pane()
 
@@ -30,7 +39,7 @@ class WaitingViewController : Initializable, OnSerialDataReceivedListener, OnMes
             val root = loader.load<Parent>()
             val scene = Scene(root, 500.0, 500.0)
 
-            val controller = loader.getController<WaitingViewController>()
+            val controller = loader.getController<GameViewController>()
             controller.setSerial(serial)
 
             Stage().apply {

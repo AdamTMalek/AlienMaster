@@ -3,6 +3,7 @@ package view
 import app.Language
 import app.Player
 import app.PlayersDatabase
+import app.tts.TextToSpeech
 import extensions.getParameterizedString
 import javafx.animation.Animation
 import javafx.animation.FadeTransition
@@ -49,8 +50,11 @@ class EndScreenController : Initializable {
 
     private val allPlayers = PlayersDatabase.getAllPlayers().sortedByDescending { it.score }
 
+    private val tts = TextToSpeech()
+
     companion object {
         private lateinit var currentPlayer: Player // Player is going to be highlighted in the table
+        private val playerLanguage by lazy { Language.fromCode(currentPlayer.language) }
         private var score: Int = 0
         private var isNewTopScore: Boolean = false
 
@@ -101,6 +105,7 @@ class EndScreenController : Initializable {
         initColumns()
         addPulsingToPromptLabel()
         populateTable()
+        readLabelsWithTts()
     }
 
     private fun initColumns() {
@@ -129,8 +134,8 @@ class EndScreenController : Initializable {
                 }
             }
         }
-        nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
-        scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
+        nameColumn.cellValueFactory = PropertyValueFactory("name")
+        scoreColumn.cellValueFactory = PropertyValueFactory("score")
     }
 
     private fun addPlayersToTable() {
@@ -153,6 +158,15 @@ class EndScreenController : Initializable {
     private fun populateTable() {
         addPlayersToTable()
         sortTable()
+    }
+
+    private fun readLabelsWithTts() {
+        with(tts) {
+            say(playerLanguage, getThanksText())
+            say(playerLanguage, getTopScoreText())
+            say(playerLanguage, getCardPromptText())
+            say(playerLanguage, getPromptText())
+        }
     }
 
     private fun addPulsingToPromptLabel() {

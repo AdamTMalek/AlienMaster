@@ -90,9 +90,8 @@ class SerialCommunication : Serial {
      * Connects to the given [port].
      */
     override fun connectTo(port: SerialPort) {
-        if (communicationThreadRunning) {
-            runCommunicationThread = false
-        }
+        if (comPort != null && comPort!!.systemPortName == port.systemPortName)
+            return
 
         comPort = port
         comPort!!.openPort()
@@ -173,7 +172,7 @@ class SerialCommunication : Serial {
                 if (comPort!!.bytesAvailable() > 0) {
                     readData(stringBuffer)
 
-                    if (stringBuffer.last() == '\n') {
+                    if (stringBuffer.last() == '\n' || stringBuffer.last() == '}') {
                         notifyDataReceived(stringBuffer.toString())
                         stringBuffer.clear()
                     }

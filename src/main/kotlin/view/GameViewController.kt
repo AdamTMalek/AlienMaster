@@ -65,7 +65,9 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     private fun sendGameModeMessage() {
-        serial.send("debug: 0")
+        Platform.runLater {
+            serial.send("debug: 0")
+        }
     }
 
     private fun setSerial(serial: Serial) {

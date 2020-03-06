@@ -2,11 +2,13 @@ package view
 
 import app.*
 import app.serialcom.*
+import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.input.KeyCode
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
@@ -53,6 +55,10 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         messageParser.addListener(this)
+
+        Platform.runLater {
+            addDebugKeyPressHandler()
+        }
     }
 
     private fun setSerial(serial: Serial) {
@@ -96,5 +102,64 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
 
     override fun onDataReceived(data: String) {
         messageParser.parse(data)
+    }
+
+    /**
+     * For debugging purposes, key presses can be used to trigger transitions.
+     */
+    private fun addDebugKeyPressHandler() {
+        emptyViewRoot.scene.setOnKeyPressed { key ->
+            removeAllChildren()
+            when (key.code) {
+                KeyCode.S -> debugDisplaySplashScreen()
+                KeyCode.W -> debugDisplayWelcomeScreen(key.isShiftDown)
+                KeyCode.E -> debugDisplayEndScreen(key.isShiftDown)
+                else -> return@setOnKeyPressed
+            }
+        }
+    }
+
+    private fun getGermanPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
+    }
+
+    private fun getEnglishPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
+    }
+
+    private fun getLastPlayer(): Player {
+        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
+    }
+
+    /**
+     * Displays splash screen after key press (for debugging)
+     */
+    private fun debugDisplaySplashScreen() {
+        SplashScreenController.loadWithAnimation(emptyViewRoot)
+    }
+
+    /**
+     * Displays welcome screen after key press (for debugging)
+     *
+     * @param german Indicates if German player should be displayed, or English (when false).
+     */
+    private fun debugDisplayWelcomeScreen(german: Boolean) {
+        val player = if (german) getGermanPlayer() else getEnglishPlayer()
+        WelcomeScreenController.loadWithAnimation(emptyViewRoot, player)
+    }
+
+    /**
+     * Displays end screen after key press (for debugging)
+     *
+     * @param german Indicates if German player should be displayed, or English (when false).
+     */
+    private fun debugDisplayEndScreen(german: Boolean) {
+        val player = if (german) getGermanPlayer() else getLastPlayer()
+        val (newScore, beaten) = if (german) {
+            Pair(player.score + 1, true)
+        } else {
+            Pair(player.score - 1, false)
+        }
+        EndScreenController.loadWithAnimation(emptyViewRoot, player, newScore, beaten)
     }
 }

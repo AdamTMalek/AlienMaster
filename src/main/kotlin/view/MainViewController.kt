@@ -1,15 +1,11 @@
 package view
 
-import app.Language
-import app.Player
-import app.PlayersDatabase
 import app.serialcom.OnAvailablePortsChangeListener
 import app.serialcom.Serial
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.ChoiceBox
-import javafx.scene.input.KeyCode
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
@@ -34,55 +30,6 @@ class MainViewController : Initializable, OnAvailablePortsChangeListener {
             setupPortChoice()
             addPortChoiceChangeListener()
         }
-    }
-
-    /**
-     * TODO: Delete after testing
-     */
-    fun setStage() {
-        rootPane.scene.setOnKeyPressed { key ->
-            val player = when (key.code) {
-                KeyCode.G -> getGermanPlayer()
-                KeyCode.E -> getEnglishPlayer()
-                KeyCode.L -> getLastPlayer()
-                KeyCode.C -> {
-                    SplashScreenController.loadWithAnimation(rootPane); return@setOnKeyPressed
-                }
-                KeyCode.W -> {
-                    val player = getGermanPlayer()
-                    WelcomeScreenController.loadWithAnimation(rootPane, player); return@setOnKeyPressed
-                }
-                else -> return@setOnKeyPressed
-            }
-
-            val isNewTopScore = key.isShiftDown
-            loadEndScreen(player, isNewTopScore)
-        }
-    }
-
-    /**
-     * TODO: Delete after testing
-     */
-    private fun getGermanPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
-    }
-
-    /**
-     * TODO: Delete after testing
-     */
-    private fun getEnglishPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
-    }
-
-    /**
-     * TODO: Delete after testing
-     */
-    private fun getLastPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
-    }
-
-    private fun loadEndScreen(player: Player, isNewTopScore: Boolean) {
-        EndScreenController.loadWithAnimation(rootPane, player, 1, isNewTopScore)
     }
 
     override fun onAvailablePortsChange() {

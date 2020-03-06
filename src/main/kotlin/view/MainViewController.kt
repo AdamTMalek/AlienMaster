@@ -18,7 +18,6 @@ import java.util.*
 class MainViewController : Initializable, OnAvailablePortsChangeListener {
     @FXML
     private var rootPane = Pane()
-
     @FXML
     private var portChoice = ChoiceBox<String>()
 
@@ -129,6 +128,10 @@ class MainViewController : Initializable, OnAvailablePortsChangeListener {
 
     fun openPlayersEditor() {
         EditorViewController.showView()
+    }
+
+    fun openGameWindow() {
+        WaitingViewController.showAndWait(serial)
     }
 
     fun close() {

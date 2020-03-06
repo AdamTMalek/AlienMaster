@@ -56,7 +56,6 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        sendGameModeMessage()
         messageParser.addListener(this)
 
         Platform.runLater {
@@ -64,14 +63,9 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
         }
     }
 
-    private fun sendGameModeMessage() {
-        Platform.runLater {
-            serial.send("debug: 0")
-        }
-    }
-
     private fun setSerial(serial: Serial) {
         this.serial = serial
+        serial.send("debug: 0")
     }
 
     override fun onActionReceived(action: Action) {

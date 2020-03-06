@@ -28,6 +28,7 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     private var emptyViewRoot = Pane()
 
     private lateinit var serial: Serial
+    private lateinit var playersDatabase: PlayersDatabaseStorage
 
     private lateinit var player: Player
 
@@ -35,13 +36,14 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     private val messageParser = MessageParser()
 
     companion object {
-        fun showAndWait(serial: Serial) {
+        fun showAndWait(serial: Serial, database: PlayersDatabaseStorage) {
             val url = this::class.java.classLoader.getResource("view/empty_view.fxml")
             val loader = FXMLLoader().apply { location = url }
             val root = loader.load<Parent>()
             val scene = Scene(root, 500.0, 500.0)
 
             val controller = loader.getController<GameViewController>()
+            controller.playersDatabase = database
             controller.setSerial(serial)
 
             Stage().apply {
@@ -92,7 +94,7 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
 
     private fun onCardInserted(state: StateMessage) {
         val playerId = state.value!!
-        player = PlayersDatabase.getPlayerById(playerId)
+        player = playersDatabase.getPlayerById(playerId)
             ?: throw PlayerNotFoundException(playerId)
 
         WelcomeScreenController.loadWithAnimation(emptyViewRoot, player)
@@ -125,15 +127,15 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     private fun getGermanPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
+        return playersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
     }
 
     private fun getEnglishPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
+        return playersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
     }
 
     private fun getLastPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
+        return playersDatabase.getAllPlayers().minBy { it.score }!!
     }
 
     /**

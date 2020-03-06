@@ -69,4 +69,10 @@ object PlayersDatabase {
             Player.all().toList()
         }
     }
+
+    fun getPlayerById(id: Int): Player? {
+        return transaction {
+            Player.findById(id)
+        }
+    }
 }

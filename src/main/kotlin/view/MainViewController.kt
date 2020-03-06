@@ -1,5 +1,6 @@
 package view
 
+import app.PlayersDatabase
 import app.serialcom.OnAvailablePortsChangeListener
 import app.serialcom.Serial
 import javafx.application.Platform
@@ -78,7 +79,7 @@ class MainViewController : Initializable, OnAvailablePortsChangeListener {
     }
 
     fun openGameWindow() {
-        GameViewController.showAndWait(serial)
+        GameViewController.showAndWait(serial, PlayersDatabase)
     }
 
     fun close() {

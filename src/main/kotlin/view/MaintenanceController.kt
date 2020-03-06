@@ -134,8 +134,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
             val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort }!!
             serial.connectTo(port)
-            requestLedStates()
-            requestAlienStates()
+            onSerialComEstablished()
         }
     }
 
@@ -452,6 +451,21 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             button.styleClass.add(BUTTON_PRESSED_STYLE)
         else
             button.styleClass.remove(BUTTON_PRESSED_STYLE)
+    }
+
+    /**
+     * Invoked after connecting to a serial port
+     */
+    private fun onSerialComEstablished() {
+        sendDebugMessage()
+        requestLedStates()
+        requestAlienStates()
+    }
+
+    private fun sendDebugMessage() {
+        val message = "debug: 1"
+        serial.send(message)
+        addToLogTextView(message, true)
     }
 
     /**

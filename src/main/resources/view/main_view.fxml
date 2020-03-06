@@ -31,7 +31,9 @@
             <ChoiceBox GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="portChoice"/>
             <Button GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#openMaintenanceWindow"
                     text="Open Maintenance Window"/>
-            <Button GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#openGameWindow" text="Open Game Window"/>
+            <Button fx:id="openGameWindowButton" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                    onAction="#openGameWindow"
+                    disable="true" text="Open Game Window"/>
         </GridPane>
     </VBox>
 </AnchorPane>

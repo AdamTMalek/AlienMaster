@@ -6,6 +6,7 @@ import app.serialcom.Serial
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
+import javafx.scene.control.Button
 import javafx.scene.control.ChoiceBox
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
@@ -15,8 +16,12 @@ import java.util.*
 class MainViewController : Initializable, OnAvailablePortsChangeListener {
     @FXML
     private var rootPane = Pane()
+
     @FXML
     private var portChoice = ChoiceBox<String>()
+
+    @FXML
+    private var openGameWindowButton = Button()
 
     private lateinit var serial: Serial
 
@@ -57,11 +62,14 @@ class MainViewController : Initializable, OnAvailablePortsChangeListener {
 
     private fun addPortChoiceChangeListener() {
         portChoice.selectionModel.selectedItemProperty().addListener { _, _, newPort ->
-            if (newPort == null)
+            if (newPort == null) {
+                openGameWindowButton.isDisable = true
                 return@addListener
+            }
 
             val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort }!!
             serial.connectTo(port)
+            openGameWindowButton.isDisable = false
         }
     }
 

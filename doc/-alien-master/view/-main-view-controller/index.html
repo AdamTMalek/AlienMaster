@@ -8,7 +8,9 @@
 <a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">view</a>&nbsp;/&nbsp;<a href="./index.html">MainViewController</a><br/>
 <br/>
 <h1>MainViewController</h1>
-<code><span class="keyword">class </span><span class="identifier">MainViewController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span></code>
+<code><span class="keyword">class </span><span class="identifier">MainViewController</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a
+        href="../../app.serialcom/-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -23,17 +25,36 @@
 </table>
 <h3>Properties</h3>
 <table>
-<tbody>
-<tr>
-<td>
-<h4><a href="root-pane.html">rootPane</a></h4>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">rootPane</span><span class="symbol">: </span><span class="identifier">Pane</span></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="serial.html">serial</a></h4>
+    <tbody>
+    <tr>
+        <td>
+            <h4><a href="open-game-window-button.html">openGameWindowButton</a></h4>
+        </td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">openGameWindowButton</span><span
+                    class="symbol">: </span><span class="identifier">Button</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <h4><a href="port-choice.html">portChoice</a></h4>
+        </td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">portChoice</span><span
+                    class="symbol">: </span><span class="identifier">ChoiceBox</span><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <h4><a href="root-pane.html">rootPane</a></h4>
+        </td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">rootPane</span><span
+                    class="symbol">: </span><span class="identifier">Pane</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <h4><a href="serial.html">serial</a></h4>
 </td>
 <td>
 <code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">serial</span><span class="symbol">: </span><a href="../../app.serialcom/-serial/index.html"><span class="identifier">Serial</span></a></code></td>
@@ -45,48 +66,77 @@
 <tbody>
 <tr>
 <td>
-<h4><a href="close.html">close</a></h4>
+    <h4><a href="add-port-choice-change-listener.html">addPortChoiceChangeListener</a></h4>
 </td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">addPortChoiceChangeListener</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>
-<h4><a href="get-english-player.html">getEnglishPlayer</a></h4>
+    <h4><a href="close.html">close</a></h4>
 </td>
-<td>
-<p>TODO: Delete after testing</p>
-<code><span class="keyword">fun </span><span class="identifier">getEnglishPlayer</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a></code></td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span
+                class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>
-<h4><a href="get-german-player.html">getGermanPlayer</a></h4>
+    <h4><a href="get-all-available-ports-names.html">getAllAvailablePortsNames</a></h4>
 </td>
-<td>
-<p>TODO: Delete after testing</p>
-<code><span class="keyword">fun </span><span class="identifier">getGermanPlayer</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a></code></td>
+    <td>
+        <p>Returns a list of descriptive port names of the available ports</p>
+        <code><span class="keyword">fun </span><span class="identifier">getAllAvailablePortsNames</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span
+                class="symbol">!</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<h4><a href="get-last-player.html">getLastPlayer</a></h4>
+    <h4><a href="initialize.html">initialize</a></h4>
 </td>
-<td>
-<p>TODO: Delete after testing</p>
-<code><span class="keyword">fun </span><span class="identifier">getLastPlayer</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a></code></td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">initialize</span><span
+                class="symbol">(</span><span class="identifier"
+                                             id="view.MainViewController$initialize(java.net.URL, java.util.ResourceBundle)/location">location</span><span
+                class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URL.html"><span
+                class="identifier">URL</span></a><span class="symbol">?</span><span class="symbol">, </span><span
+                class="identifier"
+                id="view.MainViewController$initialize(java.net.URL, java.util.ResourceBundle)/resources">resources</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a><span
+                class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>
-<h4><a href="initialize.html">initialize</a></h4>
+    <h4><a href="on-available-ports-change.html">onAvailablePortsChange</a></h4>
 </td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="identifier" id="view.MainViewController$initialize(java.net.URL, java.util.ResourceBundle)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="view.MainViewController$initialize(java.net.URL, java.util.ResourceBundle)/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <p>Invoked by the <a href="../../app.serialcom/-serial-communication/index.html">SerialCommunication</a> class
+            whenever the list of
+            available ports has been modified</p>
+        <code><span class="keyword">fun </span><span class="identifier">onAvailablePortsChange</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>
-<h4><a href="load-end-screen.html">loadEndScreen</a></h4>
+    <h4><a href="open-game-window.html">openGameWindow</a></h4>
 </td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">loadEndScreen</span><span class="symbol">(</span><span class="identifier" id="view.MainViewController$loadEndScreen(app.Player, kotlin.Boolean)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="view.MainViewController$loadEndScreen(app.Player, kotlin.Boolean)/isNewTopScore">isNewTopScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">openGameWindow</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>
@@ -111,11 +161,15 @@
 </tr>
 <tr>
 <td>
-<h4><a href="set-stage.html">setStage</a></h4>
+    <h4><a href="setup-port-choice.html">setupPortChoice</a></h4>
 </td>
-<td>
-<p>TODO: Delete after testing</p>
-<code><span class="keyword">fun </span><span class="identifier">setStage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <p>Picks the current com port in the choice box if <a href="../../app.serialcom/-serial/get-active-port.html">Serial.getActivePort</a>
+            returns non-null value</p>
+        <code><span class="keyword">fun </span><span class="identifier">setupPortChoice</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 </tbody>
 </table>

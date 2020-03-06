@@ -81,6 +81,15 @@ and interactions happening in the view defined by the end_screen.fxml.</p>
 appearing in the view.</p>
 <code><span class="keyword">val </span><span class="identifier">textResourceBundle</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a></code></td>
 </tr>
+<tr>
+    <td>
+        <h4><a href="tts.html">tts</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">val </span><span class="identifier">tts</span><span class="symbol">: </span><a
+                href="../../app.tts/-text-to-speech/index.html"><span class="identifier">TextToSpeech</span></a></code>
+    </td>
+</tr>
 </tbody>
 </table>
 <h3>Functions</h3>
@@ -178,19 +187,35 @@ appearing in the view.</p>
 <code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="identifier" id="view.EndScreenController$initialize(java.net.URL, java.util.ResourceBundle)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="view.EndScreenController$initialize(java.net.URL, java.util.ResourceBundle)/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html"><span class="identifier">ResourceBundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
-<td>
-<h4><a href="populate-table.html">populateTable</a></h4>
-</td>
-<td>
-<p>Populates the table on the end screen.</p>
-<code><span class="keyword">fun </span><span class="identifier">populateTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="populate-table.html">populateTable</a></h4>
+    </td>
+    <td>
+        <p>Populates the table on the end screen.</p>
+        <code><span class="keyword">fun </span><span class="identifier">populateTable</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="sort-table.html">sortTable</a></h4>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">sortTable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="read-labels-with-tts.html">readLabelsWithTts</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">readLabelsWithTts</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4><a href="sort-table.html">sortTable</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">sortTable</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 </tbody>
 </table>
@@ -201,22 +226,38 @@ appearing in the view.</p>
 <td>
 <h4><a href="current-player.html">currentPlayer</a></h4>
 </td>
-<td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">currentPlayer</span><span class="symbol">: </span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a></code></td>
+    <td>
+        <code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">currentPlayer</span><span
+                class="symbol">: </span><a href="../../app/-player/index.html"><span
+                class="identifier">Player</span></a></code></td>
 </tr>
 <tr>
-<td>
-<h4><a href="is-new-top-score.html">isNewTopScore</a></h4>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">isNewTopScore</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+    <td>
+        <h4><a href="is-new-top-score.html">isNewTopScore</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">isNewTopScore</span><span
+                class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="score.html">score</a></h4>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">score</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+    <td>
+        <h4><a href="player-language.html">playerLanguage</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">val </span><span class="identifier">playerLanguage</span><span
+                class="symbol">: </span><a href="../../app/-language/index.html"><span
+                class="identifier">Language</span></a></code></td>
+</tr>
+<tr>
+    <td>
+        <h4><a href="score.html">score</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">score</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a></code></td>
 </tr>
 </tbody>
 </table>

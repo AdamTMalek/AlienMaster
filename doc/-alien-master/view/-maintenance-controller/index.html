@@ -381,24 +381,52 @@ available ports has been modified</p>
 <code><span class="keyword">fun </span><span class="identifier">onLed5Clicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
-<td>
-<h4><a href="on-led-clicked.html">onLedClicked</a></h4>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">onLedClicked</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/led">led</span><span class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="on-led-clicked.html">onLedClicked</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">onLedClicked</span><span class="symbol">(</span><span
+                class="identifier"
+                id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/id">id</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                     id="view.MaintenanceController$onLedClicked(kotlin.Int, javafx.css.Styleable)/led">led</span><span
+                class="symbol">:</span>&nbsp;<span class="identifier">Styleable</span><span class="symbol">)</span><span
+                class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="on-state-received.html">onStateReceived</a></h4>
-</td>
-<td>
-<p>Handles <a href="../../app.serialcom/-state-message/index.html">StateMessage</a> messages coming from the serial.
-It just adds them to the log view.</p>
-<code><span class="keyword">fun </span><span class="identifier">onStateReceived</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$onStateReceived(app.serialcom.StateMessage)/state">state</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-state-message/index.html"><span class="identifier">StateMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="on-serial-com-established.html">onSerialComEstablished</a></h4>
+    </td>
+    <td>
+        <p>Invoked after connecting to a serial port</p>
+        <code><span class="keyword">fun </span><span class="identifier">onSerialComEstablished</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="raise-bad-alien.html">raiseBadAlien</a></h4>
+    <td>
+        <h4><a href="on-state-received.html">onStateReceived</a></h4>
+    </td>
+    <td>
+        <p>Handles <a href="../../app.serialcom/-state-message/index.html">StateMessage</a> messages coming from the
+            serial.
+            It just adds them to the log view.</p>
+        <code><span class="keyword">fun </span><span class="identifier">onStateReceived</span><span
+                class="symbol">(</span><span class="identifier"
+                                             id="view.MaintenanceController$onStateReceived(app.serialcom.StateMessage)/state">state</span><span
+                class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-state-message/index.html"><span
+                class="identifier">StateMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4><a href="raise-bad-alien.html">raiseBadAlien</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">raiseBadAlien</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
@@ -428,24 +456,56 @@ It just adds them to the log view.</p>
 <td>
 <h4><a href="request-led-states.html">requestLedStates</a></h4>
 </td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">requestLedStates</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">requestLedStates</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="send-action.html">sendAction</a></h4>
-</td>
-<td>
-<p>Sends <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and adds it to the log view</p>
-<code><span class="keyword">fun </span><span class="identifier">sendAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$sendAction(app.serialcom.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="send-action.html">sendAction</a></h4>
+    </td>
+    <td>
+        <p>Sends <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and adds it to the log view
+        </p>
+        <code><span class="keyword">fun </span><span class="identifier">sendAction</span><span
+                class="symbol">(</span><span class="identifier"
+                                             id="view.MaintenanceController$sendAction(app.serialcom.Action)/action">action</span><span
+                class="symbol">:</span>&nbsp;<a href="../../app.serialcom/-action/index.html"><span class="identifier">Action</span></a><span
+                class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
-<td>
-<h4><a href="send-set-led-action.html">sendSetLedAction</a></h4>
-</td>
-<td>
-<p>Sends the set <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and logs the message</p>
-<code><span class="keyword">fun </span><span class="identifier">sendSetLedAction</span><span class="symbol">(</span><span class="identifier" id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/on">on</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <h4><a href="send-debug-message.html">sendDebugMessage</a></h4>
+    </td>
+    <td>
+        <code><span class="keyword">fun </span><span class="identifier">sendDebugMessage</span><span
+                class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4><a href="send-set-led-action.html">sendSetLedAction</a></h4>
+    </td>
+    <td>
+        <p>Sends the set <a href="../../app.serialcom/-action/index.html">Action</a> to the serial and logs the message
+        </p>
+        <code><span class="keyword">fun </span><span class="identifier">sendSetLedAction</span><span
+                class="symbol">(</span><span class="identifier"
+                                             id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/id">id</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                     id="view.MaintenanceController$sendSetLedAction(kotlin.Int, kotlin.Boolean)/on">on</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span
+                class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 <tr>
 <td>

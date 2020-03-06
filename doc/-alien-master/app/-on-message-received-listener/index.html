@@ -37,14 +37,36 @@ must implement this interface.</p>
 <table>
 <tbody>
 <tr>
-<td>
-<h4><a href="../../view/-maintenance-controller/index.html">MaintenanceController</a></h4>
-</td>
-<td>
-<p>The <a href="../../view/-maintenance-controller/index.html">MaintenanceController</a> is responsible for controlling all actions
-that happen in the maintenance view of which controls are defined in the
-fxml file maintenance_view.fxml.</p>
-<code><span class="keyword">class </span><span class="identifier">MaintenanceController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">OnMessageReceivedListener</span></a><span class="symbol">, </span><a href="../../app.serialcom/-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span class="symbol">, </span><a href="../../app.serialcom/-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a></code></td>
+    <td>
+        <h4><a href="../../view/-game-view-controller/index.html">GameViewController</a></h4>
+    </td>
+    <td>
+        <p>The <a href="../../view/-game-view-controller/index.html">GameViewController</a> is the main controller for
+            the game window.
+            Because different views get attached to the root of this view, the
+            controller always exists as long as the game window is opened.</p>
+        <code><span class="keyword">class </span><span class="identifier">GameViewController</span>&nbsp;<span
+                class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a
+                href="../../app.serialcom/-on-serial-data-received-listener/index.html"><span class="identifier">OnSerialDataReceivedListener</span></a><span
+                class="symbol">, </span><a href="./index.html"><span class="identifier">OnMessageReceivedListener</span></a></code>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4><a href="../../view/-maintenance-controller/index.html">MaintenanceController</a></h4>
+    </td>
+    <td>
+        <p>The <a href="../../view/-maintenance-controller/index.html">MaintenanceController</a> is responsible for
+            controlling all actions
+            that happen in the maintenance view of which controls are defined in the
+            fxml file maintenance_view.fxml.</p>
+        <code><span class="keyword">class </span><span class="identifier">MaintenanceController</span>&nbsp;<span
+                class="symbol">:</span>&nbsp;<span class="identifier">Initializable</span><span class="symbol">, </span><a
+                href="./index.html"><span class="identifier">OnMessageReceivedListener</span></a><span
+                class="symbol">, </span><a
+                href="../../app.serialcom/-on-available-ports-change-listener/index.html"><span class="identifier">OnAvailablePortsChangeListener</span></a><span
+                class="symbol">, </span><a href="../../app.serialcom/-on-serial-data-received-listener/index.html"><span
+                class="identifier">OnSerialDataReceivedListener</span></a></code></td>
 </tr>
 </tbody>
 </table>

@@ -10,7 +10,7 @@ import java.sql.Connection
  * The [PlayersDatabase] is an object managing all operations with the database, like getting all players,
  * adding, and modifying a player.
  */
-object PlayersDatabase {
+object PlayersDatabase : PlayersDatabaseStorage {
 
     init {
         Database.connect("jdbc:sqlite:./resources/database.sqlite", "org.sqlite.JDBC")
@@ -21,7 +21,7 @@ object PlayersDatabase {
     /**
      * Create the [Players] table in the database
      */
-    fun createPlayersTable() {
+    override fun createPlayersTable() {
         transaction {
             SchemaUtils.create(Players)
         }
@@ -30,13 +30,16 @@ object PlayersDatabase {
     /**
      * Drop (delete) the [Players] table from the database
      */
-    fun dropPlayersTable() {
+    override fun dropPlayersTable() {
         transaction {
             SchemaUtils.drop(Players)
         }
     }
 
-    fun addPlayer(name: String, language: String, score: Int) {
+    /**
+     * Add player with the following properties to the database
+     */
+    override fun addPlayer(name: String, language: String, score: Int) {
         transaction {
             Player.new {
                 this.name = name
@@ -46,27 +49,50 @@ object PlayersDatabase {
         }
     }
 
-    fun changeName(player: Player, newName: String) {
+    /**
+     * Change name of the given [player] to [newName]
+     */
+    override fun changeName(player: Player, newName: String) {
         transaction {
             player.name = newName
         }
     }
 
-    fun changeLanguage(player: Player, newLanguage: String) {
+    /**
+     * Change the preferred language of the given [player] to [newLanguage]
+     *
+     * @param newLanguage language code
+     */
+    override fun changeLanguage(player: Player, newLanguage: String) {
         transaction {
             player.language = newLanguage
         }
     }
 
-    fun changeScore(player: Player, newScore: Int) {
+    /**
+     * Change the top score of the given [player] to the [newScore]
+     */
+    override fun changeScore(player: Player, newScore: Int) {
         transaction {
             player.score = newScore
         }
     }
 
-    fun getAllPlayers(): List<Player> {
+    /**
+     * Get all players stored in the database
+     */
+    override fun getAllPlayers(): List<Player> {
         return transaction {
             Player.all().toList()
+        }
+    }
+
+    /**
+     * Get player by the given id
+     */
+    override fun getPlayerById(id: Int): Player? {
+        return transaction {
+            Player.findById(id)
         }
     }
 }

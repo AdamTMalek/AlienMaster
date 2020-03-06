@@ -1,20 +1,27 @@
 package view
 
-import app.Language
-import app.Player
 import app.PlayersDatabase
+import app.serialcom.OnAvailablePortsChangeListener
 import app.serialcom.Serial
+import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
-import javafx.scene.input.KeyCode
+import javafx.scene.control.Button
+import javafx.scene.control.ChoiceBox
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
-class MainViewController : Initializable {
+class MainViewController : Initializable, OnAvailablePortsChangeListener {
     @FXML
     private var rootPane = Pane()
+
+    @FXML
+    private var portChoice = ChoiceBox<String>()
+
+    @FXML
+    private var openGameWindowButton = Button()
 
     private lateinit var serial: Serial
 
@@ -23,56 +30,53 @@ class MainViewController : Initializable {
 
     fun setSerial(serial: Serial) {
         this.serial = serial
+        serial.addPortListener(this)
+
+        Platform.runLater {
+            setupPortChoice()
+            addPortChoiceChangeListener()
+        }
     }
 
-    /**
-     * TODO: Delete after testing
-     */
-    fun setStage() {
-        rootPane.scene.setOnKeyPressed { key ->
-            val player = when (key.code) {
-                KeyCode.G -> getGermanPlayer()
-                KeyCode.E -> getEnglishPlayer()
-                KeyCode.L -> getLastPlayer()
-                KeyCode.C -> {
-                    SplashScreenController.loadWithAnimation(rootPane); return@setOnKeyPressed
-                }
-                KeyCode.W -> {
-                    val player = getGermanPlayer()
-                    WelcomeScreenController.loadWithAnimation(rootPane, player); return@setOnKeyPressed
-                }
-                else -> return@setOnKeyPressed
-            }
-
-            val isNewTopScore = key.isShiftDown
-            loadEndScreen(player, isNewTopScore)
+    override fun onAvailablePortsChange() {
+        Platform.runLater {
+            portChoice.items.clear()
+            portChoice.items.addAll(getAllAvailablePortsNames())
         }
     }
 
     /**
-     * TODO: Delete after testing
+     * Picks the current com port in the choice box if [Serial.getActivePort] returns non-null value
      */
-    private fun getGermanPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
+    private fun setupPortChoice() {
+        val serialNames = getAllAvailablePortsNames()
+
+        portChoice.items.addAll(serialNames)
+
+        val current = serial.getActivePort()
+            ?: return
+
+        val currentPortIndex = portChoice.items.indexOf(current.descriptivePortName)
+        portChoice.selectionModel.select(currentPortIndex)
+    }
+
+    private fun addPortChoiceChangeListener() {
+        portChoice.selectionModel.selectedItemProperty().addListener { _, _, newPort ->
+            if (newPort == null) {
+                openGameWindowButton.isDisable = true
+                return@addListener
+            }
+
+            val port = serial.getAllAvailablePorts().find { it.descriptivePortName == newPort }!!
+            serial.connectTo(port)
+            openGameWindowButton.isDisable = false
+        }
     }
 
     /**
-     * TODO: Delete after testing
+     * Returns a list of descriptive port names of the available ports
      */
-    private fun getEnglishPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
-    }
-
-    /**
-     * TODO: Delete after testing
-     */
-    private fun getLastPlayer(): Player {
-        return PlayersDatabase.getAllPlayers().minBy { it.score }!!
-    }
-
-    private fun loadEndScreen(player: Player, isNewTopScore: Boolean) {
-        EndScreenController.loadWithAnimation(rootPane, player, 1, isNewTopScore)
-    }
+    private fun getAllAvailablePortsNames() = serial.getAllAvailablePorts().map { it.descriptivePortName }
 
     fun openMaintenanceWindow() {
         MaintenanceController.showAndWait(serial)
@@ -82,8 +86,13 @@ class MainViewController : Initializable {
         EditorViewController.showView()
     }
 
+    fun openGameWindow() {
+        GameViewController.showAndWait(serial, PlayersDatabase)
+    }
+
     fun close() {
         val stage = rootPane.scene.window as Stage
+        serial.removePortListener(this)
         stage.close()
     }
 }

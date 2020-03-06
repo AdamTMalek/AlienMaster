@@ -24,9 +24,8 @@ class MainApp : Application() {
             it.show()
         }
 
-        controller = loader.getController<MainViewController>()
+        controller = loader.getController()
         controller.setSerial(serial)
-        controller.setStage()
     }
 
     override fun stop() {

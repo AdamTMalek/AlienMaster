@@ -101,10 +101,13 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     private fun onGameOver(state: StateMessage) {
-        val score = state.value!!
-        val managedToBeatTopScore = score > player.score
+        val newScore = state.value!!
+        val managedToBeatTopScore = newScore > player.score
+        if (managedToBeatTopScore)
+            playersDatabase.changeScore(player, newScore)
 
-        EndScreenController.loadWithAnimation(emptyViewRoot, player, score, managedToBeatTopScore)
+        EndScreenController.loadWithAnimation(emptyViewRoot, player, newScore, managedToBeatTopScore)
+
     }
 
     override fun onDataReceived(data: String) {

@@ -463,7 +463,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     private fun sendDebugMessage() {
-        val message = "debug: 1"
+        val message = "{\n\tdebug: 1\n}"
         serial.send(message)
         addToLogTextView(message, true)
     }

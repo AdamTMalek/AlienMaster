@@ -50,6 +50,10 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
                 title = "AlienMaster"
                 this.scene = scene
                 this.isFullScreen = true
+                this.setOnHidden {
+                    serial.removeDataReceivedListener(controller)
+                    controller.messageParser.remove(controller)
+                }
                 this.showAndWait()
             }
         }
@@ -65,7 +69,8 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
 
     private fun setSerial(serial: Serial) {
         this.serial = serial
-        serial.send("debug: 0")
+        serial.addDataReceivedListener(this)
+        serial.send("{\n\tdebug: 0\n}")
     }
 
     override fun onActionReceived(action: Action) {
@@ -75,12 +80,14 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     override fun onStateReceived(state: StateMessage) {
         removeAllChildren()
 
-        when (state.state) {
-            State.WAITING -> return
-            State.PLAYER_DETECTED -> SplashScreenController.loadWithAnimation(emptyViewRoot)
-            State.CARD_INSERTED -> onCardInserted(state)
-            State.PLAYING -> return
-            State.GAME_OVER -> onGameOver(state)
+        Platform.runLater {
+            when (state.state) {
+                State.WAITING -> return@runLater
+                State.PLAYER_DETECTED -> SplashScreenController.loadWithAnimation(emptyViewRoot)
+                State.CARD_INSERTED -> onCardInserted(state)
+                State.PLAYING -> return@runLater
+                State.GAME_OVER -> onGameOver(state)
+            }
         }
     }
 

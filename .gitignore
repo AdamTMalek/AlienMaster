@@ -76,3 +76,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 *.sqlite
+
+# MaryTTS logs
+log/

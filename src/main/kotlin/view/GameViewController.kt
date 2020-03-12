@@ -36,13 +36,25 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     private val messageParser = MessageParser()
 
     companion object {
-        fun showAndWait(serial: Serial, database: PlayersDatabaseStorage) {
+        private lateinit var controller: GameViewController
+
+        fun loadRoot(serial: Serial, database: PlayersDatabaseStorage): Parent {
             val url = this::class.java.classLoader.getResource("view/empty_view.fxml")
             val loader = FXMLLoader().apply { location = url }
             val root = loader.load<Parent>()
+
+            controller = loader.getController<GameViewController>().apply {
+                setSerial(serial)
+                playersDatabase = database
+            }
+
+            return root
+        }
+
+        fun showAndWait(serial: Serial, database: PlayersDatabaseStorage) {
+            val root = loadRoot(serial, database)
             val scene = Scene(root, 500.0, 500.0)
 
-            val controller = loader.getController<GameViewController>()
             controller.playersDatabase = database
             controller.setSerial(serial)
 

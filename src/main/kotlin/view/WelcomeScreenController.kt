@@ -1,5 +1,6 @@
 package view
 
+import app.IPlayer
 import app.Language
 import app.Player
 import app.tts.TextToSpeech
@@ -28,10 +29,10 @@ import java.util.*
  */
 class WelcomeScreenController : Initializable {
     companion object {
-        private lateinit var player: Player
+        private lateinit var player: IPlayer
         private val playerLanguage by lazy { Language.fromCode(player.language) }
 
-        fun loadWithAnimation(root: Pane, player: Player) {
+        fun loadWithAnimation(root: Pane, player: IPlayer) {
             this.player = player
             val loader = loadFxml()
             val parent = loader.load<Parent>()

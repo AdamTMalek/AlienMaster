@@ -30,7 +30,7 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     private lateinit var serial: Serial
     private lateinit var playersDatabase: PlayersDatabaseStorage
 
-    private lateinit var player: Player
+    private lateinit var player: IPlayer
 
     // The message parser will be used for creating messages out of incoming yaml from serial
     private val messageParser = MessageParser()
@@ -132,15 +132,15 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
         }
     }
 
-    private fun getGermanPlayer(): Player {
+    private fun getGermanPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
     }
 
-    private fun getEnglishPlayer(): Player {
+    private fun getEnglishPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
     }
 
-    private fun getLastPlayer(): Player {
+    private fun getLastPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().minBy { it.score }!!
     }
 

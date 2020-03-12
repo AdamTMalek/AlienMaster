@@ -1,5 +1,6 @@
 package view
 
+import app.IPlayer
 import app.Language
 import app.Player
 import app.PlayersDatabase
@@ -29,13 +30,13 @@ import java.util.*
  */
 class EndScreenController : Initializable {
     @FXML
-    private var playersTable = TableView<Player>()
+    private var playersTable = TableView<IPlayer>()
     @FXML
-    private var positionColumn = TableColumn<Player, Int>()
+    private var positionColumn = TableColumn<IPlayer, Int>()
     @FXML
-    private var nameColumn = TableColumn<Player, String>()
+    private var nameColumn = TableColumn<IPlayer, String>()
     @FXML
-    private var scoreColumn = TableColumn<Player, Int>()
+    private var scoreColumn = TableColumn<IPlayer, Int>()
     @FXML
     private var promptLabel = Label()
 
@@ -53,7 +54,7 @@ class EndScreenController : Initializable {
     private val tts = TextToSpeech()
 
     companion object {
-        private lateinit var currentPlayer: Player // Player is going to be highlighted in the table
+        private lateinit var currentPlayer: IPlayer // Player is going to be highlighted in the table
         private val playerLanguage by lazy { Language.fromCode(currentPlayer.language) }
         private var score: Int = 0
         private var isNewTopScore: Boolean = false
@@ -61,7 +62,7 @@ class EndScreenController : Initializable {
         /**
          * Loads this view with an animated transition.
          */
-        fun loadWithAnimation(root: Pane, player: Player, score: Int, isNewTopScore: Boolean) {
+        fun loadWithAnimation(root: Pane, player: IPlayer, score: Int, isNewTopScore: Boolean) {
             currentPlayer = player
             this.score = score
             this.isNewTopScore = isNewTopScore
@@ -110,13 +111,13 @@ class EndScreenController : Initializable {
 
     private fun initColumns() {
         positionColumn.setCellFactory {
-            object : TableCell<Player, Int>() {
-                private fun highlightIfCurrentPlayer(row: TableRow<Player>) {
+            object : TableCell<IPlayer, Int>() {
+                private fun highlightIfCurrentPlayer(row: TableRow<IPlayer>) {
                     if (row.item == currentPlayer)
                         row.styleClass.add("highlight")
                 }
 
-                private fun getPosition(player: Player): Int {
+                private fun getPosition(player: IPlayer): Int {
                     return allPlayers.indexOf(player) + 1
                 }
 
@@ -139,7 +140,7 @@ class EndScreenController : Initializable {
     }
 
     private fun addPlayersToTable() {
-        val players = mutableSetOf<Player>().apply {
+        val players = mutableSetOf<IPlayer>().apply {
             addAll(allPlayers.take(5))
             add(currentPlayer)
         }

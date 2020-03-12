@@ -1,5 +1,6 @@
 package view
 
+import app.IPlayer
 import app.Player
 import app.PlayerGenerator
 import app.PlayersDatabase
@@ -26,15 +27,15 @@ import java.util.*
 
 class EditorViewController : Initializable, ChangeListener<String> {
     @FXML
-    private var playersTable = TableView<Player>()
+    private var playersTable = TableView<IPlayer>()
     @FXML
-    private var idColumn = TableColumn<Player, Int>()
+    private var idColumn = TableColumn<IPlayer, Int>()
     @FXML
-    private var nameColumn = TableColumn<Player, String>()
+    private var nameColumn = TableColumn<IPlayer, String>()
     @FXML
-    private var langColumn = TableColumn<Player, String>()
+    private var langColumn = TableColumn<IPlayer, String>()
     @FXML
-    private var scoreColumn = TableColumn<Player, Int>()
+    private var scoreColumn = TableColumn<IPlayer, Int>()
 
     private val scene by lazy { playersTable.scene }
 
@@ -60,22 +61,22 @@ class EditorViewController : Initializable, ChangeListener<String> {
     }
 
     private fun setupTable() {
-        idColumn.cellValueFactory = PropertyValueFactory<Player, Int>("id")
-        nameColumn.cellValueFactory = PropertyValueFactory<Player, String>("name")
+        idColumn.cellValueFactory = PropertyValueFactory<IPlayer, Int>("id")
+        nameColumn.cellValueFactory = PropertyValueFactory<IPlayer, String>("name")
         nameColumn.cellFactory = TextFieldTableCell.forTableColumn()
         nameColumn.setOnEditCommit {
             PlayersDatabase.changeName(it.rowValue, it.newValue)
             loadPlayers()
         }
 
-        langColumn.cellValueFactory = PropertyValueFactory<Player, String>("language")
+        langColumn.cellValueFactory = PropertyValueFactory<IPlayer, String>("language")
         langColumn.cellFactory = TextFieldTableCell.forTableColumn()
         langColumn.setOnEditCommit {
             PlayersDatabase.changeLanguage(it.rowValue, it.newValue)
             loadPlayers()
         }
 
-        scoreColumn.cellValueFactory = PropertyValueFactory<Player, Int>("score")
+        scoreColumn.cellValueFactory = PropertyValueFactory<IPlayer, Int>("score")
         scoreColumn.cellFactory = TextFieldTableCell.forTableColumn(IntegerStringConverter())
         scoreColumn.setOnEditCommit {
             PlayersDatabase.changeScore(it.rowValue, it.newValue)

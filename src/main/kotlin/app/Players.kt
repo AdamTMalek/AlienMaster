@@ -27,6 +27,10 @@ class Player(id: EntityID<Int>) : IntEntity(id), IPlayer {
     override var language by Players.language
     override var score by Players.score
 
+    override fun getIdValue(): Int {
+        return id.value
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Player) return false

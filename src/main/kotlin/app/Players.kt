@@ -20,12 +20,16 @@ object Players : IntIdTable() {
 /**
  * The [Player] class is used to represent a single entry from the [Players] table
  */
-class Player(id: EntityID<Int>) : IntEntity(id) {
+class Player(id: EntityID<Int>) : IntEntity(id), IPlayer {
     companion object : IntEntityClass<Player>(Players)
 
-    var name by Players.name
-    var language by Players.language
-    var score by Players.score
+    override var name by Players.name
+    override var language by Players.language
+    override var score by Players.score
+
+    override fun getIdValue(): Int {
+        return id.value
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

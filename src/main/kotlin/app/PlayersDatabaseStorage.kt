@@ -24,27 +24,27 @@ interface PlayersDatabaseStorage {
     /**
      * Change name of the given [player] to [newName]
      */
-    fun changeName(player: Player, newName: String)
+    fun changeName(player: IPlayer, newName: String)
 
     /**
      * Change the preferred language of the given [player] to [newLanguage]
      *
      * @param newLanguage language code
      */
-    fun changeLanguage(player: Player, newLanguage: String)
+    fun changeLanguage(player: IPlayer, newLanguage: String)
 
     /**
      * Change the top score of the given [player] to the [newScore]
      */
-    fun changeScore(player: Player, newScore: Int)
+    fun changeScore(player: IPlayer, newScore: Int)
 
     /**
      * Get all players stored in the database
      */
-    fun getAllPlayers(): List<Player>
+    fun getAllPlayers(): List<IPlayer>
 
     /**
      * Get player by the given id
      */
-    fun getPlayerById(id: Int): Player?
+    fun getPlayerById(id: Int): IPlayer?
 }

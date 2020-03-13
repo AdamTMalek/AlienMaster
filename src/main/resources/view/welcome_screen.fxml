@@ -10,6 +10,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="view.WelcomeScreenController"
+      id="welcomeScreenRoot"
       AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
       AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
       spacing="20"

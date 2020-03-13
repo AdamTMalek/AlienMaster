@@ -30,19 +30,31 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     private lateinit var serial: Serial
     private lateinit var playersDatabase: PlayersDatabaseStorage
 
-    private lateinit var player: Player
+    private lateinit var player: IPlayer
 
     // The message parser will be used for creating messages out of incoming yaml from serial
     private val messageParser = MessageParser()
 
     companion object {
-        fun showAndWait(serial: Serial, database: PlayersDatabaseStorage) {
+        private lateinit var controller: GameViewController
+
+        fun loadRoot(serial: Serial, database: PlayersDatabaseStorage): Parent {
             val url = this::class.java.classLoader.getResource("view/empty_view.fxml")
             val loader = FXMLLoader().apply { location = url }
             val root = loader.load<Parent>()
+
+            controller = loader.getController<GameViewController>().apply {
+                setSerial(serial)
+                playersDatabase = database
+            }
+
+            return root
+        }
+
+        fun showAndWait(serial: Serial, database: PlayersDatabaseStorage) {
+            val root = loadRoot(serial, database)
             val scene = Scene(root, 500.0, 500.0)
 
-            val controller = loader.getController<GameViewController>()
             controller.playersDatabase = database
             controller.setSerial(serial)
 
@@ -50,6 +62,10 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
                 title = "AlienMaster"
                 this.scene = scene
                 this.isFullScreen = true
+                this.setOnHidden {
+                    serial.removeDataReceivedListener(controller)
+                    controller.messageParser.remove(controller)
+                }
                 this.showAndWait()
             }
         }
@@ -65,7 +81,8 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
 
     private fun setSerial(serial: Serial) {
         this.serial = serial
-        serial.send("debug: 0")
+        serial.addDataReceivedListener(this)
+        serial.send("{\n\tdebug: 0\n}")
     }
 
     override fun onActionReceived(action: Action) {
@@ -73,19 +90,21 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     override fun onStateReceived(state: StateMessage) {
-        removeAllChildren()
+        Platform.runLater {
+            removeAllChildren()
 
-        when (state.state) {
-            State.WAITING -> return
-            State.PLAYER_DETECTED -> SplashScreenController.loadWithAnimation(emptyViewRoot)
-            State.CARD_INSERTED -> onCardInserted(state)
-            State.PLAYING -> return
-            State.GAME_OVER -> onGameOver(state)
+            when (state.state) {
+                State.WAITING -> return@runLater
+                State.PLAYER_DETECTED -> SplashScreenController.loadWithAnimation(emptyViewRoot)
+                State.CARD_INSERTED -> onCardInserted(state)
+                State.PLAYING -> return@runLater
+                State.GAME_OVER -> onGameOver(state)
+            }
         }
     }
 
     private fun removeAllChildren() {
-        emptyViewRoot.children.removeAll()
+        emptyViewRoot.children.clear()
     }
 
     private fun onCardInserted(state: StateMessage) {
@@ -125,15 +144,15 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
         }
     }
 
-    private fun getGermanPlayer(): Player {
+    private fun getGermanPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().find { it.language == Language.GER.code }!!
     }
 
-    private fun getEnglishPlayer(): Player {
+    private fun getEnglishPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().find { it.language == Language.ENG.code }!!
     }
 
-    private fun getLastPlayer(): Player {
+    private fun getLastPlayer(): IPlayer {
         return playersDatabase.getAllPlayers().minBy { it.score }!!
     }
 

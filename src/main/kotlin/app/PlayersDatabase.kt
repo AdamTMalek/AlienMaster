@@ -52,7 +52,7 @@ object PlayersDatabase : PlayersDatabaseStorage {
     /**
      * Change name of the given [player] to [newName]
      */
-    override fun changeName(player: Player, newName: String) {
+    override fun changeName(player: IPlayer, newName: String) {
         transaction {
             player.name = newName
         }
@@ -63,7 +63,7 @@ object PlayersDatabase : PlayersDatabaseStorage {
      *
      * @param newLanguage language code
      */
-    override fun changeLanguage(player: Player, newLanguage: String) {
+    override fun changeLanguage(player: IPlayer, newLanguage: String) {
         transaction {
             player.language = newLanguage
         }
@@ -72,7 +72,7 @@ object PlayersDatabase : PlayersDatabaseStorage {
     /**
      * Change the top score of the given [player] to the [newScore]
      */
-    override fun changeScore(player: Player, newScore: Int) {
+    override fun changeScore(player: IPlayer, newScore: Int) {
         transaction {
             player.score = newScore
         }
@@ -81,7 +81,7 @@ object PlayersDatabase : PlayersDatabaseStorage {
     /**
      * Get all players stored in the database
      */
-    override fun getAllPlayers(): List<Player> {
+    override fun getAllPlayers(): List<IPlayer> {
         return transaction {
             Player.all().toList()
         }
@@ -90,7 +90,7 @@ object PlayersDatabase : PlayersDatabaseStorage {
     /**
      * Get player by the given id
      */
-    override fun getPlayerById(id: Int): Player? {
+    override fun getPlayerById(id: Int): IPlayer? {
         return transaction {
             Player.findById(id)
         }

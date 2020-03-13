@@ -90,9 +90,9 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     override fun onStateReceived(state: StateMessage) {
-        removeAllChildren()
-
         Platform.runLater {
+            removeAllChildren()
+
             when (state.state) {
                 State.WAITING -> return@runLater
                 State.PLAYER_DETECTED -> SplashScreenController.loadWithAnimation(emptyViewRoot)
@@ -104,7 +104,7 @@ class GameViewController : Initializable, OnSerialDataReceivedListener, OnMessag
     }
 
     private fun removeAllChildren() {
-        emptyViewRoot.children.removeAll()
+        emptyViewRoot.children.clear()
     }
 
     private fun onCardInserted(state: StateMessage) {

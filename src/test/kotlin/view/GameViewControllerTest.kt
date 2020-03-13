@@ -1,13 +1,13 @@
 package view
 
 import app.DatabaseMock
-import app.serialcom.OnAvailablePortsChangeListener
-import app.serialcom.OnSerialDataReceivedListener
-import app.serialcom.Serial
+import app.serialcom.*
 import com.fazecast.jSerialComm.SerialPort
+import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -61,8 +61,8 @@ class GameViewControllerTest : ApplicationTest() {
     private val database = DatabaseMock()
 
     init {
-        database.addPlayer("Sam", "ENG", 0)
-        database.addPlayer("Jack", "GER", 0)
+        database.addPlayer("Sam", "eng", 0)
+        database.addPlayer("Jack", "ger", 0)
     }
 
     override fun start(stage: Stage) {
@@ -83,5 +83,70 @@ class GameViewControllerTest : ApplicationTest() {
     fun testViewIsEmptyByDefault() {
         val root = getRoot()
         assertTrue(root.children.isEmpty())
+    }
+
+    @Test
+    fun testPlayerDetected() {
+        // Send Player Detected message
+        val message = StateMessage(State.PLAYER_DETECTED, null).toYaml()
+        serial.dataListeners.first().onDataReceived(message)
+
+        Thread.sleep(3000) // Wait for the view to load
+
+        // Check if the root contains the splash screen
+        val splashScreen = lookup("#splashScreenRoot").tryQuery<Node>()
+        assertTrue(splashScreen.isPresent)
+    }
+
+    @Test
+    fun testCardInserted() {
+        // Send Card Inserted message
+        val message = StateMessage(State.CARD_INSERTED, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(message)
+
+        // Wait for the view to load. Due to the TTS we have to wait for a good while
+        Thread.sleep(7000)
+
+        // Check if the root contains the welcome screen
+        val welcomeScreen = lookup("#welcomeScreenRoot").tryQuery<Node>()
+        assertTrue(welcomeScreen.isPresent)
+    }
+
+    @Test
+    fun testPlayingGame() {
+        // In this case we expect whatever is currently displayed (welcome screen)
+        // to be deleted from the root
+        // So, we test the welcome screen and then send another message and check
+        // if it was removed
+
+        // Load welcome screen
+        val cardInsertedMessage = StateMessage(State.CARD_INSERTED, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(cardInsertedMessage)
+        Thread.sleep(7_000)
+
+        // Send playing message
+        val playingMessage = StateMessage(State.PLAYING, null).toYaml()
+        serial.dataListeners.first().onDataReceived(playingMessage)
+
+        Thread.sleep(500)
+
+        val welcomeScreen = lookup("#welcomeScreenRoot").tryQuery<Node>()
+        assertFalse(welcomeScreen.isPresent)
+    }
+
+    @Test
+    fun testGameOver() {
+        // Load player
+        val cardInsertedMessage = StateMessage(State.CARD_INSERTED, 1).toYaml()
+        serial.dataListeners.first().onDataReceived(cardInsertedMessage)
+        Thread.sleep(7000)
+
+        val message = StateMessage(State.GAME_OVER, 21).toYaml()
+        serial.dataListeners.first().onDataReceived(message)
+
+        Thread.sleep(7000)
+
+        val gameOverScreen = lookup("#endScreenRoot").tryQuery<Node>()
+        assertTrue(gameOverScreen.isPresent)
     }
 }

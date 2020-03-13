@@ -5,6 +5,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.GameViewController"
             fx:id="emptyViewRoot"
+            id="gameViewRoot"
             prefHeight="500.0" prefWidth="500.0">
 
 </AnchorPane>

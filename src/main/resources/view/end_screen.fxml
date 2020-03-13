@@ -8,6 +8,7 @@
 <VBox xmlns="http://javafx.com/javafx/10.0.2-internal"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="view.EndScreenController"
+      id="endScreenRoot"
       AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
       AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
       alignment="CENTER" styleClass="box"
@@ -36,5 +37,5 @@
         </columns>
     </TableView>
     <Label styleClass="card-prompt" text="${controller.cardPromptText}"/>
-    <Label fx:id="promptLabel" styleClass="play-again" text="${controller.promptText}"/>
+    <Label fx:id="promptLabel" styleClass="prompt" text="${controller.promptText}"/>
 </VBox>

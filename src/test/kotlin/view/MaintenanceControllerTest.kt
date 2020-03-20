@@ -484,6 +484,6 @@ class MaintenanceControllerTest : ApplicationTest() {
         assertEquals("%X".format(red), redLabel.text)
         assertEquals("%X".format(green), greenLabel.text)
         assertEquals("%X".format(blue), blueLabel.text)
-        assertEquals("%X".format(clearLabel), clearLabel.text)
+        assertEquals("%X".format(clear), clearLabel.text)
     }
 }

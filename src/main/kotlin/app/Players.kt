@@ -27,6 +27,9 @@ class Player(id: EntityID<Int>) : IntEntity(id), IPlayer {
     override var language by Players.language
     override var score by Players.score
 
+    /**
+     * Returns the [id] of the player as stored in the database
+     */
     override fun getIdValue(): Int {
         return id.value
     }

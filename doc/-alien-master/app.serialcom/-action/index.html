@@ -14,10 +14,11 @@ between the micro-controller and the PC
 via serial communication.</p>
 <p><a href="./index.html">Action</a> objects will be constructed by parsing
 the incoming string data using the <a href="../-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a></p>
-<p><a href="value.html">value</a> is an optional field. However, as long as
-the <a href="../-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a> was used to create the object
-the <a href="value.html">value</a> will not be null if the <a href="action.html">action</a> is of type
-<a href="../-action-type/-s-e-t.html">ActionType.SET</a> or <a href="../-action-type/-r-e-p-o-r-t.html">ActionType.REPORT</a></p>
+<p><a href="values.html">values</a> are optional. However, as long as
+    the <a href="../-action-from-yaml-builder/index.html">ActionFromYamlBuilder</a> was used to create the object
+    the <a href="values.html">values</a> will not be an empty list if the <a href="action.html">action</a> is of type
+    <a href="../-action-type/-s-e-t.html">ActionType.SET</a> or <a href="../-action-type/-r-e-p-o-r-t.html">ActionType.REPORT</a>
+</p>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -25,11 +26,28 @@ the <a href="value.html">value</a> will not be null if the <a href="action.html"
 <td>
 <h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
-<td>
-<p>The <a href="./index.html">Action</a> class is used for exchanging data
-between the micro-controller and the PC
-via serial communication.</p>
-<code><span class="identifier">Action</span><span class="symbol">(</span><span class="identifier" id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.Int)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-action-type/index.html"><span class="identifier">ActionType</span></a><span class="symbol">, </span><span class="identifier" id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.Int)/deviceType">deviceType</span><span class="symbol">:</span>&nbsp;<a href="../-device-type/index.html"><span class="identifier">DeviceType</span></a><span class="symbol">, </span><span class="identifier" id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.Int)/deviceId">deviceId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.Int)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span><span class="symbol">)</span></code></td>
+    <td>
+        <p>The <a href="./index.html">Action</a> class is used for exchanging data
+            between the micro-controller and the PC
+            via serial communication.</p>
+        <code><span class="identifier">Action</span><span class="symbol">(</span><span class="identifier"
+                                                                                       id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.collections.List((kotlin.Int)))/action">action</span><span
+                class="symbol">:</span>&nbsp;<a href="../-action-type/index.html"><span
+                class="identifier">ActionType</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                            id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.collections.List((kotlin.Int)))/deviceType">deviceType</span><span
+                class="symbol">:</span>&nbsp;<a href="../-device-type/index.html"><span
+                class="identifier">DeviceType</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                            id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.collections.List((kotlin.Int)))/deviceId">deviceId</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                     id="app.serialcom.Action$<init>(app.serialcom.ActionType, app.serialcom.DeviceType, kotlin.Int, kotlin.collections.List((kotlin.Int)))/values">values</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+    </td>
 </tr>
 </tbody>
 </table>
@@ -59,10 +77,14 @@ via serial communication.</p>
 </tr>
 <tr>
 <td>
-<h4><a href="value.html">value</a></h4>
+    <h4><a href="values.html">values</a></h4>
 </td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">value</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span></code></td>
+    <td>
+        <code><span class="keyword">val </span><span class="identifier">values</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 </tbody>
 </table>

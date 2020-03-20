@@ -35,28 +35,45 @@ and interactions happening in the view defined by the end_screen.fxml.</p>
 <h4><a href="all-players.html">allPlayers</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">allPlayers</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">&gt;</span></code></td>
+    <code><span class="keyword">val </span><span class="identifier">allPlayers</span><span class="symbol">: </span><a
+            href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+            class="identifier">List</span></a><span class="symbol">&lt;</span><a
+            href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a><span
+            class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="name-column.html">nameColumn</a></h4>
 </td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">nameColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">nameColumn</span><span
+                class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a
+                href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a><span
+                class="symbol">,</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span
+                class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="players-table.html">playersTable</a></h4>
 </td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">playersTable</span><span class="symbol">: </span><span class="identifier">TableView</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">&gt;</span></code></td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">playersTable</span><span
+                class="symbol">: </span><span class="identifier">TableView</span><span class="symbol">&lt;</span><a
+                href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a><span class="symbol">&gt;</span></code>
+    </td>
 </tr>
 <tr>
 <td>
 <h4><a href="position-column.html">positionColumn</a></h4>
 </td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">positionColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">positionColumn</span><span
+                class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a
+                href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a><span
+                class="symbol">,</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
@@ -69,8 +86,13 @@ and interactions happening in the view defined by the end_screen.fxml.</p>
 <td>
 <h4><a href="score-column.html">scoreColumn</a></h4>
 </td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">scoreColumn</span><span class="symbol">: </span><span class="identifier">TableColumn</span><span class="symbol">&lt;</span><a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+    <td>
+        <code><span class="keyword">var </span><span class="identifier">scoreColumn</span><span class="symbol">: </span><span
+                class="identifier">TableColumn</span><span class="symbol">&lt;</span><a
+                href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a><span
+                class="symbol">,</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
@@ -228,8 +250,8 @@ appearing in the view.</p>
 </td>
     <td>
         <code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">currentPlayer</span><span
-                class="symbol">: </span><a href="../../app/-player/index.html"><span
-                class="identifier">Player</span></a></code></td>
+                class="symbol">: </span><a href="../../app/-i-player/index.html"><span class="identifier">IPlayer</span></a></code>
+    </td>
 </tr>
 <tr>
     <td>
@@ -275,9 +297,26 @@ appearing in the view.</p>
 <td>
 <h4><a href="load-with-animation.html">loadWithAnimation</a></h4>
 </td>
-<td>
-<p>Loads this view with an animated transition.</p>
-<code><span class="keyword">fun </span><span class="identifier">loadWithAnimation</span><span class="symbol">(</span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/root">root</span><span class="symbol">:</span>&nbsp;<span class="identifier">Pane</span><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../../app/-player/index.html"><span class="identifier">Player</span></a><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/score">score</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.Player, kotlin.Int, kotlin.Boolean)/isNewTopScore">isNewTopScore</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+    <td>
+        <p>Loads this view with an animated transition.</p>
+        <code><span class="keyword">fun </span><span class="identifier">loadWithAnimation</span><span
+                class="symbol">(</span><span class="identifier"
+                                             id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.IPlayer, kotlin.Int, kotlin.Boolean)/root">root</span><span
+                class="symbol">:</span>&nbsp;<span class="identifier">Pane</span><span class="symbol">, </span><span
+                class="identifier"
+                id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.IPlayer, kotlin.Int, kotlin.Boolean)/player">player</span><span
+                class="symbol">:</span>&nbsp;<a href="../../app/-i-player/index.html"><span
+                class="identifier">IPlayer</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                         id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.IPlayer, kotlin.Int, kotlin.Boolean)/score">score</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span
+                class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                     id="view.EndScreenController.Companion$loadWithAnimation(javafx.scene.layout.Pane, app.IPlayer, kotlin.Int, kotlin.Boolean)/isNewTopScore">isNewTopScore</span><span
+                class="symbol">:</span>&nbsp;<a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span
+                class="symbol">)</span><span class="symbol">: </span><a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+    </td>
 </tr>
 </tbody>
 </table>

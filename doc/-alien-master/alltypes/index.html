@@ -54,10 +54,21 @@ It is part of the <a href="../app.serialcom/-action/index.html">Action</a> class
   controller always exists as long as the game window is opened.</p>
 </tr>
 <tr>
+ <h5><a href="../app/-i-player/index.html">app.IPlayer</a></h5>
+ <p>Any class that represents a player must implement
+  this interface.</p>
+</tr>
+<tr>
  <h5><a href="../app/-language/index.html">app.Language</a></h5>
+ <p>The <a href="../app/-language/index.html">Language</a> enum class is a helper class for storing any
+  language-related information, for example <a href="../app/-language/code.html">code</a>, <a
+          href="../app/-language/locale.html">locale</a> (used for TTS) and <a
+          href="../app/-language/readable-name.html">readableName</a>
+  if we want to display it.</p>
 </tr>
 <tr>
  <h5><a href="../app/-language-not-found-exception/index.html">app.LanguageNotFoundException</a></h5>
+ <p>Thrown when <a href="../app/-language/from-code.html">Language.fromCode</a> fails to find equivalent enum value.</p>
 </tr>
 <tr>
  <h5><a href="../view/-load-animation/index.html">view.LoadAnimation</a></h5>
@@ -76,6 +87,10 @@ fxml file maintenance_view.fxml.</p>
 </tr>
 <tr>
 <h5><a href="../app.serialcom/-message-from-yaml-builder/index.html">app.serialcom.MessageFromYamlBuilder</a></h5>
+ <p>The <a href="../app.serialcom/-message-from-yaml-builder/index.html">MessageFromYamlBuilder</a> is an abstract class
+  for any builder that takes the incoming data
+  and parses is into type <a href="../app.serialcom/-message-from-yaml-builder/index.html#T">T</a> in the YAML format.
+ </p>
 </tr>
 <tr>
 <h5><a href="../app/-message-parser/index.html">app.MessageParser</a></h5>
@@ -85,10 +100,11 @@ possible messages, <a href="../app.serialcom/-action/index.html">Action</a> or <
 </tr>
 <tr>
 <h5><a href="../app.serialcom/-on-available-ports-change-listener/index.html">app.serialcom.OnAvailablePortsChangeListener</a></h5>
-<p>This interface should be implemented by every class that wants to keep
-the list of available serial communication ports up to date.
-The method should update the list by taking the up-to-date list
-of ports using <a href="#">SerialCommunication.getAllPorts</a> method.</p>
+ <p>This interface should be implemented by every class that wants to keep
+  the list of available serial communication ports up to date.
+  The method should update the list by taking the up-to-date list
+  of ports using <a href="../app.serialcom/-serial-communication/get-all-available-ports.html">SerialCommunication.getAllAvailablePorts</a>
+  method.</p>
 </tr>
 <tr>
 <h5><a href="../app/-on-message-received-listener/index.html">app.OnMessageReceivedListener</a></h5>

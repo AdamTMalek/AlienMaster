@@ -464,4 +464,26 @@ class MaintenanceControllerTest : ApplicationTest() {
         val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
         assertEquals("lowered", label.text)
     }
+
+    @Test
+    fun testColourParsedCorrectly() {
+        val red = 0xFFFF
+        val green = 0xDDDD
+        val blue = 0xBBBB
+        val clear = 0x9999
+        val action = Action(ActionType.REPORT, DeviceType.COLOUR_SENSOR, 0, listOf(red, green, blue, clear)).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+
+        val redLabel = lookup("#redReading").tryQuery<Label>().get()
+        val greenLabel = lookup("#greenReading").tryQuery<Label>().get()
+        val blueLabel = lookup("#blueReading").tryQuery<Label>().get()
+        val clearLabel = lookup("#clearReading").tryQuery<Label>().get()
+
+        assertEquals("%X".format(red), redLabel.text)
+        assertEquals("%X".format(green), greenLabel.text)
+        assertEquals("%X".format(blue), blueLabel.text)
+        assertEquals("%X".format(clearLabel), clearLabel.text)
+    }
 }

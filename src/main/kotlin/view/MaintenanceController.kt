@@ -446,7 +446,13 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     fun requestColourReading() {
-        TODO("Send request via serial")
+        val action = Action(ActionType.GET, DeviceType.COLOUR_SENSOR, 0, emptyList())
+
+        try {
+            sendAction(action)
+        } catch (ex: IllegalStateException) {
+            displaySerialNotConnectedError()
+        }
     }
 
     fun requestDistanceSensorReading() {

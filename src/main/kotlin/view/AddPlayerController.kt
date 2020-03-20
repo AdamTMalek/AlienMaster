@@ -32,6 +32,9 @@ class AddPlayerController : Initializable {
     companion object {
         private var player: Player? = null
 
+        /**
+         * Opens a new window and uses [Stage.showAndWait] to display it
+         */
         fun showView(): Player? {
             val url = this::class.java.classLoader.getResource("view/add_player_view.fxml")
             val loader = FXMLLoader().apply { location = url }
@@ -53,6 +56,9 @@ class AddPlayerController : Initializable {
         addFormatterToScoreField()
     }
 
+    /**
+     * Adds text formatter to the score field that only accepts numbers
+     */
     private fun addFormatterToScoreField() {
         val format = NumberFormat.getIntegerInstance()
         scoreInput.textFormatter = TextFormatter<String> { change ->
@@ -74,6 +80,9 @@ class AddPlayerController : Initializable {
         closeWindow()
     }
 
+    /**
+     * Submits the form and saves the new player to the database, then it closes the window
+     */
     fun save() {
         val name = nameInput.text
         val language = langChoice.selectionModel.selectedItem.code

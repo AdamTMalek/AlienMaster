@@ -1,7 +1,6 @@
 package view
 
 import app.IPlayer
-import app.Player
 import app.PlayerGenerator
 import app.PlayersDatabase
 import javafx.beans.value.ChangeListener
@@ -28,12 +27,16 @@ import java.util.*
 class EditorViewController : Initializable, ChangeListener<String> {
     @FXML
     private var playersTable = TableView<IPlayer>()
+
     @FXML
     private var idColumn = TableColumn<IPlayer, Int>()
+
     @FXML
     private var nameColumn = TableColumn<IPlayer, String>()
+
     @FXML
     private var langColumn = TableColumn<IPlayer, String>()
+
     @FXML
     private var scoreColumn = TableColumn<IPlayer, Int>()
 
@@ -60,23 +63,26 @@ class EditorViewController : Initializable, ChangeListener<String> {
         loadPlayers()
     }
 
+    /**
+     * Sets up the players table by setting up the cell value factories and cell factories.
+     */
     private fun setupTable() {
-        idColumn.cellValueFactory = PropertyValueFactory<IPlayer, Int>("id")
-        nameColumn.cellValueFactory = PropertyValueFactory<IPlayer, String>("name")
+        idColumn.cellValueFactory = PropertyValueFactory("id")
+        nameColumn.cellValueFactory = PropertyValueFactory("name")
         nameColumn.cellFactory = TextFieldTableCell.forTableColumn()
         nameColumn.setOnEditCommit {
             PlayersDatabase.changeName(it.rowValue, it.newValue)
             loadPlayers()
         }
 
-        langColumn.cellValueFactory = PropertyValueFactory<IPlayer, String>("language")
+        langColumn.cellValueFactory = PropertyValueFactory("language")
         langColumn.cellFactory = TextFieldTableCell.forTableColumn()
         langColumn.setOnEditCommit {
             PlayersDatabase.changeLanguage(it.rowValue, it.newValue)
             loadPlayers()
         }
 
-        scoreColumn.cellValueFactory = PropertyValueFactory<IPlayer, Int>("score")
+        scoreColumn.cellValueFactory = PropertyValueFactory("score")
         scoreColumn.cellFactory = TextFieldTableCell.forTableColumn(IntegerStringConverter())
         scoreColumn.setOnEditCommit {
             PlayersDatabase.changeScore(it.rowValue, it.newValue)
@@ -84,8 +90,8 @@ class EditorViewController : Initializable, ChangeListener<String> {
         }
     }
 
-
     fun close() {
+        playersTable.scene.window.hide()
     }
 
     /**
@@ -138,12 +144,18 @@ class EditorViewController : Initializable, ChangeListener<String> {
         return alert.showAndWait().get()
     }
 
+    /**
+     * Adds each player from the list of [players] to the database.
+     */
     private fun addPlayersToTheDatabase(players: List<PlayerGenerator.Player>) {
         players.forEach { player ->
             PlayersDatabase.addPlayer(player.name, player.language.code, player.score)
         }
     }
 
+    /**
+     * Called when Remove All Players button gets clicked
+     */
     fun removeAllPlayers() {
         PlayersDatabase.dropPlayersTable()
         PlayersDatabase.createPlayersTable()
@@ -151,6 +163,9 @@ class EditorViewController : Initializable, ChangeListener<String> {
         loadPlayers()
     }
 
+    /**
+     * Called when Add Player button gets clicked
+     */
     fun addPlayer() {
         AddPlayerController.showView()
         loadPlayers()
@@ -160,6 +175,9 @@ class EditorViewController : Initializable, ChangeListener<String> {
         loadPlayers()
     }
 
+    /**
+     * Loads players from the database and adds them to the [playersTable]
+     */
     private fun loadPlayers() {
         val players = PlayersDatabase.getAllPlayers()
         playersTable.items = FXCollections.observableList(players)

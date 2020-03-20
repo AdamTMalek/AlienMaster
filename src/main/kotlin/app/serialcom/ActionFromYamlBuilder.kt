@@ -12,7 +12,7 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
     private var actionType: ActionType? = null
     private var deviceType: DeviceType? = null
     private var deviceId: Int = -1
-    private var value: Int? = null  // TODO: Change to list of ints
+    private var values = emptyList<Int>()
 
     /**
      * Given the [line] set the correct field of the [Action] object
@@ -28,7 +28,7 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
         when (key) {
             "action" -> actionType = ActionType.fromString(value)
             "device" -> setDeviceTypeAndId(value)
-            "value" -> this.value = value.toInt()
+            "value" -> this.values = value.split(", ").map { it.toInt() }
         }
 
         return this
@@ -47,7 +47,7 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
      */
     override fun isReady(): Boolean {
         return if (isValueRequired())
-            hasRequiredFields() && value != null
+            hasRequiredFields() && values.isNotEmpty()
         else
             hasRequiredFields()
     }
@@ -77,6 +77,6 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
         if (!isReady())
             throw IllegalStateException("The object is not ready to be built")
 
-        return Action(actionType!!, deviceType!!, deviceId, listOf(value!!))
+        return Action(actionType!!, deviceType!!, deviceId, values)
     }
 }

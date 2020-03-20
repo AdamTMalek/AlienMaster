@@ -60,16 +60,33 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     private var button5 = Rectangle()
     @FXML
     private var led5 = Circle()
+
     @FXML
     private var userIdLabel = Label()
+
     @FXML
     private var logText = TextArea()
+
     @FXML
     private var distanceReading = Label()
+
     @FXML
     private var goodAlienStateLabel = Label()
+
     @FXML
     private var badAlienStateLabel = Label()
+
+    @FXML
+    private var redReading = Label()
+
+    @FXML
+    private var greenReading = Label()
+
+    @FXML
+    private var blueReading = Label()
+
+    @FXML
+    private var clearReading = Label()
 
     // The message parser will be used for creating messages out of incoming yaml from serial
     private val messageParser = MessageParser()
@@ -414,6 +431,10 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         } catch (ex: IllegalStateException) {
             displaySerialNotConnectedError()
         }
+    }
+
+    fun requestColourReading() {
+        TODO("Send request via serial")
     }
 
     fun requestDistanceSensorReading() {

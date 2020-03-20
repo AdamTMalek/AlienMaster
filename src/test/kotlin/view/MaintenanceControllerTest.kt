@@ -486,4 +486,15 @@ class MaintenanceControllerTest : ApplicationTest() {
         assertEquals("%X".format(blue), blueLabel.text)
         assertEquals("%X".format(clear), clearLabel.text)
     }
+
+    @Test
+    fun testSendsColourReadingRequest() {
+        Thread.sleep(10) // Wait for the window to show up
+        val button = lookup("#requestColourButton").tryQuery<Node>().get()
+
+        clickOn(button)
+
+        val expectedActionText = Action(ActionType.GET, DeviceType.COLOUR_SENSOR, 0, emptyList()).toYaml()
+        assertEquals(expectedActionText, serial.lastMessage)
+    }
 }

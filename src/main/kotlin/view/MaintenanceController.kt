@@ -181,14 +181,14 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     private fun requestLedStates() {
-        val actions = (0..5).map { Action(ActionType.GET, DeviceType.LED, it, null) }
+        val actions = (0..5).map { Action(ActionType.GET, DeviceType.LED, it, emptyList()) }
         actions.forEach { action ->
             sendAction(action)
         }
     }
 
     private fun requestAlienStates() {
-        val actions = (0..1).map { Action(ActionType.GET, DeviceType.SERVO, it, null) }
+        val actions = (0..1).map { Action(ActionType.GET, DeviceType.SERVO, it, emptyList()) }
         actions.forEach { action ->
             sendAction(action)
         }
@@ -220,7 +220,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         if (action.deviceType != DeviceType.BUTTON)
             throw IllegalArgumentException("Action is not a button action")
 
-        val isPressed = action.value!! == 1
+        val isPressed = action.values.first() == 1
         when (action.deviceId) {
             0 -> changeButtonState(button0, isPressed)
             1 -> changeButtonState(button1, isPressed)
@@ -241,7 +241,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         if (action.deviceType != DeviceType.CARD)
             throw IllegalArgumentException("Action is not a card reader action")
 
-        val id = action.value!!
+        val id = action.values.first()
 
         userIdLabel.text = if (id <= -1)
             "(card not present)"
@@ -259,7 +259,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         if (action.deviceType != DeviceType.DISTANCE_SENSOR)
             throw IllegalArgumentException("Action is not a distance sensor action")
 
-        val distance = action.value!!
+        val distance = action.values.first()
         distanceReading.text = distance.toString()
     }
 
@@ -283,7 +283,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             else -> return
         }
 
-        if (action.value == 1)
+        if (action.values.first() == 1)
             setLedActive(led)
         else
             setLedInactive(led)
@@ -299,7 +299,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         if (action.deviceType != DeviceType.SERVO)
             throw IllegalArgumentException("Action is not a servo action")
 
-        val isRaised = action.value == 1
+        val isRaised = action.values.first() == 1
 
         when (action.deviceId) {
             0 -> changeAlienStateLabel(goodAlienStateLabel, isRaised)
@@ -394,7 +394,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
      */
     private fun sendSetLedAction(id: Int, on: Boolean) {
         val value = if (on) 1 else 0
-        val action = Action(ActionType.SET, DeviceType.LED, id, value)
+        val action = Action(ActionType.SET, DeviceType.LED, id, listOf(value))
         sendAction(action)
     }
 
@@ -424,7 +424,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
 
     private fun moveAlien(alienId: Int, raise: Boolean) {
         val value = if (raise) 1 else 0
-        val action = Action(ActionType.SET, DeviceType.SERVO, alienId, value)
+        val action = Action(ActionType.SET, DeviceType.SERVO, alienId, listOf(value))
 
         try {
             sendAction(action)
@@ -438,7 +438,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
     }
 
     fun requestDistanceSensorReading() {
-        val action = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null)
+        val action = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, emptyList())
 
         try {
             sendAction(action)

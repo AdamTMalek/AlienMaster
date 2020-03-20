@@ -12,7 +12,7 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
     private var actionType: ActionType? = null
     private var deviceType: DeviceType? = null
     private var deviceId: Int = -1
-    private var value: Int? = null
+    private var value: Int? = null  // TODO: Change to list of ints
 
     /**
      * Given the [line] set the correct field of the [Action] object
@@ -77,6 +77,6 @@ class ActionFromYamlBuilder : MessageFromYamlBuilder<Action>() {
         if (!isReady())
             throw IllegalStateException("The object is not ready to be built")
 
-        return Action(actionType!!, deviceType!!, deviceId, value)
+        return Action(actionType!!, deviceType!!, deviceId, listOf(value!!))
     }
 }

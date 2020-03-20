@@ -490,7 +490,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
         if (pressed)
             button.styleClass.add(BUTTON_PRESSED_STYLE)
         else
-            button.styleClass.remove(BUTTON_PRESSED_STYLE)
+            button.styleClass.removeIf { it == BUTTON_PRESSED_STYLE }
     }
 
     /**

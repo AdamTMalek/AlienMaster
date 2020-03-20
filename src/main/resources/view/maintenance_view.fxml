@@ -122,6 +122,29 @@
                 <Label fx:id="userIdLabel" id="userIdLabel" text="(card not present)" GridPane.columnIndex="1"/>
             </GridPane>
 
+            <!-- Colour sensor -->
+            <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="Colour Sensor">
+                <padding>
+                    <Insets top="40"/>
+                </padding>
+            </Label>
+            <GridPane hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button onAction="#requestColourReading" id="requestColourButton" text="Request colour reading"/>
+                <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" spacing="20">
+                    <Label text="Red:"/>
+                    <Label fx:id="redReading" id="redReading"/>
+                    <Label text="Green:"/>
+                    <Label fx:id="greenReading" id="greenReading"/>
+                    <Label text="Blue:"/>
+                    <Label fx:id="blueReading" id="blueReading"/>
+                    <Label text="Clear:"/>
+                    <Label fx:id="clearReading" id="clearReading"/>
+                </HBox>
+            </GridPane>
+
             <!-- Distance sensor -->
             <Label alignment="TOP_LEFT" maxWidth="Infinity" styleClass="underline" text="Distance Sensor">
                 <padding>

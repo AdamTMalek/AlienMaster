@@ -41,6 +41,13 @@ class DeviceTypeTest {
     }
 
     @Test
+    fun testColourSensorFromString() {
+        val expected = DeviceType.COLOUR_SENSOR
+        val actual = DeviceType.fromString("tcs")
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun testThrowsUnknownDeviceException() {
         assertThrows<UnknownDeviceTypeException> {
             DeviceType.fromString("aaa")

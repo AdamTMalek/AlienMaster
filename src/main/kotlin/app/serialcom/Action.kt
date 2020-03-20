@@ -8,24 +8,25 @@ package app.serialcom
  * [Action] objects will be constructed by parsing
  * the incoming string data using the [ActionFromYamlBuilder]
  *
- * [value] is an optional field. However, as long as
+ * [values] are optional. However, as long as
  * the [ActionFromYamlBuilder] was used to create the object
- * the [value] will not be null if the [action] is of type
+ * the [values] will not be an empty list if the [action] is of type
  * [ActionType.SET] or [ActionType.REPORT]
  */
-data class Action(val action: ActionType, val deviceType: DeviceType, val deviceId: Int, val value: Int?) {
+data class Action(val action: ActionType, val deviceType: DeviceType, val deviceId: Int, val values: List<Int>) {
     /**
      * Translate the object into equivalent YAML representation
      */
     fun toYaml(): String {
-        var yaml = "{\n\taction: ${action.code}\n\tdevice: ${deviceType.code}$deviceId\n"
+        var yaml = "{\n\taction: ${action.code}\n\tdevice: ${deviceType.code}$deviceId"
 
-        if (value != null)
-        // The blank line is so that the value appears on the
-        // next line. If it was not there, the value would
-        // go right after the device id
-            yaml += "\tvalue: $value\n"
+        if (values.isNotEmpty()) {
+            // The blank line is so that the value appears on the
+            // next line. If it was not there, the value would
+            // go right after the device id
+            yaml += "\n\tvalue: ${values.joinToString()}"
+        }
 
-        return "$yaml}"
+        return "$yaml\n}"
     }
 }

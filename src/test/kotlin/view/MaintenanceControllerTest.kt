@@ -136,11 +136,11 @@ class MaintenanceControllerTest : ApplicationTest() {
         deviceIds.forEach { id ->
             val led = lookup("#led$id").tryQuery<Node>().get()
 
-            val expectedTurnOnActionText = Action(ActionType.SET, DeviceType.LED, id, 1).toYaml()
+            val expectedTurnOnActionText = Action(ActionType.SET, DeviceType.LED, id, listOf(1)).toYaml()
             clickOn(led)
             assertEquals(expectedTurnOnActionText, serial.lastMessage)
 
-            val expectedTurnOffActionText = Action(ActionType.SET, DeviceType.LED, id, 0).toYaml()
+            val expectedTurnOffActionText = Action(ActionType.SET, DeviceType.LED, id, listOf(0)).toYaml()
             clickOn(led)
             assertEquals(expectedTurnOffActionText, serial.lastMessage)
         }
@@ -201,7 +201,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         clickOn(button)
 
-        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 0, 1).toYaml()
+        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 0, listOf(1)).toYaml()
         assertEquals(expectedActionText, serial.lastMessage)
     }
 
@@ -212,7 +212,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         clickOn(button)
 
-        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 0, 0).toYaml()
+        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 0, listOf(0)).toYaml()
         assertEquals(expectedActionText, serial.lastMessage)
     }
 
@@ -223,7 +223,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         clickOn(button)
 
-        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 1, 1).toYaml()
+        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 1, listOf(1)).toYaml()
         assertEquals(expectedActionText, serial.lastMessage)
     }
 
@@ -234,7 +234,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         clickOn(button)
 
-        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 1, 0).toYaml()
+        val expectedActionText = Action(ActionType.SET, DeviceType.SERVO, 1, listOf(0)).toYaml()
         assertEquals(expectedActionText, serial.lastMessage)
     }
 
@@ -242,7 +242,7 @@ class MaintenanceControllerTest : ApplicationTest() {
     fun testCardIdIsUpdatedWithCardPresent() {
         Thread.sleep(10) // Wait for the window to show up
         val userIdLabel = lookup("#userIdLabel").tryQuery<Label>().get()
-        val receivedAction = Action(ActionType.REPORT, DeviceType.CARD, 0, 15).toYaml()
+        val receivedAction = Action(ActionType.REPORT, DeviceType.CARD, 0, listOf(15)).toYaml()
 
         serial.dataListeners.first().onDataReceived(receivedAction)
 
@@ -260,7 +260,7 @@ class MaintenanceControllerTest : ApplicationTest() {
         Thread.sleep(100) // Wait for the window to show up and for the Platform.runLater to execute
 
 
-        val receivedAction = Action(ActionType.REPORT, DeviceType.CARD, 0, -1).toYaml()
+        val receivedAction = Action(ActionType.REPORT, DeviceType.CARD, 0, listOf(-1)).toYaml()
 
         serial.dataListeners.first().onDataReceived(receivedAction)
 
@@ -287,7 +287,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         clickOn(button)
 
-        val expectedText = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, null).toYaml()
+        val expectedText = Action(ActionType.GET, DeviceType.DISTANCE_SENSOR, 0, emptyList()).toYaml()
         assertEquals(expectedText, serial.lastMessage)
     }
 
@@ -295,7 +295,7 @@ class MaintenanceControllerTest : ApplicationTest() {
     fun testDistanceIsSet() {
         Thread.sleep(10) // Wait for the window to show up
         val distanceLabel = lookup("#distanceReading").tryQuery<Label>().get()
-        val incomingAction = Action(ActionType.REPORT, DeviceType.DISTANCE_SENSOR, 0, 6).toYaml()
+        val incomingAction = Action(ActionType.REPORT, DeviceType.DISTANCE_SENSOR, 0, listOf(6)).toYaml()
         serial.dataListeners.first().onDataReceived(incomingAction)
 
         Thread.sleep(100) // Wait for the Platform.runLater to execute
@@ -304,7 +304,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testIncomingActionIsLogged() {
-        val incomingAction = Action(ActionType.REPORT, DeviceType.DISTANCE_SENSOR, 0, 6).toYaml()
+        val incomingAction = Action(ActionType.REPORT, DeviceType.DISTANCE_SENSOR, 0, listOf(6)).toYaml()
         serial.dataListeners.first().onDataReceived(incomingAction)
 
         val expectedText = Regex("action: report\\s+device: DST0\\s+value: 6")
@@ -320,7 +320,7 @@ class MaintenanceControllerTest : ApplicationTest() {
     fun testButtonsGetPressedStyleWhenReportReceived() {
         val ids = (0..5)
         ids.forEach { id ->
-            val incomingAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, 1).toYaml()
+            val incomingAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, listOf(1)).toYaml()
             serial.dataListeners.first().onDataReceived(incomingAction)
 
             val button = lookup("#button$id").tryQuery<Node>().get()
@@ -334,10 +334,10 @@ class MaintenanceControllerTest : ApplicationTest() {
     fun testButtonsGetPressedStyleRemoved() {
         val ids = (0..5)
         ids.forEach { id ->
-            val pressedAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, 1).toYaml()
+            val pressedAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, listOf(1)).toYaml()
             serial.dataListeners.first().onDataReceived(pressedAction)
 
-            val unpressedAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, 0).toYaml()
+            val unpressedAction = Action(ActionType.REPORT, DeviceType.BUTTON, id, listOf(0)).toYaml()
             serial.dataListeners.first().onDataReceived(unpressedAction)
 
             val button = lookup("#button$id").tryQuery<Node>().get()
@@ -349,7 +349,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testLedActivatesWhenReportReceived() {
-        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 1).toYaml() }
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, listOf(1)).toYaml() }
         actions.forEachIndexed { index, action ->
             serial.dataListeners.first().onDataReceived(action)
 
@@ -368,7 +368,7 @@ class MaintenanceControllerTest : ApplicationTest() {
         leds.forEach { it.styleClass.add(MaintenanceController.LED_ACTIVE_STYLE) }
 
         // Test
-        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, 0).toYaml() }
+        val actions = (0..5).map { Action(ActionType.REPORT, DeviceType.LED, it, listOf(0)).toYaml() }
         actions.forEachIndexed { index, action ->
             serial.dataListeners.first().onDataReceived(action)
 
@@ -391,7 +391,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testGoodAlienStateWhenRaised() {
-        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 1).toYaml()
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, listOf(1)).toYaml()
         serial.dataListeners.first().onDataReceived(action)
 
         Thread.sleep(100)
@@ -401,7 +401,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testGoodAlienStateWhenLowered() {
-        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, 0).toYaml()
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 0, listOf(0)).toYaml()
         serial.dataListeners.first().onDataReceived(action)
 
         Thread.sleep(100)
@@ -411,7 +411,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testBadAlienStateWhenRaised() {
-        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 1).toYaml()
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, listOf(1)).toYaml()
         serial.dataListeners.first().onDataReceived(action)
 
         Thread.sleep(100)
@@ -421,7 +421,7 @@ class MaintenanceControllerTest : ApplicationTest() {
 
     @Test
     fun testBadAlienStateWhenLowered() {
-        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, 0).toYaml()
+        val action = Action(ActionType.REPORT, DeviceType.SERVO, 1, listOf(0)).toYaml()
         serial.dataListeners.first().onDataReceived(action)
 
         Thread.sleep(100)
@@ -463,5 +463,38 @@ class MaintenanceControllerTest : ApplicationTest() {
 
         val label = lookup("#badAlienStateLabel").tryQuery<Label>().get()
         assertEquals("lowered", label.text)
+    }
+
+    @Test
+    fun testColourParsedCorrectly() {
+        val red = 0xFFFF
+        val green = 0xDDDD
+        val blue = 0xBBBB
+        val clear = 0x9999
+        val action = Action(ActionType.REPORT, DeviceType.COLOUR_SENSOR, 0, listOf(red, green, blue, clear)).toYaml()
+        serial.dataListeners.first().onDataReceived(action)
+
+        Thread.sleep(100)
+
+        val redLabel = lookup("#redReading").tryQuery<Label>().get()
+        val greenLabel = lookup("#greenReading").tryQuery<Label>().get()
+        val blueLabel = lookup("#blueReading").tryQuery<Label>().get()
+        val clearLabel = lookup("#clearReading").tryQuery<Label>().get()
+
+        assertEquals("%X".format(red), redLabel.text)
+        assertEquals("%X".format(green), greenLabel.text)
+        assertEquals("%X".format(blue), blueLabel.text)
+        assertEquals("%X".format(clear), clearLabel.text)
+    }
+
+    @Test
+    fun testSendsColourReadingRequest() {
+        Thread.sleep(10) // Wait for the window to show up
+        val button = lookup("#requestColourButton").tryQuery<Node>().get()
+
+        clickOn(button)
+
+        val expectedActionText = Action(ActionType.GET, DeviceType.COLOUR_SENSOR, 0, emptyList()).toYaml()
+        assertEquals(expectedActionText, serial.lastMessage)
     }
 }

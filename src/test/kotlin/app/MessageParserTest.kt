@@ -84,6 +84,27 @@ class MessageParserTest {
     }
 
     @Test
+    fun testParsesActionWithMultipleValues() {
+        val message = "{\n\taction: report\n\tdevice: TCS0\n\tvalue: 1, 2, 3, 4\n}"
+
+        var receivedAction: Action? = null
+        val listener = object : OnMessageReceivedListener {
+            override fun onActionReceived(action: Action) {
+                receivedAction = action
+            }
+
+            override fun onStateReceived(state: StateMessage) {
+            }
+        }
+
+        val parser = MessageParser()
+        parser.addListener(listener)
+        parser.parse(message)
+
+        assertEquals(listOf(1, 2, 3, 4), receivedAction!!.values)
+    }
+
+    @Test
     fun testParsesState() {
         val message = "{\n\tstate: OVER\n\tvalue: 20\n}"
 

@@ -67,7 +67,7 @@ class ActionFromYamlBuilderTest {
 
     @Test
     fun testParser() {
-        val expected = Action(ActionType.REPORT, DeviceType.CARD, 0, 15)
+        val expected = Action(ActionType.REPORT, DeviceType.CARD, 0, listOf(15))
         val incomingAction = "{\n\taction: report\n\tdevice: CRD0\n\tvalue: 15\n}"
 
         val builder = ActionFromYamlBuilder()

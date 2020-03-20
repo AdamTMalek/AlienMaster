@@ -8,7 +8,9 @@
 <a href="../../index.html">AlienMaster</a>&nbsp;/&nbsp;<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">Player</a><br/>
 <br/>
 <h1>Player</h1>
-<code><span class="keyword">class </span><span class="identifier">Player</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IntEntity</span></code>
+<code><span class="keyword">class </span><span class="identifier">Player</span>&nbsp;<span class="symbol">:</span>&nbsp;<span
+        class="identifier">IntEntity</span><span class="symbol">, </span><a href="../-i-player/index.html"><span
+        class="identifier">IPlayer</span></a></code>
 <p>The <a href="./index.html">Player</a> class is used to represent a single entry from the <a href="../-players/index.html">Players</a> table</p>
 <h3>Types</h3>
 <table>
@@ -63,22 +65,43 @@
 </table>
 <h3>Functions</h3>
 <table>
-<tbody>
-<tr>
-<td>
-<h4><a href="equals.html">equals</a></h4>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="app.Player$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="hash-code.html">hashCode</a></h4>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
-</tr>
-</tbody>
+    <tbody>
+    <tr>
+        <td>
+            <h4><a href="equals.html">equals</a></h4>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">equals</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="app.Player$equals(kotlin.Any)/other">other</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span
+                    class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code></td>
+    </tr>
+    <tr>
+        <td>
+            <h4><a href="get-id-value.html">getIdValue</a></h4>
+        </td>
+        <td>
+            <p>Returns the <a href="#">id</a> of the player as stored in the database</p>
+            <code><span class="keyword">fun </span><span class="identifier">getIdValue</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4><a href="hash-code.html">hashCode</a></h4>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+        </td>
+    </tr>
+    </tbody>
 </table>
 </BODY>
 </HTML>

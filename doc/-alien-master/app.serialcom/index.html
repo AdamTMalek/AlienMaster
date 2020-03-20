@@ -58,6 +58,9 @@ It is part of the <a href="-action/index.html">Action</a> class.</p>
 <h4><a href="-message-from-yaml-builder/index.html">MessageFromYamlBuilder</a></h4>
 </td>
 <td>
+<p>The <a href="-message-from-yaml-builder/index.html">MessageFromYamlBuilder</a> is an abstract class
+    for any builder that takes the incoming data
+    and parses is into type <a href="-message-from-yaml-builder/index.html#T">T</a> in the YAML format.</p>
 <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">MessageFromYamlBuilder</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
@@ -65,10 +68,11 @@ It is part of the <a href="-action/index.html">Action</a> class.</p>
 <h4><a href="-on-available-ports-change-listener/index.html">OnAvailablePortsChangeListener</a></h4>
 </td>
 <td>
-<p>This interface should be implemented by every class that wants to keep
-the list of available serial communication ports up to date.
-The method should update the list by taking the up-to-date list
-of ports using <a href="#">SerialCommunication.getAllPorts</a> method.</p>
+    <p>This interface should be implemented by every class that wants to keep
+        the list of available serial communication ports up to date.
+        The method should update the list by taking the up-to-date list
+        of ports using <a href="-serial-communication/get-all-available-ports.html">SerialCommunication.getAllAvailablePorts</a>
+        method.</p>
 <code><span class="keyword">interface </span><span class="identifier">OnAvailablePortsChangeListener</span></code></td>
 </tr>
 <tr>

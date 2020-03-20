@@ -45,16 +45,16 @@
         </td>
         <td>
             <p>Change the preferred language of the given <a
-                    href="change-language.html#app.PlayersDatabaseStorage$changeLanguage(app.Player, kotlin.String)/player">player</a>
+                    href="change-language.html#app.PlayersDatabaseStorage$changeLanguage(app.IPlayer, kotlin.String)/player">player</a>
                 to
-                <a href="change-language.html#app.PlayersDatabaseStorage$changeLanguage(app.Player, kotlin.String)/newLanguage">newLanguage</a>
+                <a href="change-language.html#app.PlayersDatabaseStorage$changeLanguage(app.IPlayer, kotlin.String)/newLanguage">newLanguage</a>
             </p>
             <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">changeLanguage</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="app.PlayersDatabaseStorage$changeLanguage(app.Player, kotlin.String)/player">player</span><span
-                    class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="app.PlayersDatabaseStorage$changeLanguage(app.Player, kotlin.String)/newLanguage">newLanguage</span><span
+                                                 id="app.PlayersDatabaseStorage$changeLanguage(app.IPlayer, kotlin.String)/player">player</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-i-player/index.html"><span
+                    class="identifier">IPlayer</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                             id="app.PlayersDatabaseStorage$changeLanguage(app.IPlayer, kotlin.String)/newLanguage">newLanguage</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
@@ -67,15 +67,15 @@
         </td>
         <td>
             <p>Change name of the given <a
-                    href="change-name.html#app.PlayersDatabaseStorage$changeName(app.Player, kotlin.String)/player">player</a>
-                to <a href="change-name.html#app.PlayersDatabaseStorage$changeName(app.Player, kotlin.String)/newName">newName</a>
+                    href="change-name.html#app.PlayersDatabaseStorage$changeName(app.IPlayer, kotlin.String)/player">player</a>
+                to <a href="change-name.html#app.PlayersDatabaseStorage$changeName(app.IPlayer, kotlin.String)/newName">newName</a>
             </p>
             <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">changeName</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="app.PlayersDatabaseStorage$changeName(app.Player, kotlin.String)/player">player</span><span
-                    class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="app.PlayersDatabaseStorage$changeName(app.Player, kotlin.String)/newName">newName</span><span
+                                                 id="app.PlayersDatabaseStorage$changeName(app.IPlayer, kotlin.String)/player">player</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-i-player/index.html"><span
+                    class="identifier">IPlayer</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                             id="app.PlayersDatabaseStorage$changeName(app.IPlayer, kotlin.String)/newName">newName</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
@@ -88,16 +88,16 @@
         </td>
         <td>
             <p>Change the top score of the given <a
-                    href="change-score.html#app.PlayersDatabaseStorage$changeScore(app.Player, kotlin.Int)/player">player</a>
+                    href="change-score.html#app.PlayersDatabaseStorage$changeScore(app.IPlayer, kotlin.Int)/player">player</a>
                 to the <a
-                        href="change-score.html#app.PlayersDatabaseStorage$changeScore(app.Player, kotlin.Int)/newScore">newScore</a>
+                        href="change-score.html#app.PlayersDatabaseStorage$changeScore(app.IPlayer, kotlin.Int)/newScore">newScore</a>
             </p>
             <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">changeScore</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="app.PlayersDatabaseStorage$changeScore(app.Player, kotlin.Int)/player">player</span><span
-                    class="symbol">:</span>&nbsp;<a href="../-player/index.html"><span class="identifier">Player</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="app.PlayersDatabaseStorage$changeScore(app.Player, kotlin.Int)/newScore">newScore</span><span
+                                                 id="app.PlayersDatabaseStorage$changeScore(app.IPlayer, kotlin.Int)/player">player</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-i-player/index.html"><span
+                    class="identifier">IPlayer</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                             id="app.PlayersDatabaseStorage$changeScore(app.IPlayer, kotlin.Int)/newScore">newScore</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
                     class="symbol">)</span><span class="symbol">: </span><a
@@ -135,9 +135,8 @@
             <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllPlayers</span><span
                     class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
-                    href="../-player/index.html"><span class="identifier">Player</span></a><span
-                    class="symbol">&gt;</span></code></td>
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-i-player/index.html"><span
+                    class="identifier">IPlayer</span></a><span class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
         <td>
@@ -150,8 +149,8 @@
                                                  id="app.PlayersDatabaseStorage$getPlayerById(kotlin.Int)/id">id</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
-                    class="symbol">)</span><span class="symbol">: </span><a href="../-player/index.html"><span
-                    class="identifier">Player</span></a><span class="symbol">?</span></code></td>
+                    class="symbol">)</span><span class="symbol">: </span><a href="../-i-player/index.html"><span
+                    class="identifier">IPlayer</span></a><span class="symbol">?</span></code></td>
     </tr>
     </tbody>
 </table>

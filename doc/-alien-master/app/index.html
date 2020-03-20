@@ -12,14 +12,28 @@
 <table>
 <tbody>
 <tr>
-<td>
-<h4><a href="-language/index.html">Language</a></h4>
-</td>
-<td>
-<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Language</span></code></td>
+    <td>
+        <h4><a href="-i-player/index.html">IPlayer</a></h4>
+    </td>
+    <td>
+        <p>Any class that represents a player must implement
+            this interface.</p>
+        <code><span class="keyword">interface </span><span class="identifier">IPlayer</span></code></td>
 </tr>
 <tr>
-<td>
+    <td>
+        <h4><a href="-language/index.html">Language</a></h4>
+    </td>
+    <td>
+        <p>The <a href="-language/index.html">Language</a> enum class is a helper class for storing any
+            language-related information, for example <a href="-language/code.html">code</a>, <a
+                    href="-language/locale.html">locale</a> (used for TTS) and <a href="-language/readable-name.html">readableName</a>
+            if we want to display it.</p>
+        <code><span class="keyword">enum</span> <span class="keyword">class </span><span
+                class="identifier">Language</span></code></td>
+</tr>
+<tr>
+    <td>
 <h4><a href="-main-app/index.html">MainApp</a></h4>
 </td>
 <td>
@@ -49,9 +63,12 @@ must implement this interface.</p>
 <td>
 <h4><a href="-player/index.html">Player</a></h4>
 </td>
-<td>
-<p>The <a href="-player/index.html">Player</a> class is used to represent a single entry from the <a href="-players/index.html">Players</a> table</p>
-<code><span class="keyword">class </span><span class="identifier">Player</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IntEntity</span></code></td>
+    <td>
+        <p>The <a href="-player/index.html">Player</a> class is used to represent a single entry from the <a
+                href="-players/index.html">Players</a> table</p>
+        <code><span class="keyword">class </span><span class="identifier">Player</span>&nbsp;<span
+                class="symbol">:</span>&nbsp;<span class="identifier">IntEntity</span><span class="symbol">, </span><a
+                href="-i-player/index.html"><span class="identifier">IPlayer</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -67,10 +84,11 @@ database.</p>
 <td>
 <h4><a href="-players/index.html">Players</a></h4>
 </td>
-<td>
-<p>This object defines the database table properties like the field it contains, what the primary key is etc.</p>
-    <code><span class="keyword">object </span><span class="identifier">Players</span>&nbsp;<span class="symbol">:</span>&nbsp;<span
-            class="identifier">IntIdTable</span></code></td>
+    <td>
+        <p>This object defines the database table properties like the field it contains, what the primary key is
+            etc.</p>
+        <code><span class="keyword">object </span><span class="identifier">Players</span>&nbsp;<span
+                class="symbol">:</span>&nbsp;<span class="identifier">IntIdTable</span></code></td>
 </tr>
 <tr>
     <td>
@@ -104,6 +122,8 @@ database.</p>
             <h4><a href="-language-not-found-exception/index.html">LanguageNotFoundException</a></h4>
         </td>
         <td>
+            <p>Thrown when <a href="-language/from-code.html">Language.fromCode</a> fails to find equivalent enum value.
+            </p>
             <code><span class="keyword">class </span><span
                     class="identifier">LanguageNotFoundException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span

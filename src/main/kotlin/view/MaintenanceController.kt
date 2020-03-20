@@ -205,7 +205,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
                 DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
                 DeviceType.LED -> handleLedAction(action)
                 DeviceType.SERVO -> handleServoAction(action)
-                DeviceType.COLOUR_SENSOR -> TODO("Handle colour sensor")
+                DeviceType.COLOUR_SENSOR -> handleColourSensorAction(action)
             }
         }
     }
@@ -305,6 +305,18 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
             0 -> changeAlienStateLabel(goodAlienStateLabel, isRaised)
             1 -> changeAlienStateLabel(badAlienStateLabel, isRaised)
         }
+    }
+
+    @Throws(IllegalArgumentException::class)
+    private fun handleColourSensorAction(action: Action) {
+        if (action.deviceType != DeviceType.COLOUR_SENSOR)
+            throw IllegalArgumentException("Action is not a colour sensor action")
+
+        val (red, green, blue, clear) = action.values
+        redReading.text = "%X".format(red)
+        greenReading.text = "%X".format(green)
+        blueReading.text = "%X".format(blue)
+        clearReading.text = "%X".format(clear)
     }
 
     /**

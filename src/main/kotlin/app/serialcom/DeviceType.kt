@@ -11,7 +11,8 @@ enum class DeviceType(val code: String) {
     LED("LED"),
     SERVO("SRV"),
     DISTANCE_SENSOR("DST"),
-    CARD("CRD");
+    CARD("CRD"),
+    COLOUR_SENSOR("TCS");
 
     companion object {
         /**

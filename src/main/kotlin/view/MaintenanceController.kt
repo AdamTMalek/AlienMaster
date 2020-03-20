@@ -188,6 +188,7 @@ class MaintenanceController : Initializable, OnMessageReceivedListener, OnAvaila
                 DeviceType.DISTANCE_SENSOR -> handleDistanceReadingAction(action)
                 DeviceType.LED -> handleLedAction(action)
                 DeviceType.SERVO -> handleServoAction(action)
+                DeviceType.COLOUR_SENSOR -> TODO("Handle colour sensor")
             }
         }
     }
